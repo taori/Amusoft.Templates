@@ -8,8 +8,6 @@
 	"tags": {
 		"type": "item"
 	},
-	"sourceName": "MyTemplate",
-	"defaultName": ".template.config",
 	"symbols": {
 		"author": {
 			"type": "parameter",
@@ -17,11 +15,10 @@
 			"isRequired": true,
 			"replaces": "MyAuthor"
 		},
-		"type": {
+		"folderRename": {
 			"type": "parameter",
-			"description": "Type of the template. Usually project/item",
-			"defaultValue": "project",
-			"replaces": "MyType"
+			"fileRename": "MyTemplate",
+			"defaultValue": ".template.config"
 		}
 	}
 }
