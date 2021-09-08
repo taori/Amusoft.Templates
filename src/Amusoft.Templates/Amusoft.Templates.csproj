@@ -22,7 +22,6 @@
 	<ItemGroup>
 		<Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**" />
 		<Compile Remove="**\*" />
-		<!-- <Content Remove="templates\dotnet-template\MyTemplate\*" /> -->
 	</ItemGroup>
 
 </Project>
