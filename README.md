@@ -13,4 +13,4 @@ I would probably never spend as much time creating projects for this to be worth
 | item | dotnet-template | Creates a .template.config to begin a new template at the current directory |
 
 ## Project state
-[![.NET](https://github.com/taori/Amusoft.Templates/actions/workflows/dotnet.yml/badge.svg)](https://github.com/taori/Amusoft.Templates/actions/workflows/dotnet.yml)
+[![.GitHub](https://github.com/taori/Amusoft.Templates/actions/workflows/dotnet.yml/badge.svg)](https://github.com/taori/Amusoft.Templates/actions/workflows/dotnet.yml)
