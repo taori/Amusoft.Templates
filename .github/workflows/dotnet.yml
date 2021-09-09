@@ -1,0 +1,36 @@
+name: .NET
+
+on:
+  push:
+    branches: [ master ]
+    paths: 
+      - src/*
+      - tests/*
+      
+  pull_request:
+    branches: [ master ]
+    types: 
+      - opened
+      - reopened
+      - synchronize 
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+        
+    - name: Restore dependencies
+      run: dotnet restore src/All.sln
+    - name: Build
+      run: dotnet build src/All.sln --no-restore --verbosity m -c Release
+    - name: Test
+      run: dotnet test src/All.sln --no-build --verbosity normal
+    - name: Pack
+      run: dotnet pack src/Amusoft.Templates/Amusoft.Templates.csproj -o artifacts/nupkg --no-build --verbosity normal
