@@ -14,3 +14,5 @@ I would probably never spend as much time creating projects for this to be worth
 
 ## Project state
 [![.GitHub](https://github.com/taori/Amusoft.Templates/actions/workflows/dotnet.yml/badge.svg)](https://github.com/taori/Amusoft.Templates/actions/workflows/dotnet.yml)
+[![GitHub issues](https://img.shields.io/github/issues/taori/Amusoft.Templates)](https://github.com/taori/Amusoft.Templates/issues)
+[![NuGet version (Amusoft.Templates)](https://img.shields.io/nuget/v/Amusoft.Templates.svg)](https://www.nuget.org/packages/Amusoft.Templates/)
