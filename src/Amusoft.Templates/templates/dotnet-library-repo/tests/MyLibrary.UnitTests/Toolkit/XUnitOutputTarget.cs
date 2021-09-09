@@ -2,7 +2,7 @@
 using NLog.Targets;
 using Xunit.Abstractions;
 
-namespace Amusoft.Templates.Tests.Toolkit
+namespace MyLibrary.UnitTests.Toolkit
 {
 	[Target("XUnitOutputTarget")]
 	public class XUnitOutputTarget : TargetWithLayout

@@ -1,11 +1,14 @@
 using System.Reflection;
+using Amusoft.XUnit.NLog.Extensions;
+using NLog;
+using Xunit;
 using Xunit.Abstractions;
 
 namespace Amusoft.Templates.Tests.Toolkit
 {
-	public class TemplateTests : TestBase
+	public class TemplateTests : LoggedTestBase, IClassFixture<GlobalSetupFixture>
 	{
-		public TemplateTests(ITestOutputHelper outputHelper, GlobalSetupFixture data) : base(outputHelper, data)
+		public TemplateTests(ITestOutputHelper outputHelper, GlobalSetupFixture data) : base(outputHelper)
 		{
 		}
 

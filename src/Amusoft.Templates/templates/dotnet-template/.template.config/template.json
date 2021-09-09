@@ -3,7 +3,7 @@
 	"author": "Andreas Müller",
 	"classifications": [ "Templating" ],
 	"identity": "Amusoft.Templates.TemplateFile.Json",
-	"name": "dotnet new template structure",
+	"name": ".template.config structure",
 	"shortName": "dotnet-template",
 	"tags": {
 		"type": "item"
@@ -19,6 +19,11 @@
 			"type": "parameter",
 			"fileRename": "MyTemplate",
 			"defaultValue": ".template.config"
+		},
+		"fileRename": {
+			"type": "parameter",
+			"fileRename": "MyTemplate.json",
+			"defaultValue": "template.json"
 		}
 	}
 }

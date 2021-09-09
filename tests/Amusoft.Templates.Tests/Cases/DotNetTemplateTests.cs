@@ -2,12 +2,11 @@ using System.IO;
 using System.Threading.Tasks;
 using Amusoft.Templates.Tests.Toolkit;
 using Amusoft.Templates.Tests.Utility;
-using NLog;
 using Shouldly;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Amusoft.Templates.Tests
+namespace Amusoft.Templates.Tests.Cases
 {
 	public class DotNetTemplateTests : TemplateTests
 	{
@@ -16,12 +15,14 @@ namespace Amusoft.Templates.Tests
 		{
 			using (new TemplateInstallationSession(Path.Combine(GetTemplateRootPath(), "dotnet-template")))
 			{
-				var dryRunner = new DryRunner("dotnet-template");
+				using var dryRunner = new TemplateRunner("dotnet-template");
 				await dryRunner.ExecuteAsync("-au testauthor");
 
 				dryRunner.OutputContent.ShouldNotBeEmpty();
 				dryRunner.ErrorContent.ShouldBeEmpty();
-				dryRunner.OutputContent.ShouldContain("Create: ./.template.config/template.json");
+				dryRunner.OutputContent.ShouldEndWith(@"File actions would have been taken:
+  Create: ./.template.config/template.json
+");
 			}
 		}
 
@@ -30,7 +31,7 @@ namespace Amusoft.Templates.Tests
 		{
 			using (new TemplateInstallationSession(Path.Combine(GetTemplateRootPath(), "dotnet-template")))
 			{
-				var dryRunner = new DryRunner("dotnet-template");
+				using var dryRunner = new TemplateRunner("dotnet-template");
 				await dryRunner.ExecuteAsync(string.Empty);
 
 				dryRunner.OutputContent.ShouldBeEmpty();
