@@ -13,6 +13,15 @@ on:
       - opened
       - reopened
       - synchronize 
+      
+  workflow_dispatch:
+  
+    inputs:   
+    
+      versionSuffix:
+        required: true
+        description: "Version suffix for nupkg"
+        default: 'beta'
 
 jobs:
   build:
@@ -33,4 +42,4 @@ jobs:
     - name: Test
       run: dotnet test src/All.sln --no-build --verbosity normal
     - name: Pack
-      run: dotnet pack src/Amusoft.Templates/Amusoft.Templates.csproj -o artifacts/nupkg --no-build --verbosity normal
+      run: dotnet pack src/Amusoft.Templates/Amusoft.Templates.csproj -o artifacts/nupkg --no-build --verbosity normal /p:VersionSuffix=
