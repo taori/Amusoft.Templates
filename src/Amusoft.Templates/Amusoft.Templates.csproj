@@ -12,6 +12,7 @@
 		<FileVersion>1.0.0</FileVersion>
 		<VersionPrefix>1.0.0</VersionPrefix>
 		<VersionSuffix>beta</VersionSuffix>
+		<IsPackable>true</IsPackable>
 
 		<IncludeContentInPack>true</IncludeContentInPack>
 		<IncludeBuildOutput>false</IncludeBuildOutput>
