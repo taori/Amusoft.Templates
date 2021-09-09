@@ -22,6 +22,11 @@ on:
         required: true
         description: "Version suffix for nupkg"
         default: 'beta'
+        
+      nugetRelease:
+        required: true
+        description: "whether or not to publish a nuget release"
+        default: '1'
 
 jobs:
   build:
@@ -43,3 +48,10 @@ jobs:
       run: dotnet test src/All.sln --no-build --verbosity normal -c Release
     - name: Pack
       run: dotnet pack src/Amusoft.Templates/Amusoft.Templates.csproj -o artifacts/nupkg --no-build --verbosity normal -c Release /p:VersionSuffix=${{ github.event.inputs.versionSuffix }}
+    
+    - name: Release
+      run: dotnet nuget push foo.nupkg -k $NUGETKEY -s https://api.nuget.org/v3/index.json
+      if: ${{ github.event.inputs.nugetRelease == '1' }}
+      env:
+        NUGETKEY: ${{ secrets.NUGET }}
+    
