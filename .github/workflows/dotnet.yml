@@ -40,6 +40,6 @@ jobs:
     - name: Build
       run: dotnet build src/All.sln --no-restore --verbosity m -c Release
     - name: Test
-      run: dotnet test src/All.sln --no-build --verbosity normal
+      run: dotnet test src/All.sln --no-build --verbosity normal -c Release
     - name: Pack
-      run: dotnet pack src/Amusoft.Templates/Amusoft.Templates.csproj -o artifacts/nupkg --no-build --verbosity normal /p:VersionSuffix=
+      run: dotnet pack src/Amusoft.Templates/Amusoft.Templates.csproj -o artifacts/nupkg --no-build --verbosity normal -c Release /p:VersionSuffix=${{ github.event.inputs.versionSuffix }}
