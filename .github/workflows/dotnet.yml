@@ -25,8 +25,8 @@ on:
         
       nugetRelease:
         required: true
-        description: "whether or not to publish a nuget release"
-        default: '1'
+        description: "nuget release? (1/0)"
+        default: '0'
 
 jobs:
   build:
@@ -50,7 +50,7 @@ jobs:
       run: dotnet pack src/Amusoft.Templates/Amusoft.Templates.csproj -o artifacts/nupkg --no-build --verbosity normal -c Release /p:VersionSuffix=${{ github.event.inputs.versionSuffix }}
     
     - name: Release
-      run: dotnet nuget push foo.nupkg -k $NUGETKEY -s https://api.nuget.org/v3/index.json
+      run: dotnet nuget push "artifacts/nupkg/*.nupkg" -k $NUGETKEY -s https://api.nuget.org/v3/index.json
       if: ${{ github.event.inputs.nugetRelease == '1' }}
       env:
         NUGETKEY: ${{ secrets.NUGET }}
