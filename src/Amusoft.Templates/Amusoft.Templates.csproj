@@ -2,17 +2,28 @@
 
 	<PropertyGroup>
 		<PackageType>Template</PackageType>
-		<PackageVersion>1.0.0</PackageVersion>
 		<PackageId>Amusoft.Templates</PackageId>
 		<Title>Amusoft.Templates</Title>
 		<Authors>Andreas Müller</Authors>
 		<Description>Amusoft templates for multiple purposes</Description>
 		<PackageTags>dotnet-new;templates;Amusoft</PackageTags>
 		<TargetFramework>netstandard2.0</TargetFramework>
+		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+		<FileVersion>1.0.0</FileVersion>
+		<VersionPrefix>1.0.0</VersionPrefix>
+		<VersionSuffix>beta</VersionSuffix>
 
 		<IncludeContentInPack>true</IncludeContentInPack>
 		<IncludeBuildOutput>false</IncludeBuildOutput>
 		<ContentTargetFolders>content</ContentTargetFolders>
+		<RepositoryUrl>https://github.com/taori/Amusoft.Templates.git</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/taori/Amusoft.Templates</PackageProjectUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<Copyright>Copyright © Andreas Müller 2021</Copyright>
+		<PackageReleaseNotes>new templates:
+ dotnet-template</PackageReleaseNotes>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
