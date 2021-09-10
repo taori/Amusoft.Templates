@@ -24,7 +24,9 @@
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<Copyright>Copyright © Andreas Müller 2021</Copyright>
 		<PackageReleaseNotes>new templates:
- dotnet-template</PackageReleaseNotes>
+template-cheatsheet
+dotnet-library-repo
+		</PackageReleaseNotes>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
