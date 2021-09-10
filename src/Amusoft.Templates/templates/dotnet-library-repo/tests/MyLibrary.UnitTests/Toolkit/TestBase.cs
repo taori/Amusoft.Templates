@@ -1,7 +1,7 @@
 ﻿using Xunit;
 using Xunit.Abstractions;
 
-namespace Amusoft.Templates.Tests.Toolkit
+namespace MyLibrary.UnitTests.Toolkit
 {
 	public class TestBase : IClassFixture<GlobalSetupFixture>
 	{

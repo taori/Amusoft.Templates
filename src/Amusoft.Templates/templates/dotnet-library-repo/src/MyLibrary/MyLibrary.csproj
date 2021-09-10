@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+
+		<TargetFrameworks>net5.0;netstandard2.0</TargetFrameworks>
+		<VersionPrefix>1.0.0</VersionPrefix>
+		<VersionSuffix>beta</VersionSuffix>
+		<IsPackable>true</IsPackable>
+
+		<Copyright>Copyright © AUTHOR CURRENTYEAR</Copyright>
+		<PackageId>MyPackageId</PackageId>
+		<Authors>AUTHOR</Authors>
+		<Product>MyProductName</Product>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/GITOWNER/GITPROJECT.git</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/GITOWNER/GITPROJECT</PackageProjectUrl>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+	</PropertyGroup>
+</Project>

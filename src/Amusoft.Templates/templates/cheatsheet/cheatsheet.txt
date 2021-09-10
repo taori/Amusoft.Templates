@@ -1,0 +1,2 @@
+dotnet new dotnet-template -au "AUTHOR"
+dotnet new dotnet-library-repo --RootBranchName main --Author "AUTHOR" --GitUser taori -n "PROJECTID" --GitProjectName "PROJECTID" --NugetPackageId "PROJECTID" --ProductName "PROJECTID"
