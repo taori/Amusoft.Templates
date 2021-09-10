@@ -10,7 +10,9 @@ I would probably never spend as much time creating projects for this to be worth
 
 | kind | command | function |
 |------|:--------|:---------|
+| item | template-cheatsheet | Creates a .template.config to begin a new template at the current directory |
 | item | dotnet-template | Creates a .template.config to begin a new template at the current directory |
+| project | dotnet-library-repo | Creates a quickstart repo to build nuget packages for dotnet |
 
 ## Project state
 [![.GitHub](https://github.com/taori/Amusoft.Templates/actions/workflows/dotnet.yml/badge.svg)](https://github.com/taori/Amusoft.Templates/actions/workflows/dotnet.yml)
