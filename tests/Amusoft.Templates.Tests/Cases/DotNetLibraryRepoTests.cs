@@ -36,7 +36,8 @@ namespace Amusoft.Templates.Tests.Cases
 
 				templateRunner.OutputContent.ShouldNotBeEmpty();
 				templateRunner.ErrorContent.ShouldBeEmpty();
-				templateRunner.OutputContent.ShouldEndWith($@"File actions would have been taken:
+
+				var expectedLines = $@"File actions would have been taken:
   Create: ./README.md
   Create: ./build/SourceLink.props
   Create: ./src/All.sln
@@ -50,7 +51,12 @@ namespace Amusoft.Templates.Tests.Cases
   Create: ./tests/{sourceName}.UnitTests/Toolkit/GlobalSetupFixture.cs
   Create: ./tests/{sourceName}.UnitTests/Toolkit/TestBase.cs
   Create: ./tests/{sourceName}.UnitTests/Toolkit/XUnitOutputTarget.cs
-");
+".Split(Environment.NewLine);
+
+				var actualLines = templateRunner.OutputContent.Split(Environment.NewLine);
+
+				actualLines.Length.ShouldBe(expectedLines.Length);
+				actualLines.ShouldAllBe(d => expectedLines.Contains(d));
 			}
 		}
 
