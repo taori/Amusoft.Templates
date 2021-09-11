@@ -44,7 +44,7 @@
 	</PropertyGroup>
 
 	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-		<Message Importance="High" Text="Writing $(TemplateRootPath) to $(TemplatePathResource)"></Message>
+		<Message Importance="High" Text="Writing $(TemplateRootPath) to $(TemplatePathResource)2"></Message>
 		<Exec Command="echo $(TemplateRootPath) &gt; &quot;$(TemplatePathResource)&quot;" />
 	</Target>
 
