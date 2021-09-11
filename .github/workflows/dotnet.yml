@@ -40,6 +40,13 @@ jobs:
 
     steps:
     
+      - name: Git Information
+        shell: bash
+        run: |
+          echo "head: $GITHUB_HEAD_REF"
+          echo "base: $GITHUB_BASE_REF"
+          echo "base: $GITHUB_REF"
+          
       - name: declare default values 
         id: defaults
         shell: pwsh
