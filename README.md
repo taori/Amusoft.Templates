@@ -2,9 +2,7 @@
 
 ## Description
 
-I love creating libraries to reduce rewriting the same code over and over again. To make this easier i created a library that helps me build libraries faster - and because i love learning new things. 
-
-I would probably never spend as much time creating projects for this to be worth it from a realistic point of view, but hey - that is what some developers enjoy
+If you enjoy the DRY principle and write .net libraries, this template collection may be for you. I made this template collection for this very purpose - To create reusable libraries faster in the future and not even have to think about the effort that goes into setting up CI, tests and all the same things every time.
 
 ## Templates
 
