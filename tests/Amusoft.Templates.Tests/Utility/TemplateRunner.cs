@@ -40,7 +40,7 @@ namespace Amusoft.Templates.Tests.Utility
 
 			Log.Debug("Executing dotnet {Arguments}", processArguments);
 
-			var processRunner = new SimpleProcessRunner("dotnet", processArguments);
+			var processRunner = new SimpleProcessRunner("dotnets", processArguments);
 			var executionTimeout = timeout == default ? TimeSpan.FromSeconds(3) : timeout;
 			await processRunner.ExecuteAsync(executionTimeout);
 
