@@ -54,12 +54,12 @@ jobs:
           
           if($automaticTrigger) {
             if("${{github.base_ref}}" -eq "master") {
-              $versionSuffix = "beta${{github.run_id}}"
+              $versionSuffix = "beta${{github.run_number}}"
             } else {
-              $versionSuffix = "alpha${{github.run_id}}"
+              $versionSuffix = "alpha${{github.run_number}}"
             }
           } else {
-            $versionSuffix = "${{ github.event.inputs.versionSuffix }}${{github.run_id}}"
+            $versionSuffix = "${{ github.event.inputs.versionSuffix }}${{github.run_number}}"
           }
           
           $values = @(
