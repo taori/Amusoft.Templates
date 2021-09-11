@@ -59,7 +59,11 @@ jobs:
               $versionSuffix = "alpha${{github.run_number}}"
             }
           } else {
-            $versionSuffix = "${{ github.event.inputs.versionSuffix }}${{github.run_number}}"
+            if([string]::IsNullOrEmpty("${{ github.event.inputs.versionSuffix }}") -eq $true){
+              $versionSuffix = ""
+            } else {
+              $versionSuffix = "${{ github.event.inputs.versionSuffix }}${{github.run_number}}"
+            }
           }
           
           $values = @(
