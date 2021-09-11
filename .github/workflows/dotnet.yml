@@ -53,7 +53,7 @@ jobs:
         run: |        
           $automaticTrigger = "$env:GITHUB_EVENT_NAME" -ne "workflow_dispatch"          
           $mergePR = "master|pull_request|closed|true" -eq "${{github.base_ref}}|${{github.event_name}}|${{github.event.action}}|${{github.event.pull_request.merged}}"
-          $publishRelease = ("${{ github.event.inputs.nugetRelease }}" -eq "1") -Or ($notManual -And $mergePR)
+          $publishRelease = ("${{ github.event.inputs.nugetRelease }}" -eq "1") -Or ($automaticTrigger -And $mergePR)
           Write-Host "publishRelease: $publishRelease, mergePR: $mergePR, automaticTrigger: $automaticTrigger"
           
           $versionSuffix = "";
