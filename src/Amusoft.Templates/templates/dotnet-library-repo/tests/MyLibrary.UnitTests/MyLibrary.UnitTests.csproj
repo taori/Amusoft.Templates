@@ -21,6 +21,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Amusoft.XUnit.NLog.Extensions" Version="2.4.2-alpha61" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
 		<PackageReference Include="xunit" Version="2.4.1" />
 		<PackageReference Include="NLog" Version="4.7.11" />

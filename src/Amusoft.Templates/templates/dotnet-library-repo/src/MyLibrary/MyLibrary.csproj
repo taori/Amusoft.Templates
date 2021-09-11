@@ -8,10 +8,12 @@
 		<IsPackable>true</IsPackable>
 
 		<Copyright>Copyright © AUTHOR CURRENTYEAR</Copyright>
+		<Description>MyPackageId</Description>
 		<PackageId>MyPackageId</PackageId>
 		<Authors>AUTHOR</Authors>
 		<Product>MyProductName</Product>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<GenerateDocumentationFile>false</GenerateDocumentationFile>
 
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/GITOWNER/GITPROJECT.git</RepositoryUrl>
