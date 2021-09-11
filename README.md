@@ -10,7 +10,7 @@ I would probably never spend as much time creating projects for this to be worth
 
 | kind | command | function |
 |------|:--------|:---------|
-| item | template-cheatsheet | Creates a .template.config to begin a new template at the current directory |
+| item | template-cheatsheet | Creates a cheatsheet.txt to get sample calls for templates |
 | item | dotnet-template | Creates a .template.config to begin a new template at the current directory |
 | project | dotnet-library-repo | Creates a quickstart repo to build nuget packages for dotnet |
 
