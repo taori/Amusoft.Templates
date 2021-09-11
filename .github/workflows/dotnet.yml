@@ -103,7 +103,7 @@ jobs:
     
     - name: Release
       run: dotnet nuget push "artifacts/nupkg/*.nupkg" -k $NUGETKEY -s https://api.nuget.org/v3/index.json
-      if: ${{ needs.environment.outputs.publishRelease == 'true' }}
+      if: ${{ needs.environment.outputs.publishRelease == 'True' }}
       env:
         NUGETKEY: ${{ secrets.NUGET }}
         
