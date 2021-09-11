@@ -59,6 +59,7 @@ jobs:
               $versionSuffix = "alpha${{github.run_number}}"
             }
           } else {
+            Write-Host "------> versionSuffix ${{ github.event.inputs.versionSuffix }}"
             if([string]::IsNullOrEmpty("${{ github.event.inputs.versionSuffix }}") -eq $true){
               $versionSuffix = ""
             } else {
