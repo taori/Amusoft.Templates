@@ -63,7 +63,7 @@ jobs:
           }
           
           $values = @(
-              @("versionSuffix", $automaticTrigger, "${{ github.event.inputs.versionSuffix }}", "beta"),
+              @("versionSuffix", $true, "$versionSuffix", "$versionSuffix"),
               @("publishRelease", $true, "$publishRelease", "$publishRelease"),
               @("verbosity", $true, "${{ github.event.inputs.verbosity }}", "minimal"),
               @("configuration", $true, "${{ github.event.inputs.configuration }}", "Release")
