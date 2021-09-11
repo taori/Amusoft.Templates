@@ -40,7 +40,7 @@ jobs:
        run: |
         #Write-Host "event_name=${{github.event_name}} eventaction=${{github.event.action}} merged=${{github.event.pull_request.merged}} "
         $pullMergeRequest = "${{github.event_name}}|${{github.event.action}}|${{github.event.pull_request.merged}}"
-        Write-Host "state: $pullMergeRequest"
+        Write-Host "state: $pullMergeRequest "
        
      - name: pull merge request
        if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
