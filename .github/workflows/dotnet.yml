@@ -22,7 +22,6 @@ on:
     
       versionSuffix:
         description: "Version suffix for nupkg"
-        default: 'beta'
         
       nugetRelease:
         required: true
