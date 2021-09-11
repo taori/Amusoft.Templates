@@ -21,7 +21,7 @@ on:
     inputs:   
     
       versionSuffix:
-        required: true
+        required: false
         description: "Version suffix for nupkg"
         default: 'beta'
         
