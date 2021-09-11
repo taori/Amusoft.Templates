@@ -31,7 +31,6 @@ on:
 
 jobs:
   ciTest: 
-    if: false
     runs-on: ubuntu-latest
 
     steps:
