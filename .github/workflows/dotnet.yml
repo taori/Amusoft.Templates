@@ -21,13 +21,12 @@ on:
     inputs:   
     
       versionSuffix:
-        required: true
         description: "Version suffix for nupkg"
         default: 'beta'
         
       nugetRelease:
         required: true
-        description: "nuget release? (1/0)"
+        description: "release? (1/0)"
         default: '0'
 
 jobs:
@@ -36,10 +35,9 @@ jobs:
     
     outputs:      
       versionSuffix : ${{ steps.defaults.outputs.versionSuffix }}
-      nugetRelease : ${{ steps.defaults.outputs.nugetRelease }}
       verbosity : ${{ steps.defaults.outputs.verbosity }}
       configuration : ${{ steps.defaults.outputs.configuration }}
-      mergePR : ${{ steps.defaults.outputs.mergePR }}
+      publishRelease : ${{ steps.defaults.outputs.publishRelease }}
 
     steps:
     
@@ -47,17 +45,26 @@ jobs:
         id: defaults
         shell: pwsh
         run: |        
-          $notManual = "$env:GITHUB_EVENT_NAME" -ne "workflow_dispatch"
-          Write-Host "notManual: $notManual"
+          $automaticTrigger = "$env:GITHUB_EVENT_NAME" -ne "workflow_dispatch"          
+          $mergePR = "master|pull_request|closed|true" -eq "${{github.base_ref}}|${{github.event_name}}|${{github.event.action}}|${{github.event.pull_request.merged}}"
+          $publishRelease = ("${{ github.event.inputs.nugetRelease }}" -eq "1") -Or ($notManual -And $mergePR)
+          Write-Host "publishRelease: $publishRelease, mergePR: $mergePR, automaticTrigger: $automaticTrigger"
           
-          $mergePR = "pull_request|closed|true" -eq "${{github.event_name}}|${{github.event.action}}|${{github.event.pull_request.merged}}"
-          $doRelease = ("${{ github.event.inputs.nugetRelease }}" -eq "1") -Or ($notManual -And $mergePR)
-          Write-Host "doRelease: $doRelease"
+          $versionSuffix = "";
+          
+          if($automaticTrigger) {
+            if("${{github.base_ref}}" -eq "master") {
+              $versionSuffix = "beta${{github.run_id}}"
+            } else {
+              $versionSuffix = "alpha${{github.run_id}}"
+            }
+          } else {
+            $versionSuffix = "${{ github.event.inputs.versionSuffix }}${{github.run_id}}"
+          }
           
           $values = @(
-              @("mergePR", $notManual, "${{ github.event.inputs.versionSuffix }}", "beta"),
-              @("versionSuffix", $notManual, "${{ github.event.inputs.versionSuffix }}", "beta"),
-              @("nugetRelease", $true, "${{ github.event.inputs.nugetRelease }}", "1"),
+              @("versionSuffix", $automaticTrigger, "${{ github.event.inputs.versionSuffix }}", "beta"),
+              @("publishRelease", $true, "$publishRelease", "$publishRelease"),
               @("verbosity", $true, "${{ github.event.inputs.verbosity }}", "minimal"),
               @("configuration", $true, "${{ github.event.inputs.configuration }}", "Release")
             )
@@ -96,7 +103,7 @@ jobs:
     
     - name: Release
       run: dotnet nuget push "artifacts/nupkg/*.nupkg" -k $NUGETKEY -s https://api.nuget.org/v3/index.json
-      if: ${{ github.event.inputs.nugetRelease == '1' }}
+      if: ${{ needs.environment.outputs.publishRelease == 'true' }}
       env:
         NUGETKEY: ${{ secrets.NUGET }}
         
