@@ -13,6 +13,7 @@ on:
       - opened
       - reopened
       - synchronize 
+      - closed
       
   workflow_dispatch:
   
@@ -29,8 +30,22 @@ on:
         default: '0'
 
 jobs:
-  build:
+  ciTest: 
+    if: false
+    runs-on: ubuntu-latest
 
+    steps:
+     - name: States
+       if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+       shell: pwsh
+       run: Write-Host "event_name=${{github.event_name}} eventaction=${{github.event.action}} merged=${{github.event.pull_request.merged}} "
+       
+     - name: pull merge request
+       if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+       shell: pwsh
+       run: Write-Host "Merge pull request"
+  build:
+    if: false
     runs-on: ubuntu-latest
 
     steps:
@@ -54,4 +69,6 @@ jobs:
       if: ${{ github.event.inputs.nugetRelease == '1' }}
       env:
         NUGETKEY: ${{ secrets.NUGET }}
+        
+        
     
