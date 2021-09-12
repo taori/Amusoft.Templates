@@ -1,13 +1,14 @@
 $configuration = "Release"
 $verbosity = "n"
+$versionSuffix = "beta"
 
-dotnet restore ../src/All.sln --verbosity $verbosity
+dotnet restore "$PSScriptRoot/../src/All.sln" --verbosity $verbosity
 Write-Host "Restore complete" -ForegroundColor Green
 
-dotnet build ../src/All.sln --verbosity $verbosity -c $configuration --no-restore
+dotnet build "$PSScriptRoot/../src/All.sln" --verbosity $verbosity -c $configuration --no-restore
 Write-Host "Build complete" -ForegroundColor Green
 
-dotnet test ../src/All.sln --verbosity $verbosity -c $configuration --no-build 
+dotnet test "$PSScriptRoot/../src/All.sln" --verbosity $verbosity -c $configuration --no-build 
 Write-Host "Test complete" -ForegroundColor Green
 
-dotnet pack ../src/MyLibrary/MyLibrary.csproj --verbosity $verbosity -c $configuration -o ../artifacts/nupkg --no-build /p:VersionSuffix=$versionSuffix
+dotnet pack "$PSScriptRoot/../src/MyLibrary/MyLibrary.csproj" --verbosity $verbosity -c $configuration -o ../artifacts/nupkg --no-build /p:VersionSuffix=$versionSuffix
