@@ -10,7 +10,7 @@
 		<TargetFramework>netstandard2.0</TargetFramework>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
 		<FileVersion>1.0.0</FileVersion>
-		<VersionPrefix>1.1.0</VersionPrefix>
+		<VersionPrefix>1.1.1</VersionPrefix>
 		<VersionSuffix>beta</VersionSuffix>
 		<IsPackable>true</IsPackable>
 		<PackageIcon>packageIcon.png</PackageIcon>
