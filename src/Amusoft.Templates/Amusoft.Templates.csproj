@@ -13,6 +13,7 @@
 		<VersionPrefix>1.1.0</VersionPrefix>
 		<VersionSuffix>beta</VersionSuffix>
 		<IsPackable>true</IsPackable>
+		<PackageIcon>packageIcon.png</PackageIcon>
 
 		<IncludeContentInPack>true</IncludeContentInPack>
 		<IncludeBuildOutput>false</IncludeBuildOutput>
