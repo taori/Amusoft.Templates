@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -40,6 +41,7 @@ namespace Amusoft.Templates.Tests.Cases
 				var expectedLines = $@"File actions would have been taken:
   Create: ./README.md
   Create: ./build/SourceLink.props
+  Create: ./scripts/build.ps1
   Create: ./src/All.sln
   Create: ./src/Directory.Build.props
   Create: ./.github/workflows/dotnet.yml
@@ -50,10 +52,9 @@ namespace Amusoft.Templates.Tests.Cases
   Create: ./tests/{sourceName}.UnitTests/Toolkit/EmbeddedResourceReader.cs
   Create: ./tests/{sourceName}.UnitTests/Toolkit/GlobalSetupFixture.cs
   Create: ./tests/{sourceName}.UnitTests/Toolkit/TestBase.cs
-  Create: ./tests/{sourceName}.UnitTests/Toolkit/XUnitOutputTarget.cs
-".Split(Environment.NewLine);
+".Split(Environment.NewLine).OrderBy(d => d).ToArray();
 
-				var actualLines = templateRunner.OutputContent.Split(Environment.NewLine);
+				var actualLines = templateRunner.OutputContent.Split(Environment.NewLine).OrderBy(d => d).ToArray();
 
 				actualLines.Length.ShouldBe(expectedLines.Length);
 				actualLines.ShouldAllBe(d => expectedLines.Contains(d));
