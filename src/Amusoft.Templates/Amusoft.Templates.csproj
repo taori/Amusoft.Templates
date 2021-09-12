@@ -33,6 +33,10 @@ dotnet-library-repo
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 	  <NoWarn>1701;1702;NU5128</NoWarn>
 	</PropertyGroup>
+	
+	<ItemGroup>
+		<None Include="packageIcon.png" Pack="true" PackagePath=""/>
+	</ItemGroup>
 
 	<ItemGroup>
 		<Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**;templates\**\.vs\**" />
