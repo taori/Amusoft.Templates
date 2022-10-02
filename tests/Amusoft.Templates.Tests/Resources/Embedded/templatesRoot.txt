@@ -1,1 +1,1 @@
-D:\GitHub\Amusoft.Templates\src\Amusoft.Templates\templates 
+D:\GitHub\taori\Amusoft.Templates\src\Amusoft.Templates\templates 

@@ -2,7 +2,7 @@
 	<PropertyGroup>
 		<TargetFrameworks>net5.0;netstandard2.0</TargetFrameworks>
 		<VersionPrefix>1.0.0</VersionPrefix>
-		<VersionSuffix>beta</VersionSuffix>
+		<VersionSuffix>alpha.</VersionSuffix>
 		<IsPackable>true</IsPackable>
 
 		<Copyright>Copyright © AUTHOR CURRENTYEAR</Copyright>
@@ -11,15 +11,38 @@
 		<Authors>AUTHOR</Authors>
 		<Product>MyProductName</Product>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<GenerateDocumentationFile>false</GenerateDocumentationFile>
 
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/GITOWNER/GITPROJECT.git</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/GITOWNER/GITPROJECT</PackageProjectUrl>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<PackageReleaseNotes>
+			http download with progress
+		</PackageReleaseNotes>
+		<PackageTags>TODO</PackageTags>
+
+		<LangVersion>10.0</LangVersion>
+		<WarningsAsErrors>CS1591</WarningsAsErrors>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<Nullable>Enable</Nullable>
+		<Title>Amusoft.Toolkit.Http</Title>
+		<PackageIcon>packageIcon.png</PackageIcon>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3" PrivateAssets="all" />
+		<!-- <None Include="..\..\README.md"> -->
+		<!-- 	<Pack>True</Pack> -->
+		<!-- 	<PackagePath>\</PackagePath> -->
+		<!-- </None> -->
+		<None Include="..\..\README.md" Pack="True" PackagePath="\"/>
+		<None Include="packageIcon.png" Pack="True" PackagePath="\" />
+
+		<InternalsVisibleTo Include="MyLibrary.UnitTests" />
+		<InternalsVisibleTo Include="MyLibrary.IntegrationTests" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="6.0.0" PrivateAssets="all" />
 	</ItemGroup>
 </Project>

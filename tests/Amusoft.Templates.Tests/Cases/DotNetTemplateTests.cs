@@ -20,7 +20,7 @@ namespace Amusoft.Templates.Tests.Cases
 
 				dryRunner.OutputContent.ShouldNotBeEmpty();
 				dryRunner.ErrorContent.ShouldBeEmpty();
-				dryRunner.OutputContent.ShouldEndWith(@"File actions would have been taken:
+				dryRunner.OutputContent.ShouldContain(@"File actions would have been taken:
   Create: ./.template.config/template.json
 ");
 			}
@@ -34,7 +34,7 @@ namespace Amusoft.Templates.Tests.Cases
 				using var dryRunner = new TemplateRunner("dotnet-template");
 				await dryRunner.ExecuteAsync(string.Empty);
 
-				dryRunner.OutputContent.ShouldBeEmpty();
+				dryRunner.OutputContent.Trim().ShouldBeEmpty();
 				dryRunner.ErrorContent.ShouldNotBeEmpty();
 				dryRunner.ErrorContent.ShouldContain("Mandatory option --param:author missing");
 			}

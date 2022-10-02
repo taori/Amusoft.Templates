@@ -46,15 +46,18 @@ namespace Amusoft.Templates.Tests.Cases
   Create: ./src/Directory.Build.props
   Create: ./.github/workflows/dotnet.yml
   Create: ./src/{sourceName}/{sourceName}.csproj
+  Create: ./tests/{sourceName}.IntegrationTests/{sourceName}.IntegrationTests.csproj
+  Create: ./tests/{sourceName}.IntegrationTests/UnitTest1.cs
+  Create: ./tests/{sourceName}.IntegrationTests/Usings.cs
   Create: ./tests/{sourceName}.UnitTests/{sourceName}.UnitTests.csproj
   Create: ./tests/{sourceName}.UnitTests/nlog.config
   Create: ./tests/{sourceName}.UnitTests/UnitTest1.cs
   Create: ./tests/{sourceName}.UnitTests/Toolkit/EmbeddedResourceReader.cs
   Create: ./tests/{sourceName}.UnitTests/Toolkit/GlobalSetupFixture.cs
   Create: ./tests/{sourceName}.UnitTests/Toolkit/TestBase.cs
-".Split(Environment.NewLine).OrderBy(d => d).ToArray();
+".Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries).OrderBy(d => d).ToArray();
 
-				var actualLines = templateRunner.OutputContent.Split(Environment.NewLine).OrderBy(d => d).ToArray();
+				var actualLines = templateRunner.OutputContent.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries).OrderBy(d => d).ToArray();
 
 				actualLines.Length.ShouldBe(expectedLines.Length);
 				actualLines.ShouldAllBe(d => expectedLines.Contains(d));

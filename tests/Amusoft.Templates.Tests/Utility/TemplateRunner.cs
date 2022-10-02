@@ -1,9 +1,13 @@
 using System;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Amusoft.Templates.Tests.Toolkit;
+using CliWrap;
+using CliWrap.Buffered;
 using NLog;
 
 namespace Amusoft.Templates.Tests.Utility
@@ -40,15 +44,18 @@ namespace Amusoft.Templates.Tests.Utility
 
 			Log.Debug("Executing dotnet {Arguments}", processArguments);
 
-			var processRunner = new SimpleProcessRunner("dotnet", processArguments);
 			var executionTimeout = timeout == default ? TimeSpan.FromSeconds(3) : timeout;
-			await processRunner.ExecuteAsync(executionTimeout);
+			using var cts = new CancellationTokenSource(executionTimeout);
+			var command = await Cli.Wrap("dotnet")
+				.WithArguments(processArguments)
+				.WithValidation(CommandResultValidation.None)
+				.ExecuteBufferedAsync(cts.Token);
 
-			Log.Trace("Output: {Content}", processRunner.OutputContent);
-			Log.Trace("Error: {Content}", processRunner.ErrorContent);
+			Log.Trace("Output: {Content}", command.StandardOutput);
+			Log.Trace("Error: {Content}", command.StandardError);
 
-			ErrorContent = processRunner.ErrorContent;
-			OutputContent = processRunner.OutputContent;
+			ErrorContent = command.StandardError;
+			OutputContent = command.StandardOutput;
 		}
 
 		private void ApplyConfiguration(StringBuilder argumentBuilder)
