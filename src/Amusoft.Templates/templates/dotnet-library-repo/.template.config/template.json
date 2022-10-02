@@ -50,7 +50,6 @@
 			"replaces": "BRANCHTRIGGER"
 		},
 
-
 		"IncludeTests": {
 			"type": "parameter",
 			"datatype": "bool",
@@ -84,6 +83,15 @@
 			}
 		},
 
+		"guidIntegrationTestLibrary": {
+			"type": "generated",
+			"generator": "guid",
+			"replaces": "guidIntegrationTestLibrary",
+			"parameters": {
+				"format": "B"
+			}
+		},
+
 		"guidSolution": {
 			"type": "generated",
 			"generator": "guid",
@@ -98,7 +106,7 @@
 			"modifiers": [
 				{
 					"condition": "(!IncludeTests)",
-					"exclude": [ "MyLibrary.UnitTests/**/*" ]
+					"exclude": [ "MyLibrary.UnitTests/**/*", "MyLibrary.IntegrationTests/**/*" ]
 				}
 			]
 		}
