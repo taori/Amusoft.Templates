@@ -46,6 +46,7 @@ namespace Amusoft.Templates.Tests.Cases
   Create: ./src/Directory.Build.props
   Create: ./.github/workflows/dotnet.yml
   Create: ./src/{sourceName}/{sourceName}.csproj
+  Create: ./src/{sourceName}/packageIcon.png
   Create: ./tests/{sourceName}.IntegrationTests/{sourceName}.IntegrationTests.csproj
   Create: ./tests/{sourceName}.IntegrationTests/UnitTest1.cs
   Create: ./tests/{sourceName}.IntegrationTests/Usings.cs
@@ -59,8 +60,8 @@ namespace Amusoft.Templates.Tests.Cases
 
 				var actualLines = templateRunner.OutputContent.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries).OrderBy(d => d).ToArray();
 
-				actualLines.Length.ShouldBe(expectedLines.Length);
 				actualLines.ShouldAllBe(d => expectedLines.Contains(d));
+				actualLines.Length.ShouldBe(expectedLines.Length);
 			}
 		}
 
