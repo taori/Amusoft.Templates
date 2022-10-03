@@ -17,7 +17,7 @@
 		<PackageProjectUrl>https://github.com/GITOWNER/GITPROJECT</PackageProjectUrl>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<PackageReleaseNotes>
-			http download with progress
+			lorem ipsum
 		</PackageReleaseNotes>
 		<PackageTags>TODO</PackageTags>
 
@@ -25,7 +25,7 @@
 		<WarningsAsErrors>CS1591</WarningsAsErrors>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<Nullable>Enable</Nullable>
-		<Title>Amusoft.Toolkit.Http</Title>
+		<Title>MyPackageId</Title>
 		<PackageIcon>packageIcon.png</PackageIcon>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>

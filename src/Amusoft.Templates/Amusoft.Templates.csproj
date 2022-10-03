@@ -10,7 +10,7 @@
 		<TargetFramework>netstandard2.0</TargetFramework>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
 		<FileVersion>1.0.0</FileVersion>
-		<VersionPrefix>1.1.1</VersionPrefix>
+		<VersionPrefix>1.2.0</VersionPrefix>
 		<VersionSuffix>beta</VersionSuffix>
 		<IsPackable>true</IsPackable>
 		<PackageIcon>packageIcon.png</PackageIcon>
@@ -23,19 +23,20 @@
 		<RepositoryType>git</RepositoryType>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<Copyright>Copyright © Andreas Müller 2021</Copyright>
-		<PackageReleaseNotes>new templates:
-template-cheatsheet
-dotnet-library-repo
+		<Copyright>Copyright © Andreas Müller 2022</Copyright>
+		<PackageReleaseNotes>
+updates dotnet-library-repo
 		</PackageReleaseNotes>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-	  <NoWarn>1701;1702;NU5128</NoWarn>
+		<NoWarn>1701;1702;NU5128</NoWarn>
 	</PropertyGroup>
 	
 	<ItemGroup>
-		<None Include="packageIcon.png" Pack="true" PackagePath=""/>
+		<None Include="packageIcon.png" Pack="true" PackagePath="\"/>
+		<None Include="..\..\README.md" Pack="True" PackagePath="\"/>
 	</ItemGroup>
 
 	<ItemGroup>

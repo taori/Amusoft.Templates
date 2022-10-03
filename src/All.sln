@@ -1,11 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30114.105
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Amusoft.Templates", "Amusoft.Templates\Amusoft.Templates.csproj", "{6EE782EB-3F6D-4008-B8F3-B7885206AA29}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amusoft.Templates.Tests", "..\tests\Amusoft.Templates.Tests\Amusoft.Templates.Tests.csproj", "{3EBAB693-B422-4AFB-8BA5-54DC491912B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Amusoft.Templates.Tests", "..\tests\Amusoft.Templates.Tests\Amusoft.Templates.Tests.csproj", "{3EBAB693-B422-4AFB-8BA5-54DC491912B4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "package", "package", "{53F69D64-462B-4F85-80FD-DB90B3FD10E4}"
+	ProjectSection(SolutionItems) = preProject
+		..\.github\workflows\dotnet.yml = ..\.github\workflows\dotnet.yml
+		..\README.md = ..\README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
