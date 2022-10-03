@@ -99,6 +99,15 @@
 			"parameters": {
 				"format": "B"
 			}
+		},
+
+		"guidSolutionFolder": {
+			"type": "generated",
+			"generator": "guid",
+			"replaces": "SOLUTIONFOLDERID",
+			"parameters": {
+				"format": "B"
+			}
 		}
 	},
 	"sources": [
