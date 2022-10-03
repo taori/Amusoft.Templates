@@ -5,7 +5,8 @@ on:
     branches: [ BRANCHTRIGGER ]
     paths:
       - .github/workflows/*
-      - src/MyLibrary/**            
+      - src/**/*
+      - tests/**/*    
 
   pull_request:
     branches: [ BRANCHTRIGGER ]
