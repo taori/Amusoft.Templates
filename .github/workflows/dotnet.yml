@@ -84,14 +84,13 @@ jobs:
               $suffix = "$($suffix)${{github.run_number}}"
           }  
           
-          Write-Host "suffix: $suffix"
-          
           #   key name                workflow value                                  fallback value
           $values = @(
               @("versionSuffix",      "$suffix",                                      "$suffix"),
               @("configuration",      "${{github.event.inputs.configuration}}",       "Release"),
               @("verbosity",          "${{github.event.inputs.verbosity}}",           "minimal"),
               @("publishRelease",     "${{github.event.inputs.publishRelease}}",      "true")
+          );
 
           $manual = $('${{github.event_name}}' -eq 'workflow_dispatch')
           foreach($pair in $values){
