@@ -31,23 +31,23 @@ on:
         default: false        
                 
       configuration:
-          required: false
-          default: Release
-          type: choice
-          options:
-          - Debug
-          - Release
+        required: false
+        default: Release
+        type: choice
+        options:
+        - Debug
+        - Release
           
       verbosity:
-          required: false
-          default: minimal
-          type: choice
-          options:
-          - quiet
-          - minimal
-          - normal
-          - detailed
-          - diagnostic
+        required: false
+        default: minimal
+        type: choice
+        options:
+        - quiet
+        - minimal
+        - normal
+        - detailed
+        - diagnostic
 
 jobs:
   environment : 
@@ -83,6 +83,9 @@ jobs:
               $suffix = $($suffix.TrimEnd('.') + ".")
               $suffix = "$($suffix)${{github.run_number}}"
           }  
+          
+          Write-Host "$suffix"
+          
           #   key name                workflow value                                  fallback value
           $values = @(
               @("versionSuffix",      "$suffix",                                      "$suffix"),
