@@ -24,11 +24,30 @@ on:
         required: false
         description: "Version suffix for nupkg"
         
-      nugetRelease:
+      publishRelease:
         required: true
         type: boolean
         description: "Nuget release?"
-        default: false
+        default: false        
+                
+      configuration:
+          required: false
+          default: Release
+          type: choice
+          options:
+          - Debug
+          - Release
+          
+      verbosity:
+          required: false
+          default: minimal
+          type: choice
+          options:
+          - quiet
+          - minimal
+          - normal
+          - detailed
+          - diagnostic
 
 jobs:
   environment : 
@@ -110,7 +129,7 @@ jobs:
     
     - name: Release
       run: dotnet nuget push "artifacts/nupkg/*.nupkg" -k $NUGETKEY -s https://api.nuget.org/v3/index.json
-      if: ${{ needs.environment.outputs.publishRelease == 'True' }}
+      if: ${{ needs.environment.outputs.publishRelease == 'true' }}
       env:
         NUGETKEY: ${{ secrets.NUGET }}
         
