@@ -78,7 +78,7 @@ jobs:
               "pull_request"="beta.${{github.run_number}}"; 
               "workflow_dispatch"="${{github.event.inputs.versionSuffix}}"
           };
-          $suffix = $suffixMap['${{github.event_name}}']
+          $suffix = $($suffixMap['${{github.event_name}}'])
           if( $suffixMap['workflow_dispatch'] -ne '' -and '${{github.event_name}}' -eq 'workflow_dispatch'){
               $suffix = $($suffix.TrimEnd('.') + ".")
               $suffix = "$($suffix)${{github.run_number}}"
