@@ -84,7 +84,7 @@ jobs:
               $suffix = "$($suffix)${{github.run_number}}"
           }  
           
-          Write-Host "$suffix"
+          Write-Host "suffix: $suffix"
           
           #   key name                workflow value                                  fallback value
           $values = @(
