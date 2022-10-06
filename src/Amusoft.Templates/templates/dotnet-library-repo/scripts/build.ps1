@@ -20,4 +20,17 @@ if($runTest){
 
 if($runPack){
   dotnet pack "$PSScriptRoot/../src/MyLibrary/MyLibrary.csproj" --verbosity $verbosity -c $configuration -o ../artifacts/nupkg --no-build /p:VersionSuffix=$versionSuffix
+      
+  $nupkgFiles = Get-ChildItem -Filter "*.nupkg" -Path "$PSScriptRoot/../artifacts/nupkg" | Sort-Object -Descending CreationTime | % {$_.FullName}
+  $latest = $nupkgFiles | Select-Object -First 1
+
+  if($latest){
+    if((Test-Path "$PSScriptRoot/../artifacts/feed") -eq $false){
+      Write-Host "Initializing local feed" -ForegroundColor Green
+      nuget init "$PSScriptRoot/../artifacts/nupkg" "$PSScriptRoot/../artifacts/feed"
+    } else {
+      nuget add $latest -source "$PSScriptRoot/../artifacts/feed"
+    }
+    Remove-Item $latest
+  }
 }
