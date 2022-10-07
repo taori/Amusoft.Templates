@@ -17,51 +17,57 @@ on:
 
   workflow_dispatch:
     inputs:          
+      versionPrefix:
+          type: string
+          description: e.g 1.1.1
+          default: ""
+
       versionSuffix:
-        required: false
-        type: string
-        description: Version suffix for package
-        default: ""
-        
+          type: string
+          description: e.g alpha.1
+          default: ""
+
+      package:
+          type: boolean
+          description: run dotnet pack?
+          default: true
+
       publish:
-        description: Whether or not to publish on nuget
-        required: true
-        type: boolean
-        default: true
+          type: boolean
+          description: run dotnet publish?
+          default: false
 
       publishSymbols:
-        description: Whether or not to publish snupkg
-        required: true
-        type: boolean
-        default: true
+          type: boolean
+          description: publish snupkg?
+          default: false
 
       removePrereleases:
-        description: Whether or not to remove prior prereleases
-        required: true
-        type: boolean
-        default: true
-                
+          type: boolean
+          description: nuget unlist preleases?
+          default: false
+
       configuration:
-        description: Configuration of build artifact
-        required: false
-        default: Release
-        type: choice
-        options:
-        - Debug
-        - Release
+          description: build configuration
+          required: false
+          default: Release
+          type: choice
+          options:
+          - Debug
+          - Release
 
       verbosity:
-        description: Verbosity of build process
-        required: false
-        default: minimal
-        type: choice
-        options:
-        - quiet
-        - minimal
-        - normal
-        - detailed
-        - diagnostic
-
+          description: build log verbosity
+          required: false
+          default: minimal
+          type: choice
+          options:
+          - quiet
+          - minimal
+          - normal
+          - detailed
+          - diagnostic 
+                
 jobs:
 
   parameters:
@@ -69,9 +75,11 @@ jobs:
   
     outputs:      
       versionSuffix : ${{ steps.parameters.outputs.versionSuffix }}
+      versionPrefix : ${{ steps.parameters.outputs.versionPrefix }}
       configuration : ${{ steps.parameters.outputs.configuration }}
       verbosity : ${{ steps.parameters.outputs.verbosity }}
       publish : ${{ steps.parameters.outputs.publish }}
+      package : ${{ steps.parameters.outputs.package }}
       publishSymbols : ${{ steps.parameters.outputs.publishSymbols }}
       removePrereleases : ${{ steps.parameters.outputs.removePrereleases }}
 
@@ -106,11 +114,13 @@ jobs:
         #   key name                workflow value                                  fallback value
         $values = @(
             @("versionSuffix",      "$suffix",                                      "$suffix"),
+            @("versionPrefix",      "${{github.event.inputs.versionPrefix}}",       ""),
             @("configuration",      "${{github.event.inputs.configuration}}",       "Release"),
             @("verbosity",          "${{github.event.inputs.verbosity}}",           "minimal"),
-            @("publish",            "${{github.event.inputs.publish}}",             "true"),
-            @("publishSymbols",     "${{github.event.inputs.publishSymbols}}",      "true"),
-            @("removePrereleases",  "${{github.event.inputs.removePrereleases}}",   "true")
+            @("publish",            "${{github.event.inputs.publish}}",             "false"),
+            @("package",            "${{github.event.inputs.package}}",             "true"),
+            @("publishSymbols",     "${{github.event.inputs.publishSymbols}}",      "false"),
+            @("removePrereleases",  "${{github.event.inputs.removePrereleases}}",   "false")
         )
             
         $manual = $('${{github.event_name}}' -eq 'workflow_dispatch')
@@ -123,19 +133,20 @@ jobs:
             
             Write-Host "Setting parameter $($pair[0]) => $value"
             echo "::set-output name=$($pair[0])::$value"
-        }    
+        }     
 
   package:
     needs: parameters
-    uses: taori/actions/.github/workflows/nupkg.yml@v2
+    uses: taori/actions/.github/workflows/nupkg.yml@v5
     with:
       solutionPath: src/All.sln
-      projectPath: src/MyLibrary/MyLibrary.csproj
+      projectPaths: src/MyLibrary/MyLibrary.csproj
       versionSuffix: ${{ needs.parameters.outputs.versionSuffix }}
+      versionPrefix: ${{ needs.parameters.outputs.versionPrefix }}
+      package: ${{ needs.parameters.outputs.package == 'true' }}
       publish: ${{ needs.parameters.outputs.publish == 'true' }}
       publishSymbols: ${{ needs.parameters.outputs.publishSymbols == 'true' }}
       removePrereleases: ${{ needs.parameters.outputs.removePrereleases == 'true' }}
-      packageId: MyLibrary
       configuration: ${{ needs.parameters.outputs.configuration }}
       verbosity: ${{ needs.parameters.outputs.verbosity }}
       dotnetVersion: 6.0.x
