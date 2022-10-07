@@ -44,6 +44,7 @@ namespace Amusoft.Templates.Tests.Cases
   Create: ./scripts/build.ps1
   Create: ./src/All.sln
   Create: ./src/Directory.Build.props
+  Create: ./src/nuget.config
   Create: ./.github/workflows/CI.yml
   Create: ./src/{sourceName}/{sourceName}.csproj
   Create: ./src/{sourceName}/packageIcon.png

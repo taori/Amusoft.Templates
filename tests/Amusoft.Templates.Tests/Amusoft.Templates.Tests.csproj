@@ -39,6 +39,10 @@
 		<ProjectReference Include="..\..\src\Amusoft.Templates\Amusoft.Templates.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Configuration\" />
+	</ItemGroup>
+
 	<PropertyGroup>
 		<TemplateRootPath>$(SolutionDir)Amusoft.Templates\templates</TemplateRootPath>
 		<TemplatePathResource>$(ProjectDir)Resources\Embedded\templatesRoot.txt</TemplatePathResource>
