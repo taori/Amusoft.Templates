@@ -35,13 +35,17 @@ updates dotnet-library-repo
 	</PropertyGroup>
 	
 	<ItemGroup>
-		<None Include="packageIcon.png" Pack="true" PackagePath="\"/>
-		<None Include="..\..\README.md" Pack="True" PackagePath="\"/>
+		<None Include="packageIcon.png" Pack="true" PackagePath="\" />
+		<None Include="..\..\README.md" Pack="True" PackagePath="\" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**;templates\**\.vs\**" />
 		<Compile Remove="**\*" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="templates\dotnet-library-repo\build\Project.Common.props" />
 	</ItemGroup>
 
 </Project>

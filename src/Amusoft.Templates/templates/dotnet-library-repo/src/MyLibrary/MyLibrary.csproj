@@ -1,40 +1,22 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFrameworks>net5.0;netstandard2.0</TargetFrameworks>
-		<VersionPrefix>1.0.0</VersionPrefix>
-		<VersionSuffix>alpha</VersionSuffix>
+		<LangVersion>10.0</LangVersion>
 		<IsPackable>true</IsPackable>
 
-		<Copyright>Copyright © AUTHOR CURRENTYEAR</Copyright>
+		<Title>MyPackageId</Title>
 		<Description>MyPackageId</Description>
 		<PackageId>MyPackageId</PackageId>
-		<Authors>AUTHOR</Authors>
 		<Product>MyProductName</Product>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-
-		<RepositoryType>git</RepositoryType>
-		<RepositoryUrl>https://github.com/GITOWNER/GITPROJECT.git</RepositoryUrl>
-		<PackageProjectUrl>https://github.com/GITOWNER/GITPROJECT</PackageProjectUrl>
-		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<PackageReleaseNotes>
 			lorem ipsum
 		</PackageReleaseNotes>
 		<PackageTags>TODO</PackageTags>
-
-		<LangVersion>10.0</LangVersion>
-		<NoWarn>MSB3243,NU1801</NoWarn>
-		<WarningsAsErrors>CS1591</WarningsAsErrors>
-		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<Nullable>Enable</Nullable>
-		<Title>MyPackageId</Title>
-		<PackageIcon>Resources\packageIcon.png</PackageIcon>
-		<PackageReadmeFile>Resources\README.md</PackageReadmeFile>
 	</PropertyGroup>
 
-	<ItemGroup>
-		<None Include="..\..\README.md" Pack="True" PackagePath="\Resources"/>
-		<None Include="..\packageIcon.png" Pack="True" PackagePath="\Resources" />
+	<Import Project="..\..\build\Project.Common.props" />
 
+	<ItemGroup>
 		<InternalsVisibleTo Include="MyLibrary.UnitTests" />
 		<InternalsVisibleTo Include="MyLibrary.IntegrationTests" />
 	</ItemGroup>
