@@ -19,6 +19,8 @@ if($runTest){
 }
 
 if($runPack){
+  if((Test-Path "$PSScriptRoot/../artifacts/nupkg") -eq $false) { New-Item -ItemType Directory -Path "$PSScriptRoot/../artifacts/nupkg" }
+  
   dotnet pack "$PSScriptRoot/../src/MyLibrary/MyLibrary.csproj" --verbosity $verbosity -c $configuration -o ../artifacts/nupkg --no-build /p:VersionSuffix=$versionSuffix
       
   $nupkgFiles = Get-ChildItem -Filter "*.nupkg" -Path "$PSScriptRoot/../artifacts/nupkg" | Sort-Object -Descending CreationTime | % {$_.FullName}
