@@ -3,7 +3,7 @@
 		<VersionPrefix>0.1.0</VersionPrefix>
 		<VersionSuffix>alpha</VersionSuffix>
 		<Copyright>Copyright © AUTHOR CURRENTYEAR</Copyright>
-		<Authors>AUTHOR</Authors>
+		<Authors>https://github.com/GITOWNER/graphs/contributors</Authors>
 	</PropertyGroup>
 
 	<PropertyGroup>

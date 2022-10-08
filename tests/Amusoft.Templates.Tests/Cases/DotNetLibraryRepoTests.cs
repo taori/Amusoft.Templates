@@ -40,14 +40,15 @@ namespace Amusoft.Templates.Tests.Cases
 
 				var expectedLines = $@"File actions would have been taken:
   Create: ./README.md
+  Create: ./build/Project.Common.props
   Create: ./build/SourceLink.props
   Create: ./scripts/build.ps1
   Create: ./src/All.sln
   Create: ./src/Directory.Build.props
   Create: ./src/nuget.config
+  Create: ./src/packageIcon.png
   Create: ./.github/workflows/CI.yml
   Create: ./src/{sourceName}/{sourceName}.csproj
-  Create: ./src/{sourceName}/packageIcon.png
   Create: ./tests/{sourceName}.IntegrationTests/{sourceName}.IntegrationTests.csproj
   Create: ./tests/{sourceName}.IntegrationTests/UnitTest1.cs
   Create: ./tests/{sourceName}.IntegrationTests/Usings.cs
@@ -126,15 +127,23 @@ namespace Amusoft.Templates.Tests.Cases
 				templateRunner.OutputContent.ShouldNotBeEmpty();
 				templateRunner.ErrorContent.ShouldBeEmpty();
 
-				var absoluteFilePath = templateRunner.GetAbsoluteFilePath($"./src/{sourceName}/{sourceName}.csproj");
-				File.Exists(absoluteFilePath).ShouldBeTrue();
-				var content = await File.ReadAllTextAsync(absoluteFilePath);
-				content.ShouldContain($"<Copyright>Copyright © {authorName} {DateTime.Now:yyyy}</Copyright>");
-				content.ShouldContain($"<RepositoryUrl>https://github.com/{gitUser}/{projectName}.git</RepositoryUrl>");
-				content.ShouldContain($"<PackageProjectUrl>https://github.com/{gitUser}/{projectName}</PackageProjectUrl>");
-				content.ShouldContain($"<PackageId>{packageId}</PackageId>");
-				content.ShouldContain($"<Authors>{authorName}</Authors>");
-				content.ShouldContain($"<Product>{productName}</Product>");
+				var projectFileContent = await ProjectFileContentAsync($"./src/{sourceName}/{sourceName}.csproj");
+				projectFileContent.ShouldContain($"<Copyright>Copyright © {authorName} {DateTime.Now:yyyy}</Copyright>");
+				projectFileContent.ShouldContain($"<RepositoryUrl>https://github.com/{gitUser}/{projectName}.git</RepositoryUrl>");
+				projectFileContent.ShouldContain($"<PackageProjectUrl>https://github.com/{gitUser}/{projectName}</PackageProjectUrl>");
+				projectFileContent.ShouldContain($"<PackageId>{packageId}</PackageId>");
+				projectFileContent.ShouldContain($"<Authors>{authorName}</Authors>");
+				projectFileContent.ShouldContain($"<Product>{productName}</Product>");
+
+				var projectCommonContent = await ProjectFileContentAsync("./build/Project.Common.props");
+
+				async Task<string> ProjectFileContentAsync(string relativeFilePath)
+				{
+					var absoluteFilePath = templateRunner.GetAbsoluteFilePath(relativeFilePath);
+					File.Exists(absoluteFilePath).ShouldBeTrue();
+					var projectFileContent = await File.ReadAllTextAsync(absoluteFilePath);
+					return projectFileContent;
+				}
 			}
 		}
 	}
