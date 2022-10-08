@@ -27,13 +27,13 @@
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<Nullable>Enable</Nullable>
 		<Title>MyPackageId</Title>
-		<PackageIcon>packageIcon.png</PackageIcon>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageIcon>Resources\packageIcon.png</PackageIcon>
+		<PackageReadmeFile>Resources\README.md</PackageReadmeFile>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Include="..\..\README.md" Pack="True" PackagePath="\"/>
-		<None Include="packageIcon.png" Pack="True" PackagePath="\" />
+		<None Include="..\..\README.md" Pack="True" PackagePath="\Resources"/>
+		<None Include="..\packageIcon.png" Pack="True" PackagePath="\Resources" />
 
 		<InternalsVisibleTo Include="MyLibrary.UnitTests" />
 		<InternalsVisibleTo Include="MyLibrary.IntegrationTests" />
