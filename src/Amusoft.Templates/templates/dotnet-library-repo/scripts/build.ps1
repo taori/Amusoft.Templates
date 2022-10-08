@@ -4,7 +4,7 @@ $versionSuffix = "beta"
 $runTest = $false
 $runPack = $true
 
-$dateFormat = [System.DateTime]::Now.ToString("yyyyMMdd.HHmm")
+$dateFormat = [System.DateTime]::Now.ToString("yyyyMMdd.Hmm")
 $versionSuffix = "$($versionSuffix).$($dateFormat)"
 
 dotnet restore "$PSScriptRoot/../src/All.sln" --verbosity $verbosity
