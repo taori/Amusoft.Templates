@@ -53,6 +53,10 @@ jobs:
   environment : 
     runs-on: ubuntu-latest
     
+    concurrency:    
+      group: ci-${{ github.ref }}
+      cancel-in-progress: true
+    
     outputs:      
       versionSuffix : ${{ steps.defaults.outputs.versionSuffix }}
       verbosity : ${{ steps.defaults.outputs.verbosity }}
