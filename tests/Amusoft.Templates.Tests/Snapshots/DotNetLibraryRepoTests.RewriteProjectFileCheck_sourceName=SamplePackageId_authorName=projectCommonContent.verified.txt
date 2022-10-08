@@ -1,0 +1,30 @@
+﻿<Project>
+	<PropertyGroup>
+		<VersionPrefix>0.1.0</VersionPrefix>
+		<VersionSuffix>alpha</VersionSuffix>
+		<Copyright>Copyright © Santa Clause 2022</Copyright>
+		<Authors>https://github.com/santa/graphs/contributors</Authors>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/santa/SampleProject.git</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/santa/SampleProject</PackageProjectUrl>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<NoWarn>MSB3243,NU1801</NoWarn>
+		<WarningsAsErrors>CS1591</WarningsAsErrors>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<Nullable>Enable</Nullable>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<PackageIcon>Resources\packageIcon.png</PackageIcon>
+		<PackageReadmeFile>Resources\README.md</PackageReadmeFile>
+	</PropertyGroup>
+
+	<ItemGroup Condition="'$(IsPackable)' == 'True'">
+		<None Include="..\..\README.md" Pack="True" PackagePath="\Resources" />
+		<None Include="..\packageIcon.png" Pack="True" PackagePath="\Resources" />
+	</ItemGroup>
+</Project>

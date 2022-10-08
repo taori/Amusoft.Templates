@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFrameworks>net5.0;netstandard2.0</TargetFrameworks>
+		<LangVersion>10.0</LangVersion>
+		<IsPackable>true</IsPackable>
+
+		<Title>SamplePackageId</Title>
+		<Description>SamplePackageId</Description>
+		<PackageId>SamplePackageId</PackageId>
+		<Product>SampleProductName</Product>
+		<PackageReleaseNotes>
+			lorem ipsum
+		</PackageReleaseNotes>
+		<PackageTags>TODO</PackageTags>
+	</PropertyGroup>
+
+	<Import Project="..\..\build\Project.Common.props" />
+
+	<ItemGroup>
+		<InternalsVisibleTo Include="GeneratedProject.UnitTests" />
+		<InternalsVisibleTo Include="GeneratedProject.IntegrationTests" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="6.0.0" PrivateAssets="all" />
+	</ItemGroup>
+</Project>

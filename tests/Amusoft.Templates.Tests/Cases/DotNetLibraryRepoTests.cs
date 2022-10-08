@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 using Amusoft.Templates.Tests.Toolkit;
 using Amusoft.Templates.Tests.Utility;
 using Shouldly;
+using VerifyXunit;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace Amusoft.Templates.Tests.Cases
 {
+	[UsesVerify]
 	public class DotNetLibraryRepoTests : TemplateTests
 	{
 		public DotNetLibraryRepoTests(ITestOutputHelper outputHelper, GlobalSetupFixture data) : base(outputHelper, data)
@@ -107,8 +109,8 @@ namespace Amusoft.Templates.Tests.Cases
 
 
 		[Theory]
-		[InlineData("GeneratedProject", "Santa Clause", "SampleProject", "SamplePackageId", "SampleProductName", "taori")]
-		[InlineData("GeneratedProject2", "Santa Clause2", "SampleProject2", "SamplePackageId2", "SampleProductName2", "taori2")]
+		[InlineData("GeneratedProject", "Santa Clause", "SampleProject", "SamplePackageId", "SampleProductName", "santa")]
+		[InlineData("GeneratedProject2", "Santa Clause2", "SampleProject2", "SamplePackageId2", "SampleProductName2", "santa2")]
 		public async Task RewriteProjectFileCheck(string sourceName, string authorName, string projectName, string packageId, string productName, string gitUser)
 		{
 			using (new TemplateInstallationSession(Path.Combine(GetTemplateRootPath(), "dotnet-library-repo")))
@@ -128,14 +130,12 @@ namespace Amusoft.Templates.Tests.Cases
 				templateRunner.ErrorContent.ShouldBeEmpty();
 
 				var projectFileContent = await ProjectFileContentAsync($"./src/{sourceName}/{sourceName}.csproj");
-				projectFileContent.ShouldContain($"<Copyright>Copyright © {authorName} {DateTime.Now:yyyy}</Copyright>");
-				projectFileContent.ShouldContain($"<RepositoryUrl>https://github.com/{gitUser}/{projectName}.git</RepositoryUrl>");
-				projectFileContent.ShouldContain($"<PackageProjectUrl>https://github.com/{gitUser}/{projectName}</PackageProjectUrl>");
-				projectFileContent.ShouldContain($"<PackageId>{packageId}</PackageId>");
-				projectFileContent.ShouldContain($"<Authors>{authorName}</Authors>");
-				projectFileContent.ShouldContain($"<Product>{productName}</Product>");
+				await Verifier.Verify(projectFileContent)
+					.UseParameters(packageId, "projectFileContent");
 
 				var projectCommonContent = await ProjectFileContentAsync("./build/Project.Common.props");
+				await Verifier.Verify(projectCommonContent)
+					.UseParameters(packageId, "projectCommonContent");
 
 				async Task<string> ProjectFileContentAsync(string relativeFilePath)
 				{
