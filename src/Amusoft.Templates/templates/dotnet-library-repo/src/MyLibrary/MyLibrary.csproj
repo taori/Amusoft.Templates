@@ -22,6 +22,7 @@
 		<PackageTags>TODO</PackageTags>
 
 		<LangVersion>10.0</LangVersion>
+		<NoWarn>MSB3243,NU1801</NoWarn>
 		<WarningsAsErrors>CS1591</WarningsAsErrors>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<Nullable>Enable</Nullable>
