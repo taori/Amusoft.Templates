@@ -16,6 +16,8 @@
 		<WarningsAsErrors>CS1591</WarningsAsErrors>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<Nullable>Enable</Nullable>
+		<IncludeSymbols>True</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -23,7 +25,7 @@
 		<PackageReadmeFile>Resources\README.md</PackageReadmeFile>
 	</PropertyGroup>
 
-	<ItemGroup Condition="'$(IsPackable)' == 'True'">
+	<ItemGroup Condition="'$(IsPackable)' == 'True'">		
 		<None Include="..\..\README.md" Pack="True" PackagePath="\Resources" />
 		<None Include="..\packageIcon.png" Pack="True" PackagePath="\Resources" />
 	</ItemGroup>
