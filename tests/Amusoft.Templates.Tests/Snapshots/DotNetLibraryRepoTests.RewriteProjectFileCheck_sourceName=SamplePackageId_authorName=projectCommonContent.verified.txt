@@ -12,7 +12,7 @@
 		<RepositoryUrl>https://github.com/santa/SampleProject.git</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/santa/SampleProject</PackageProjectUrl>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-		<NoWarn>MSB3243,NU1801</NoWarn>
+		<NoWarn>MSB3243;NU1801</NoWarn>
 		<WarningsAsErrors>CS1591</WarningsAsErrors>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<Nullable>Enable</Nullable>
