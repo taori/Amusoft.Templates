@@ -37,6 +37,11 @@ on:
           description: run dotnet publish?
           default: false
 
+      skipTests:
+          type: boolean
+          description: skip tests?
+          default: false
+
       publishSymbols:
           type: boolean
           description: publish snupkg?
@@ -82,6 +87,7 @@ jobs:
       package : ${{ steps.parameters.outputs.package }}
       publishSymbols : ${{ steps.parameters.outputs.publishSymbols }}
       removePrereleases : ${{ steps.parameters.outputs.removePrereleases }}
+      skipTests : ${{ steps.parameters.outputs.skipTests }}
 
     steps:
 
@@ -120,7 +126,8 @@ jobs:
             @("publish",            "${{github.event.inputs.publish}}",             "false"),
             @("package",            "${{github.event.inputs.package}}",             "true"),
             @("publishSymbols",     "${{github.event.inputs.publishSymbols}}",      "false"),
-            @("removePrereleases",  "${{github.event.inputs.removePrereleases}}",   "false")
+            @("removePrereleases",  "${{github.event.inputs.removePrereleases}}",   "false"),
+            @("skipTests",          "${{github.event.inputs.skipTests}}",           "false")
         )
             
         $manual = $('${{github.event_name}}' -eq 'workflow_dispatch')
@@ -138,7 +145,7 @@ jobs:
 
   package:
     needs: parameters
-    uses: taori/actions/.github/workflows/nupkg.yml@v7
+    uses: taori/actions/.github/workflows/nupkg.yml@v8
     with:
       solutionPath: src/All.sln
       projectPaths: src/MyLibrary/MyLibrary.csproj
@@ -148,6 +155,7 @@ jobs:
       publish: ${{ needs.parameters.outputs.publish == 'true' }}
       publishSymbols: ${{ needs.parameters.outputs.publishSymbols == 'true' }}
       removePrereleases: ${{ needs.parameters.outputs.removePrereleases == 'true' }}
+      skipTests: ${{ needs.parameters.outputs.skipTests == 'true' }}
       configuration: ${{ needs.parameters.outputs.configuration }}
       verbosity: ${{ needs.parameters.outputs.verbosity }}
       dotnetVersion: 6.0.x
