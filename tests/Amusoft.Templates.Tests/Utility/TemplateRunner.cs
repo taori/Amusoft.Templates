@@ -75,7 +75,7 @@ namespace Amusoft.Templates.Tests.Utility
 		{
 			if (_dryRun)
 			{
-				argumentBuilder.Append(" --dry-run -o ./");
+				argumentBuilder.Append(" --dry-run -o .");
 			}
 			else
 			{
