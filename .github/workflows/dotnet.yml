@@ -122,7 +122,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 5.0.x
+          dotnet-version: 6.0.x
 
       - name: Restore dependencies
         run: dotnet restore src/All.sln
@@ -135,7 +135,7 @@ jobs:
 
       - name: Release
         run: dotnet nuget push "artifacts/nupkg/*.nupkg" -k $NUGETKEY -s https://api.nuget.org/v3/index.json
-        if: ${{ needs.environment.outputs.publishRelease == 'true' }}
+        if: ${{ needs.environment.outputs.publishRelease == 'true' && github.event.pull_request.merged }}
         env:
           NUGETKEY: ${{ secrets.NUGET }}
         
