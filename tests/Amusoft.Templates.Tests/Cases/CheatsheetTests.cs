@@ -1,6 +1,7 @@
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using Amusoft.Templates.Tests.Resources;
 using Amusoft.Templates.Tests.Toolkit;
 using Amusoft.Templates.Tests.Utility;
 using Shouldly;
@@ -10,24 +11,24 @@ using Xunit.Abstractions;
 
 namespace Amusoft.Templates.Tests.Cases
 {
-	public class CheatsheetTests : TemplateTests
+	public class CheatsheetTests : TemplateTests, IClassFixture<CheatsheetSession>
 	{
-		public CheatsheetTests(ITestOutputHelper outputHelper, GlobalSetupFixture data) : base(outputHelper, data)
+		private readonly CheatsheetSession _session;
+
+		public CheatsheetTests(ITestOutputHelper outputHelper, GlobalSetupFixture data, CheatsheetSession session) : base(outputHelper, data)
 		{
+			_session = session;
 		}
 
 		[Fact]
 		public async Task FileStructureTest()
 		{
-			using (new TemplateInstallationSession(Path.Combine(GetTemplateRootPath(), "cheatsheet")))
-			{
-				using var dryRunner = new TemplateRunner("amusoft-cheatsheet");
-				var sb = new StringBuilder();
-				sb.Append(" --Author testUser --ProjectId TestId");
-				await dryRunner.ExecuteAsync(sb.ToString());
+			using var dryRunner = new TemplateRunner("amusoft-cheatsheet");
+			var sb = new StringBuilder();
+			sb.Append(" --Author testUser --ProjectId TestId");
+			await dryRunner.ExecuteAsync(sb.ToString());
 
-				await Verifier.Verify(new[] { dryRunner.OutputContent, dryRunner.ErrorContent });
-			}
+			await Verifier.Verify(new[] { dryRunner.OutputContent, dryRunner.ErrorContent });
 		}
 	}
 }
