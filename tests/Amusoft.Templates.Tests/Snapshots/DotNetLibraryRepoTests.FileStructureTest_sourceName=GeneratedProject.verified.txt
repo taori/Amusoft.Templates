@@ -1,0 +1,23 @@
+﻿File actions would have been taken:
+  Create: .github\workflows\CI.yml
+  Create: .gitignore
+  Create: README.md
+  Create: build\Project.Common.props
+  Create: build\SourceLink.props
+  Create: scripts\build.ps1
+  Create: src\Directory.Build.props
+  Create: src\GeneratedProject.sln
+  Create: src\GeneratedProject\GeneratedProject.csproj
+  Create: src\nuget.config
+  Create: src\packageIcon.png
+  Create: tests\GeneratedProject.IntegrationTests\GeneratedProject.IntegrationTests.csproj
+  Create: tests\GeneratedProject.IntegrationTests\UnitTest1.cs
+  Create: tests\GeneratedProject.IntegrationTests\Usings.cs
+  Create: tests\GeneratedProject.UnitTests\Configuration\ProjectSetup.cs
+  Create: tests\GeneratedProject.UnitTests\GeneratedProject.UnitTests.csproj
+  Create: tests\GeneratedProject.UnitTests\Toolkit\EmbeddedResourceReader.cs
+  Create: tests\GeneratedProject.UnitTests\Toolkit\GlobalSetupFixture.cs
+  Create: tests\GeneratedProject.UnitTests\Toolkit\TestBase.cs
+  Create: tests\GeneratedProject.UnitTests\UnitTest1.cs
+  Create: tests\GeneratedProject.UnitTests\nlog.config
+

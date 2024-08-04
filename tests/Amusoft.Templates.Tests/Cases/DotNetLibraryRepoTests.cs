@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -13,7 +12,6 @@ using Xunit.Abstractions;
 
 namespace Amusoft.Templates.Tests.Cases
 {
-	[UsesVerify]
 	public class DotNetLibraryRepoTests : TemplateTests
 	{
 		public DotNetLibraryRepoTests(ITestOutputHelper outputHelper, GlobalSetupFixture data) : base(outputHelper, data)
@@ -40,32 +38,8 @@ namespace Amusoft.Templates.Tests.Cases
 				templateRunner.OutputContent.ShouldNotBeEmpty();
 				templateRunner.ErrorContent.ShouldBeEmpty();
 
-				var expectedLines = $@"File actions would have been taken:
-  Create: ./README.md
-  Create: ./build/Project.Common.props
-  Create: ./build/SourceLink.props
-  Create: ./scripts/build.ps1
-  Create: ./src/All.sln
-  Create: ./src/Directory.Build.props
-  Create: ./src/nuget.config
-  Create: ./src/packageIcon.png
-  Create: ./.github/workflows/CI.yml
-  Create: ./src/{sourceName}/{sourceName}.csproj
-  Create: ./tests/{sourceName}.IntegrationTests/{sourceName}.IntegrationTests.csproj
-  Create: ./tests/{sourceName}.IntegrationTests/UnitTest1.cs
-  Create: ./tests/{sourceName}.IntegrationTests/Usings.cs
-  Create: ./tests/{sourceName}.UnitTests/{sourceName}.UnitTests.csproj
-  Create: ./tests/{sourceName}.UnitTests/nlog.config
-  Create: ./tests/{sourceName}.UnitTests/UnitTest1.cs
-  Create: ./tests/{sourceName}.UnitTests/Toolkit/EmbeddedResourceReader.cs
-  Create: ./tests/{sourceName}.UnitTests/Toolkit/GlobalSetupFixture.cs
-  Create: ./tests/{sourceName}.UnitTests/Toolkit/TestBase.cs
-".Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries).OrderBy(d => d).ToArray();
-
-				var actualLines = templateRunner.OutputContent.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries).OrderBy(d => d).ToArray();
-
-				actualLines.ShouldAllBe(d => expectedLines.Contains(d));
-				actualLines.Length.ShouldBe(expectedLines.Length);
+				await Verifier.Verify(templateRunner.OutputContent)
+					.UseParameters(sourceName);
 			}
 		}
 
@@ -96,14 +70,8 @@ namespace Amusoft.Templates.Tests.Cases
 				var absoluteFilePath = templateRunner.GetAbsoluteFilePath("./.github/workflows/CI.yml");
 				File.Exists(absoluteFilePath).ShouldBeTrue();
 				var content = await File.ReadAllTextAsync(absoluteFilePath);
-				content.ShouldContain($@"
-  push:
-    branches: [ {expectedFileBranch} ]");
-
-				content.ShouldContain($@"
-  pull_request:
-    branches: [ {expectedFileBranch} ]");
-
+				await Verifier.Verify(content)
+					.UseParameters(rootBranchName, expectedFileBranch);
 			}
 		}
 

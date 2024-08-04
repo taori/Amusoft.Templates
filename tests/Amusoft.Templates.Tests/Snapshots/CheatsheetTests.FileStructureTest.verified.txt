@@ -1,0 +1,7 @@
+﻿[  
+File actions would have been taken:
+  Create: cheatsheet.txt
+
+,
+  
+]

@@ -3,16 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{guidSolution}") = "MyLibrary", "MyLibrary\MyLibrary.csproj", "{guidLibrary}"
+Project("{00000000-0000-0000-0000-000000000000}") = "MyLibrary", "MyLibrary\MyLibrary.csproj", "{00000000-0000-0000-0000-000000000000}"
 EndProject
-Project("{guidSolution}") = "MyLibrary.UnitTests", "..\tests\MyLibrary.UnitTests\MyLibrary.UnitTests.csproj", "{guidTestLibrary}"
+Project("{00000000-0000-0000-0000-000000000000}") = "MyLibrary.UnitTests", "..\tests\MyLibrary.UnitTests\MyLibrary.UnitTests.csproj", "{00000000-0000-0000-0000-000000000000}"
 EndProject
-Project("{guidSolution}") = "MyLibrary.IntegrationTests", "..\tests\MyLibrary.IntegrationTests\MyLibrary.IntegrationTests.csproj", "{guidIntegrationTestLibrary}"
+Project("{00000000-0000-0000-0000-000000000000}") = "MyLibrary.IntegrationTests", "..\tests\MyLibrary.IntegrationTests\MyLibrary.IntegrationTests.csproj", "{00000000-0000-0000-0000-000000000000}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "package", "package", "{SOLUTIONFOLDERID}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "package", "package", "{00000000-0000-0000-0000-000000000000}"
 	ProjectSection(SolutionItems) = preProject
 		..\README.md = ..\README.md
 		..\.github\workflows\CI.yml = ..\.github\workflows\CI.yml
+		nuget.config = nuget.config
+		Directory.Build.props = Directory.Build.props
+		..\build\Project.Common.props = ..\build\Project.Common.props
+		..\scripts\build.ps1 = ..\scripts\build.ps1
+		..\.gitignore = ..\.gitignore
 	EndProjectSection
 EndProject
 Global

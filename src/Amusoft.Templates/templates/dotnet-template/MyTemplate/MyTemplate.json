@@ -1,12 +1,14 @@
 ﻿{
-	"$schema": "http://json.schemastore.org/template",
-	"author": "MyAuthor",
-	"classifications": [ "C#" ],
-	"identity": "Some.Unique.Id",
-	"name": "Display name for dotnet new",
-	"shortName": "cliname",
-	"tags": {
-		"language": "C#",
-		"type": "project"
-	}
+  "$schema": "http://json.schemastore.org/template",
+  "author": "MyAuthor",
+  "classifications": [
+    "C#"
+  ],
+  "identity": "Some.Unique.Id",
+  "name": "Display name for dotnet new",
+  "shortName": "cliname",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  }
 }

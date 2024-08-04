@@ -1,29 +1,31 @@
 ﻿{
-	"$schema": "http://json.schemastore.org/template",
-	"author": "Andreas Müller",
-	"classifications": [ "Templating" ],
-	"identity": "Amusoft.Templates.TemplateFile.Json",
-	"name": ".template.config structure",
-	"shortName": "dotnet-template",
-	"tags": {
-		"type": "item"
-	},
-	"symbols": {
-		"author": {
-			"type": "parameter",
-			"description": "Author of the template",
-			"isRequired": true,
-			"replaces": "MyAuthor"
-		},
-		"folderRename": {
-			"type": "parameter",
-			"fileRename": "MyTemplate",
-			"defaultValue": ".template.config"
-		},
-		"fileRename": {
-			"type": "parameter",
-			"fileRename": "MyTemplate.json",
-			"defaultValue": "template.json"
-		}
-	}
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Andreas Müller",
+  "classifications": [
+    "Templating"
+  ],
+  "identity": "Amusoft.Templates.TemplateFile.Json",
+  "name": ".template.config structure",
+  "shortName": "dotnet-template",
+  "tags": {
+    "type": "item"
+  },
+  "symbols": {
+    "author": {
+      "type": "parameter",
+      "description": "Author of the template",
+      "isRequired": true,
+      "replaces": "MyAuthor"
+    },
+    "folderRename": {
+      "type": "parameter",
+      "fileRename": "MyTemplate",
+      "defaultValue": ".template.config"
+    },
+    "fileRename": {
+      "type": "parameter",
+      "fileRename": "MyTemplate.json",
+      "defaultValue": "template.json"
+    }
+  }
 }

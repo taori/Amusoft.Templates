@@ -1,9 +1,7 @@
 using System;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using NLog;
-using NLog.Fluent;
 
 namespace Amusoft.Templates.Tests.Toolkit
 {
