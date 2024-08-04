@@ -55,7 +55,7 @@ jobs:
     
     concurrency:
       group: ci-${{ github.ref }}
-      cancel-in-progress: true
+      cancel-in-progress: false
     
     outputs:
       versionSuffix: ${{ steps.defaults.outputs.versionSuffix }}
@@ -130,6 +130,6 @@ jobs:
 
       - name: Release
         run: dotnet nuget push "artifacts/nupkg/*.nupkg" -k $env:NUGETKEY -s https://api.nuget.org/v3/index.json
-        if: ${{ needs.environment.outputs.publishRelease == 'true' && github.event.pull_request.merged }}
+        if: ${{ needs.environment.outputs.publishRelease == 'true' && ( github.event.pull_request.merged || github.event_name == 'workflow_call' ) }}
         env:
           NUGETKEY: ${{ secrets.NUGET }}

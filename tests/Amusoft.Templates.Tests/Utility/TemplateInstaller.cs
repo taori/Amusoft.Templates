@@ -18,7 +18,7 @@ namespace Amusoft.Templates.Tests.Utility
 		{
 			Log.Debug("Installing template {Path}", TemplatePath);
 			using var process = new Process();
-			process.StartInfo = new ProcessStartInfo("dotnet", $"new -i \"{TemplatePath}\"");
+			process.StartInfo = new ProcessStartInfo("dotnet", $"new install \"{TemplatePath}\"");
 			process.Start();
 			process.WaitForExit(10000);
 		}
@@ -27,7 +27,7 @@ namespace Amusoft.Templates.Tests.Utility
 		{
 			Log.Debug("Uninstalling template {Path}", TemplatePath);
 			using var process = new Process();
-			process.StartInfo = new ProcessStartInfo("dotnet", $"new -u \"{TemplatePath}\"");
+			process.StartInfo = new ProcessStartInfo("dotnet", $"new uninstall \"{TemplatePath}\"");
 			process.Start();
 			process.WaitForExit(10000);
 		}
