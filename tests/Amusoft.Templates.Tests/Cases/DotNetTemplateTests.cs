@@ -1,18 +1,21 @@
 using System.IO;
 using System.Threading.Tasks;
+using Amusoft.Templates.Tests.Resources;
 using Amusoft.Templates.Tests.Toolkit;
 using Amusoft.Templates.Tests.Utility;
-using Shouldly;
 using VerifyXunit;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace Amusoft.Templates.Tests.Cases
 {
-	public class DotNetTemplateTests : TemplateTests
+	public class DotNetTemplateTests : TemplateTests, IClassFixture<DotnetTemplateRepoSession>
 	{
-		public DotNetTemplateTests(ITestOutputHelper outputHelper, GlobalSetupFixture data) : base(outputHelper, data)
+		private readonly DotnetTemplateRepoSession _session;
+
+		public DotNetTemplateTests(ITestOutputHelper outputHelper, GlobalSetupFixture data, DotnetTemplateRepoSession session) : base(outputHelper, data)
 		{
+			_session = session;
 		}
 
 		[Fact]
