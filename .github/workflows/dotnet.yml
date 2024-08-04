@@ -3,80 +3,80 @@ name: .NET
 on:
   push:
     branches: [ master ]
-    paths: 
+    paths:
       - .github/workflows/*
       - src/**/*
       - tests/**/*
-      
+  
   pull_request:
     branches: [ master ]
-    types: 
+    types:
       - opened
       - reopened
-      - synchronize 
+      - synchronize
       - closed
-      
-  workflow_dispatch:
   
-    inputs:   
+  workflow_dispatch:
     
+    inputs:
+      
       versionSuffix:
         required: false
         description: "Version suffix for nupkg"
-        
+      
       publishRelease:
         required: true
         type: boolean
         description: "Nuget release?"
-        default: false        
-                
+        default: false
+      
       configuration:
         required: false
         default: Release
         type: choice
         options:
-        - Debug
-        - Release
-          
+          - Debug
+          - Release
+      
       verbosity:
         required: false
         default: minimal
         type: choice
         options:
-        - quiet
-        - minimal
-        - normal
-        - detailed
-        - diagnostic
+          - quiet
+          - minimal
+          - normal
+          - detailed
+          - diagnostic
 
 jobs:
-  environment : 
+  environment:
     runs-on: ubuntu-latest
     
-    concurrency:    
+    concurrency:
       group: ci-${{ github.ref }}
       cancel-in-progress: true
     
-    outputs:      
-      versionSuffix : ${{ steps.defaults.outputs.versionSuffix }}
-      verbosity : ${{ steps.defaults.outputs.verbosity }}
-      configuration : ${{ steps.defaults.outputs.configuration }}
-      publishRelease : ${{ steps.defaults.outputs.publishRelease }}
+    outputs:
+      versionSuffix: ${{ steps.defaults.outputs.versionSuffix }}
+      verbosity: ${{ steps.defaults.outputs.verbosity }}
+      configuration: ${{ steps.defaults.outputs.configuration }}
+      publishRelease: ${{ steps.defaults.outputs.publishRelease }}
 
     steps:
-    
+
       - name: Git Information
         shell: bash
         run: |
           echo "head: $GITHUB_HEAD_REF"
           echo "base: $GITHUB_BASE_REF"
           echo "base: $GITHUB_REF"
-          
-      - name: declare default values 
+
+      - name: declare default values
         id: defaults
         shell: pwsh
-        run: |        
-         
+        run: |
+          
           $suffixMap = @{
               "push"="alpha.${{github.run_number}}"; 
               "pull_request"="beta.${{github.run_number}}"; 
@@ -106,7 +106,7 @@ jobs:
               Write-Host "Setting parameter $($pair[0]) => $value"
               echo "$($pair[0])=$value" >> $env:GITHUB_OUTPUT
           }   
-          
+  
   build:
     if: true
     runs-on: ubuntu-latest
@@ -118,26 +118,26 @@ jobs:
       versionSuffix: ${{ needs.environment.outputs.versionSuffix }}
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 5.0.x
-        
-    - name: Restore dependencies
-      run: dotnet restore src/All.sln
-    - name: Build
-      run: dotnet build src/All.sln --no-restore --verbosity $verbosity -c $configuration
-    - name: Test
-      run: dotnet test src/All.sln --no-build --verbosity $verbosity -c $configuration
-    - name: Pack
-      run: dotnet pack src/Amusoft.Templates/Amusoft.Templates.csproj -o artifacts/nupkg --no-build --verbosity $verbosity -c $configuration /p:VersionSuffix=${{ needs.environment.outputs.versionSuffix}}
-    
-    - name: Release
-      run: dotnet nuget push "artifacts/nupkg/*.nupkg" -k $NUGETKEY -s https://api.nuget.org/v3/index.json
-      if: ${{ needs.environment.outputs.publishRelease == 'true' }}
-      env:
-        NUGETKEY: ${{ secrets.NUGET }}
+      - uses: actions/checkout@v2
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore src/All.sln
+      - name: Build
+        run: dotnet build src/All.sln --no-restore --verbosity $verbosity -c $configuration
+      - name: Test
+        run: dotnet test src/All.sln --no-build --verbosity $verbosity -c $configuration
+      - name: Pack
+        run: dotnet pack src/Amusoft.Templates/Amusoft.Templates.csproj -o artifacts/nupkg --no-build --verbosity $verbosity -c $configuration /p:VersionSuffix=${{ needs.environment.outputs.versionSuffix}}
+
+      - name: Release
+        run: dotnet nuget push "artifacts/nupkg/*.nupkg" -k $NUGETKEY -s https://api.nuget.org/v3/index.json
+        if: ${{ needs.environment.outputs.publishRelease == 'true' }}
+        env:
+          NUGETKEY: ${{ secrets.NUGET }}
         
         
     

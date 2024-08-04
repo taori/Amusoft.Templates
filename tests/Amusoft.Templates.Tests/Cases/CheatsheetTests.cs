@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Amusoft.Templates.Tests.Toolkit;
 using Amusoft.Templates.Tests.Utility;
 using Shouldly;
+using VerifyXunit;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -25,9 +26,7 @@ namespace Amusoft.Templates.Tests.Cases
 				sb.Append(" --Author testUser --ProjectId TestId");
 				await dryRunner.ExecuteAsync(sb.ToString());
 
-				dryRunner.ErrorContent.ShouldBeEmpty();
-				dryRunner.OutputContent.ShouldNotBeEmpty();
-				dryRunner.OutputContent.ShouldContain("Create: ./cheatsheet.txt");
+				await Verifier.Verify(new[] { dryRunner.OutputContent, dryRunner.ErrorContent });
 			}
 		}
 	}

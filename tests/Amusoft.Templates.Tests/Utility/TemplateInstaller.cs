@@ -7,12 +7,12 @@ namespace Amusoft.Templates.Tests.Utility
 	{
 		private static readonly Logger Log = LogManager.GetLogger(nameof(TemplateInstaller));
 
-		public string TemplatePath { get; }
-
 		public TemplateInstaller(string templatePath)
 		{
 			TemplatePath = templatePath;
 		}
+
+		public string TemplatePath { get; }
 
 		public void Install()
 		{

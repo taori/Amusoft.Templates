@@ -6,14 +6,14 @@ namespace Amusoft.Templates.Tests.Utility
 	{
 		private readonly TemplateInstaller _installer;
 
-		public string TemplatePath { get; }
-
 		public TemplateInstallationSession(string templatePath)
 		{
 			TemplatePath = templatePath;
 			_installer = new TemplateInstaller(templatePath);
 			_installer.Install();
 		}
+
+		public string TemplatePath { get; }
 
 		public void Dispose()
 		{

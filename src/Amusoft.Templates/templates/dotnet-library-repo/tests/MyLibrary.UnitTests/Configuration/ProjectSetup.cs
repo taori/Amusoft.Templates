@@ -8,7 +8,7 @@ using Xunit;
 
 [assembly: CollectionBehavior(DisableTestParallelization = true)]
 
-namespace Amusoft.Templates.Tests.Configuration
+namespace MyLibrary.UnitTests.Toolkit
 {
 	public class ProjectSetup
 	{

@@ -1,11 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Amusoft.Templates.Tests.Toolkit;
 using CliWrap;
 using CliWrap.Buffered;
 using NLog;
@@ -18,12 +17,6 @@ namespace Amusoft.Templates.Tests.Utility
 
 		private readonly bool _dryRun;
 
-		public string TemplateName { get; }
-
-		public string OutputContent { get; set; }
-
-		public string ErrorContent { get; set; }
-
 		public TemplateRunner(string templateName, bool dryRun = true)
 		{
 			_dryRun = dryRun;
@@ -32,10 +25,28 @@ namespace Amusoft.Templates.Tests.Utility
 			TemplateName = templateName;
 		}
 
+		public string TemplateName { get; }
+
+		public string OutputContent { get; set; }
+
+		public string ErrorContent { get; set; }
+
 		public string TemporaryDirectory { get; }
+
+		public void Dispose()
+		{
+			if (!_dryRun)
+			{
+				if (Directory.Exists(TemporaryDirectory))
+					Directory.Delete(TemporaryDirectory, true);
+			}
+		}
 
 		public async Task ExecuteAsync(string arguments, TimeSpan timeout = default)
 		{
+			Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+			Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
+
 			var argumentBuilder = new StringBuilder();
 			argumentBuilder.Append($"new {TemplateName} {arguments}");
 			ApplyConfiguration(argumentBuilder);
@@ -47,6 +58,11 @@ namespace Amusoft.Templates.Tests.Utility
 			var executionTimeout = timeout == default ? TimeSpan.FromSeconds(3) : timeout;
 			using var cts = new CancellationTokenSource(executionTimeout);
 			var command = await Cli.Wrap("dotnet")
+				.WithEnvironmentVariables(new Dictionary<string, string>()
+					{
+						["DOTNET_CLI_UI_LANGUAGE"] = "en",
+					}
+				)
 				.WithArguments(processArguments)
 				.WithValidation(CommandResultValidation.None)
 				.ExecuteBufferedAsync(cts.Token);
@@ -67,15 +83,6 @@ namespace Amusoft.Templates.Tests.Utility
 			else
 			{
 				argumentBuilder.Append($" -o \"{TemporaryDirectory}\"");
-			}
-		}
-
-		public void Dispose()
-		{
-			if (!_dryRun)
-			{
-				if (Directory.Exists(TemporaryDirectory))
-					Directory.Delete(TemporaryDirectory, true);
 			}
 		}
 

@@ -1,6 +1,7 @@
 # GITPROJECT
 
 ## Project state
+
 [![.GitHub](https://github.com/GITOWNER/GITPROJECT/actions/workflows/CI.yml/badge.svg)](https://github.com/GITOWNER/GITPROJECT/actions/workflows/CI.yml)
 [![GitHub issues](https://img.shields.io/github/issues/GITOWNER/GITPROJECT)](https://github.com/GITOWNER/GITPROJECT/issues)
 [![NuGet version (MyPackageId)](https://img.shields.io/nuget/v/MyPackageId.svg)](https://www.nuget.org/packages/MyPackageId/)

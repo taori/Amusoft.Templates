@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Amusoft.Templates.Tests.Toolkit;
 using Amusoft.Templates.Tests.Utility;
 using Shouldly;
+using VerifyXunit;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -10,6 +11,10 @@ namespace Amusoft.Templates.Tests.Cases
 {
 	public class DotNetTemplateTests : TemplateTests
 	{
+		public DotNetTemplateTests(ITestOutputHelper outputHelper, GlobalSetupFixture data) : base(outputHelper, data)
+		{
+		}
+
 		[Fact]
 		public async Task FileStructureTest()
 		{
@@ -18,11 +23,7 @@ namespace Amusoft.Templates.Tests.Cases
 				using var dryRunner = new TemplateRunner("dotnet-template");
 				await dryRunner.ExecuteAsync("-au testauthor");
 
-				dryRunner.OutputContent.ShouldNotBeEmpty();
-				dryRunner.ErrorContent.ShouldBeEmpty();
-				dryRunner.OutputContent.ShouldContain(@"File actions would have been taken:
-  Create: ./.template.config/template.json
-");
+				await Verifier.Verify(new[] { dryRunner.ErrorContent, dryRunner.OutputContent });
 			}
 		}
 
@@ -34,14 +35,8 @@ namespace Amusoft.Templates.Tests.Cases
 				using var dryRunner = new TemplateRunner("dotnet-template");
 				await dryRunner.ExecuteAsync(string.Empty);
 
-				dryRunner.OutputContent.Trim().ShouldBeEmpty();
-				dryRunner.ErrorContent.ShouldNotBeEmpty();
-				dryRunner.ErrorContent.ShouldContain("Mandatory option --param:author missing");
+				await Verifier.Verify(new[] { dryRunner.ErrorContent, dryRunner.OutputContent });
 			}
-		}
-
-		public DotNetTemplateTests(ITestOutputHelper outputHelper, GlobalSetupFixture data) : base(outputHelper, data)
-		{
 		}
 	}
 }
