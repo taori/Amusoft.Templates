@@ -127,7 +127,7 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore src/All.sln
       - name: Build
-        run: dotnet build src/All.sln --no-restore --verbosity $env:verbosity -c $configuration
+        run: dotnet build src/All.sln --no-restore --verbosity $env:verbosity -c $env:configuration
       - name: Test
         run: dotnet test src/All.sln --no-build --verbosity $env:verbosity -c $env:configuration
       - name: Pack
