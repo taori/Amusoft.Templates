@@ -127,14 +127,14 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore src/All.sln
       - name: Build
-        run: dotnet build src/All.sln --no-restore --verbosity $verbosity -c $configuration
+        run: dotnet build src/All.sln --no-restore --verbosity $env:verbosity -c $configuration
       - name: Test
-        run: dotnet test src/All.sln --no-build --verbosity $verbosity -c $configuration
+        run: dotnet test src/All.sln --no-build --verbosity $env:verbosity -c $env:configuration
       - name: Pack
-        run: dotnet pack src/Amusoft.Templates/Amusoft.Templates.csproj -o artifacts/nupkg --no-build --verbosity $verbosity -c $configuration /p:VersionSuffix=${{ needs.environment.outputs.versionSuffix}}
+        run: dotnet pack src/Amusoft.Templates/Amusoft.Templates.csproj -o artifacts/nupkg --no-build --verbosity $env:verbosity -c $env:configuration /p:VersionSuffix=${{ needs.environment.outputs.versionSuffix}}
 
       - name: Release
-        run: dotnet nuget push "artifacts/nupkg/*.nupkg" -k $NUGETKEY -s https://api.nuget.org/v3/index.json
+        run: dotnet nuget push "artifacts/nupkg/*.nupkg" -k $env:NUGETKEY -s https://api.nuget.org/v3/index.json
         if: ${{ needs.environment.outputs.publishRelease == 'true' && github.event.pull_request.merged }}
         env:
           NUGETKEY: ${{ secrets.NUGET }}
