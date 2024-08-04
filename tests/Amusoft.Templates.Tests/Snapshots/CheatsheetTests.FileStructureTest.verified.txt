@@ -1,6 +1,6 @@
 ﻿[  
 File actions would have been taken:
-  Create: C:\tmp\cheatsheet.txt
+  Create: cheatsheet.txt
 
 ,
   

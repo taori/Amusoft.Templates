@@ -44,9 +44,6 @@ namespace Amusoft.Templates.Tests.Utility
 
 		public async Task ExecuteAsync(string arguments, TimeSpan timeout = default)
 		{
-			Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
-			Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
-
 			var argumentBuilder = new StringBuilder();
 			argumentBuilder.Append($"new {TemplateName} {arguments}");
 			ApplyConfiguration(argumentBuilder);
@@ -78,7 +75,7 @@ namespace Amusoft.Templates.Tests.Utility
 		{
 			if (_dryRun)
 			{
-				argumentBuilder.Append(" --dry-run -o C:\\tmp");
+				argumentBuilder.Append(" --dry-run -o ./");
 			}
 			else
 			{

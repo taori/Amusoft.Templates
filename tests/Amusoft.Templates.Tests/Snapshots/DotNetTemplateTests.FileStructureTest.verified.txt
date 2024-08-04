@@ -2,7 +2,7 @@
   
   
 File actions would have been taken:
-  Create: C:\tmp\.template.config\template.json
+  Create: .template.config\template.json
 
 
 ]
