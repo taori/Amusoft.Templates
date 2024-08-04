@@ -2,7 +2,7 @@
 	<PropertyGroup>
 		<VersionPrefix>0.1.0</VersionPrefix>
 		<VersionSuffix>alpha</VersionSuffix>
-		<Copyright>Copyright © Santa Clause 2022</Copyright>
+		<Copyright>Copyright © Santa Clause 2024</Copyright>
 		<Authors>https://github.com/santa/graphs/contributors</Authors>
 	</PropertyGroup>
 

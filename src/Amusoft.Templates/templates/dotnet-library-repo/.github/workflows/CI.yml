@@ -12,7 +12,6 @@ on:
     branches: [ BRANCHTRIGGER ]
     types: 
       - opened
-      - reopened
       - synchronize 
 
   workflow_dispatch:
@@ -30,7 +29,7 @@ on:
       package:
           type: boolean
           description: run dotnet pack?
-          default: true
+          default: false
 
       publish:
           type: boolean
@@ -51,6 +50,11 @@ on:
           type: boolean
           description: nuget unlist preleases?
           default: false
+
+      runCoverage:
+        type: boolean
+        description: run code coverage?
+        default: true
 
       configuration:
           description: build configuration
@@ -88,6 +92,7 @@ jobs:
       publishSymbols : ${{ steps.parameters.outputs.publishSymbols }}
       removePrereleases : ${{ steps.parameters.outputs.removePrereleases }}
       skipTests : ${{ steps.parameters.outputs.skipTests }}
+      runCoverage : ${{ steps.parameters.outputs.runCoverage }}
 
     steps:
 
@@ -127,7 +132,8 @@ jobs:
             @("package",            "${{github.event.inputs.package}}",             "true"),
             @("publishSymbols",     "${{github.event.inputs.publishSymbols}}",      "false"),
             @("removePrereleases",  "${{github.event.inputs.removePrereleases}}",   "false"),
-            @("skipTests",          "${{github.event.inputs.skipTests}}",           "false")
+            @("skipTests",          "${{github.event.inputs.skipTests}}",           "false"),
+            @("runCoverage",        "${{github.event.inputs.runCoverage}}",         "true")
         )
             
         $manual = $('${{github.event_name}}' -eq 'workflow_dispatch')
@@ -145,10 +151,10 @@ jobs:
 
   package:
     needs: parameters
-    uses: taori/actions/.github/workflows/nupkg.yml@v8
+    uses: taori/actions/.github/workflows/nupkg.yml@v9
     with:
-      solutionPath: src/All.sln
-      projectPaths: src/MyLibrary/MyLibrary.csproj
+      solutionPath: src/MyLibrary.sln
+      packProjects: src/MyLibrary/MyLibrary.csproj
       versionSuffix: ${{ needs.parameters.outputs.versionSuffix }}
       versionPrefix: ${{ needs.parameters.outputs.versionPrefix }}
       package: ${{ needs.parameters.outputs.package == 'true' }}
@@ -158,6 +164,7 @@ jobs:
       skipTests: ${{ needs.parameters.outputs.skipTests == 'true' }}
       configuration: ${{ needs.parameters.outputs.configuration }}
       verbosity: ${{ needs.parameters.outputs.verbosity }}
+      runCoverage: ${{ needs.parameters.outputs.runCoverage }}
       dotnetVersion: 6.0.x
     secrets:
       nuget: ${{ secrets.NUGET }}
