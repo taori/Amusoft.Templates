@@ -125,11 +125,15 @@ jobs:
         run: dotnet build src/All.sln --no-restore --verbosity ${{ needs.environment.outputs.verbosity }} -c ${{ needs.environment.outputs.configuration }}
       - name: Test
         run: dotnet test src/All.sln --no-build --verbosity ${{ needs.environment.outputs.verbosity }} -c ${{ needs.environment.outputs.configuration }}
-      - name: Pack
-        run: dotnet pack src/Amusoft.Templates/Amusoft.Templates.csproj -o "${{ github.workspace }}/artifacts/nupkg" --no-build --verbosity ${{ needs.environment.outputs.verbosity }} -c ${{ needs.environment.outputs.configuration }} /p:VersionSuffix=${{ needs.environment.outputs.versionSuffix}}
+      - name: Pack      
+        run: dotnet pack src/Amusoft.Templates/Amusoft.Templates.csproj -o "artifacts\nupkg" --no-build --verbosity ${{ needs.environment.outputs.verbosity }} -c ${{ needs.environment.outputs.configuration }} /p:VersionSuffix=${{ needs.environment.outputs.versionSuffix}}
+      - name: Inspect path
+        shell: pwsh        
+        run: Get-ChildItem -Path "artifacts\nupkg" 
 
       - name: Release
-        run: dotnet nuget push "${{ github.workspace }}/artifacts/nupkg/*.nupkg" -k $env:NUGETKEY -s https://api.nuget.org/v3/index.json
+        run: dotnet nuget push "artifacts\nupkg\*.nupkg" -k $env:NUGETKEY -s https://api.nuget.org/v3/index.json
+        shell: pwsh
         if: ${{ needs.environment.outputs.publishRelease == 'true' && ( github.event.pull_request.merged || github.event_name == 'workflow_call' ) }}
         env:
           NUGETKEY: ${{ secrets.NUGET }}
