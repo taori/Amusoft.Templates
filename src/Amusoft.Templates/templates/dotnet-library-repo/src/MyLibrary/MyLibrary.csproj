@@ -14,8 +14,6 @@
 		<PackageTags>TODO</PackageTags>
 	</PropertyGroup>
 
-	<Import Project="..\..\build\Project.Common.props"/>
-
 	<ItemGroup>
 		<InternalsVisibleTo Include="MyLibrary.UnitTests"/>
 		<InternalsVisibleTo Include="MyLibrary.IntegrationTests"/>

@@ -3,21 +3,23 @@
 		<VersionPrefix>0.1.0</VersionPrefix>
 		<VersionSuffix>alpha</VersionSuffix>
 		<Copyright>Copyright © AUTHOR CURRENTYEAR</Copyright>
-		<Authors>https://github.com/GITOWNER/graphs/contributors</Authors>
+		<Authors>https://github.com/GITOWNER/GITPROJECT/graphs/contributors</Authors>
+	</PropertyGroup>
+	
+	<PropertyGroup>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<Nullable>Enable</Nullable>
+		<IsTestProject>false</IsTestProject>		
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/GITOWNER/GITPROJECT.git</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/GITOWNER/GITPROJECT</PackageProjectUrl>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<NoWarn>MSB3243;NU1801</NoWarn>
 		<WarningsAsErrors>CS1591</WarningsAsErrors>
-		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<Nullable>Enable</Nullable>
-		<IncludeSymbols>True</IncludeSymbols>
-		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 	</PropertyGroup>
 
 	<PropertyGroup>

@@ -104,6 +104,30 @@
       "parameters": {
         "format": "B"
       }
+    },
+    "guidPackage": {
+      "type": "generated",
+      "generator": "guid",
+      "replaces": "guidPackage",
+      "parameters": {
+        "format": "B"
+      }
+    },
+    "guidvFolderSrc": {
+      "type": "generated",
+      "generator": "guid",
+      "replaces": "guidvFolderSrc",
+      "parameters": {
+        "format": "B"
+      }
+    },
+    "guidvFolderTests": {
+      "type": "generated",
+      "generator": "guid",
+      "replaces": "guidvFolderTests",
+      "parameters": {
+        "format": "B"
+      }
     }
   },
   "sources": [

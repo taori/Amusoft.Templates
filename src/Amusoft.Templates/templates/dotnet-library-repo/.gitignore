@@ -7,11 +7,12 @@
 *.rsuser
 *.suo
 *.user
+*.DotSettings.user
 *.userosscache
 *.sln.docstates
 *.idea/
-
 *.received.*
+.idea/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

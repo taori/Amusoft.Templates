@@ -1,5 +1,13 @@
 name: CI
 
+permissions: 
+  contents: 
+    write
+  pull-requests: 
+    write
+  id-token:
+    write
+    
 on:
   push:
     branches: [ BRANCHTRIGGER ]
@@ -76,7 +84,7 @@ on:
           - normal
           - detailed
           - diagnostic
-
+    
 jobs:
 
   parameters:
@@ -164,7 +172,10 @@ jobs:
       skipTests: ${{ needs.parameters.outputs.skipTests == 'true' }}
       configuration: ${{ needs.parameters.outputs.configuration }}
       verbosity: ${{ needs.parameters.outputs.verbosity }}
-      runCoverage: ${{ needs.parameters.outputs.runCoverage }}
+      runCoverage: ${{ needs.parameters.outputs.runCoverage == 'true' }}
+      testArguments: "--filter Category!=SkipInCI"
+      concurrencyAbortable: true
+      coverageThreshold: '85 95'
       dotnetVersion: 6.0.x
     secrets:
       nuget: ${{ secrets.NUGET }}
