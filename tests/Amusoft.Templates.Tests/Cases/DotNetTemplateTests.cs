@@ -1,45 +1,44 @@
 using System.IO;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
-using Amusoft.Templates.Tests.Resources;
+using Amusoft.DotnetNew.Tests.CLI;
+using Amusoft.DotnetNew.Tests.Diagnostics;
+using Amusoft.DotnetNew.Tests.Exceptions;
+using Amusoft.DotnetNew.Tests.Scopes;
 using Amusoft.Templates.Tests.Toolkit;
-using Amusoft.Templates.Tests.Utility;
 using VerifyXunit;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace Amusoft.Templates.Tests.Cases
 {
-	public class DotNetTemplateTests : TemplateTests, IClassFixture<DotnetTemplateRepoSession>
+	public class DotNetTemplateTests : TemplateTests
 	{
-		private readonly DotnetTemplateRepoSession _session;
-
-		public DotNetTemplateTests(ITestOutputHelper outputHelper, GlobalSetupFixture data, DotnetTemplateRepoSession session) : base(outputHelper, data)
+		public DotNetTemplateTests(ITestOutputHelper outputHelper, GlobalSetupFixture data) : base(outputHelper, data)
 		{
-			_session = session;
 		}
 
 		[Fact]
 		public async Task FileStructureTest()
 		{
-			using (new TemplateInstallationSession(Path.Combine(GetTemplateRootPath(), "dotnet-template")))
-			{
-				using var dryRunner = new TemplateRunner("dotnet-template");
-				await dryRunner.ExecuteAsync("-au testauthor");
+			using var loggingScope = new LoggingScope();
+			using var scaffold = await Dotnet.Cli.NewAsync("dotnet-template", "-au testauthor", CancellationToken.None);
 
-				await Verifier.Verify(new[] { dryRunner.ErrorContent, dryRunner.OutputContent });
-			}
+			await Verifier.Verify(new
+			{
+				Log = loggingScope.ToFullString(PrintKind.All),
+				Files = await scaffold.GetAllFileContentsAsync().ToListAsync()
+			});
 		}
 
 		[Fact]
 		public async Task CheckAuthorIsRequired()
 		{
-			using (new TemplateInstallationSession(Path.Combine(GetTemplateRootPath(), "dotnet-template")))
-			{
-				using var dryRunner = new TemplateRunner("dotnet-template");
-				await dryRunner.ExecuteAsync(string.Empty);
+			using var loggingScope = new LoggingScope();
 
-				await Verifier.Verify(new[] { dryRunner.ErrorContent, dryRunner.OutputContent });
-			}
+			var exception = await Assert.ThrowsAsync<ScaffoldingFailedException>(async() => await Dotnet.Cli.NewAsync("dotnet-template", null, CancellationToken.None));
+			await Verifier.Verify(exception.Output);
 		}
 	}
 }

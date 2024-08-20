@@ -1,23 +1,23 @@
-﻿File actions would have been taken:
-  Create: .github\workflows\CI.yml
-  Create: .gitignore
-  Create: README.md
-  Create: build\Project.Common.props
-  Create: build\SourceLink.props
-  Create: scripts\build.ps1
-  Create: src\Directory.Build.props
-  Create: src\GeneratedProject.sln
-  Create: src\GeneratedProject\GeneratedProject.csproj
-  Create: src\nuget.config
-  Create: src\packageIcon.png
-  Create: tests\GeneratedProject.IntegrationTests\GeneratedProject.IntegrationTests.csproj
-  Create: tests\GeneratedProject.IntegrationTests\UnitTest1.cs
-  Create: tests\GeneratedProject.IntegrationTests\Usings.cs
-  Create: tests\GeneratedProject.UnitTests\Configuration\ProjectSetup.cs
-  Create: tests\GeneratedProject.UnitTests\GeneratedProject.UnitTests.csproj
-  Create: tests\GeneratedProject.UnitTests\Toolkit\EmbeddedResourceReader.cs
-  Create: tests\GeneratedProject.UnitTests\Toolkit\GlobalSetupFixture.cs
-  Create: tests\GeneratedProject.UnitTests\Toolkit\TestBase.cs
-  Create: tests\GeneratedProject.UnitTests\UnitTest1.cs
-  Create: tests\GeneratedProject.UnitTests\nlog.config
-
+﻿[
+  .github/workflows/CI.yml,
+  .gitignore,
+  build/Project.Common.props,
+  build/SourceLink.props,
+  README.md,
+  scripts/build.ps1,
+  src/Directory.Build.props,
+  src/GeneratedProject.sln,
+  src/GeneratedProject/GeneratedProject.csproj,
+  src/nuget.config,
+  src/packageIcon.png,
+  tests/GeneratedProject.IntegrationTests/GeneratedProject.IntegrationTests.csproj,
+  tests/GeneratedProject.IntegrationTests/UnitTest1.cs,
+  tests/GeneratedProject.IntegrationTests/Usings.cs,
+  tests/GeneratedProject.UnitTests/Configuration/ProjectSetup.cs,
+  tests/GeneratedProject.UnitTests/GeneratedProject.UnitTests.csproj,
+  tests/GeneratedProject.UnitTests/nlog.config,
+  tests/GeneratedProject.UnitTests/Toolkit/EmbeddedResourceReader.cs,
+  tests/GeneratedProject.UnitTests/Toolkit/GlobalSetupFixture.cs,
+  tests/GeneratedProject.UnitTests/Toolkit/TestBase.cs,
+  tests/GeneratedProject.UnitTests/UnitTest1.cs
+]

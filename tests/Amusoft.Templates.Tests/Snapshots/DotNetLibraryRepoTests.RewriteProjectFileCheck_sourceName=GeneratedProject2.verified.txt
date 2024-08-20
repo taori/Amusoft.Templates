@@ -1,0 +1,65 @@
+﻿{
+  ProjectFile:
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFrameworks>net6.0;netstandard2.0</TargetFrameworks>
+		<LangVersion>10.0</LangVersion>
+		<IsPackable>true</IsPackable>
+
+		<Title>SamplePackageId2</Title>
+		<Description>SamplePackageId2</Description>
+		<PackageId>SamplePackageId2</PackageId>
+		<Product>SampleProductName2</Product>
+		<PackageReleaseNotes>
+			lorem ipsum
+		</PackageReleaseNotes>
+		<PackageTags>TODO</PackageTags>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<InternalsVisibleTo Include="GeneratedProject2.UnitTests"/>
+		<InternalsVisibleTo Include="GeneratedProject2.IntegrationTests"/>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0" PrivateAssets="all"/>
+	</ItemGroup>
+</Project>
+,
+  ProjectCommonProps:
+<Project>
+	<PropertyGroup>
+		<VersionPrefix>0.1.0</VersionPrefix>
+		<VersionSuffix>alpha</VersionSuffix>
+		<Copyright>Copyright © Santa Clause2 2024</Copyright>
+		<Authors>https://github.com/santa2/SampleProject2/graphs/contributors</Authors>
+	</PropertyGroup>
+	
+	<PropertyGroup>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<Nullable>Enable</Nullable>
+		<IsTestProject>false</IsTestProject>		
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/santa2/SampleProject2.git</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/santa2/SampleProject2</PackageProjectUrl>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<NoWarn>MSB3243;NU1801</NoWarn>
+		<WarningsAsErrors>CS1591</WarningsAsErrors>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<PackageIcon>Resources\packageIcon.png</PackageIcon>
+		<PackageReadmeFile>Resources\README.md</PackageReadmeFile>
+	</PropertyGroup>
+
+	<ItemGroup Condition="'$(IsPackable)' == 'True'">
+		<None Include="..\..\README.md" Pack="True" PackagePath="\Resources"/>
+		<None Include="..\packageIcon.png" Pack="True" PackagePath="\Resources"/>
+	</ItemGroup>
+</Project>
+
+}
