@@ -3,6 +3,7 @@
   .gitignore,
   build/Project.Common.props,
   build/SourceLink.props,
+  build/Tests.Common.props,
   README.md,
   scripts/build.ps1,
   src/Directory.Build.props,
@@ -16,9 +17,9 @@
   tests/GeneratedProject2.Tests.Shared/AssemblyDeclarations.cs,
   tests/GeneratedProject2.Tests.Shared/GeneratedProject2.Tests.Shared.csproj,
   tests/GeneratedProject2.Tests.Shared/Initializers/VerifyInitializer.cs,
+  tests/GeneratedProject2.Tests.Shared/nlog.config,
   tests/GeneratedProject2.Tests.Shared/SharedStartup.shared.cs,
   tests/GeneratedProject2.Tests.Shared/Toolkit/EmbeddedResourceReader.cs,
   tests/GeneratedProject2.UnitTests/GeneratedProject2.UnitTests.csproj,
-  tests/GeneratedProject2.UnitTests/nlog.config,
   tests/GeneratedProject2.UnitTests/UnitTest1.cs
 ]

@@ -19,8 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="SharedStartup.cs" />
-    <None Include="SharedStartup.cs" />
+    <Compile Remove="**\*.shared.cs" />
+    <None Include="**\*.shared.cs" />
   </ItemGroup>
 
   <ItemGroup>

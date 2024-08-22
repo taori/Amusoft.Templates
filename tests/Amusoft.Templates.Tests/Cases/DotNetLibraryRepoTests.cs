@@ -9,6 +9,7 @@ using Amusoft.DotnetNew.Tests.Diagnostics;
 using Amusoft.DotnetNew.Tests.Exceptions;
 using Amusoft.DotnetNew.Tests.Scopes;
 using Amusoft.Templates.Tests.Toolkit;
+using NLog.Fluent;
 using Shouldly;
 using VerifyXunit;
 using Xunit;
