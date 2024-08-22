@@ -1,4 +1,7 @@
 name: .NET
+defaults:
+  run:
+    shell: pwsh
 
 on:
   push:
@@ -75,8 +78,7 @@ jobs:
       - name: declare default values
         id: defaults
         shell: pwsh
-        run: |
-          
+        run: |        
           $suffixMap = @{
               "push"="alpha.${{github.run_number}}"; 
               "pull_request"="beta.${{github.run_number}}"; 
