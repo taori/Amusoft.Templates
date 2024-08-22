@@ -1,16 +1,12 @@
 ﻿using System.Reflection;
-using Amusoft.DotnetNew.Tests.Diagnostics;
-using Amusoft.DotnetNew.Tests.Exceptions;
 
-namespace MyLibrary.Tests.Shared;
+namespace MyLibrary.Tests.Shared.Initializers;
 
 public class VerifyInitializer
 {
 	public static void Initialize()
 	{
 		Verifier.DerivePathInfo(PathInfoConfiguration);
-		VerifierSettings.ScrubMember<Exception>(nameof(Exception.StackTrace));
-		VerifierSettings.ScrubMember<CommandResult>(nameof(CommandResult.Runtime));
 	}
 
 	private static PathInfo PathInfoConfiguration(string sourcefile, string projectdirectory, Type type, MethodInfo method)

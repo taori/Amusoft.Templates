@@ -24,8 +24,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Compile Include="..\MyLibrary.Tests.Shared\SharedStartup.cs">
-			<Link>Shared\SharedStartup.cs</Link>
+		<Compile Include="..\MyLibrary.Tests.Shared\**\*.shared.cs">
+			<Link>Shared\**\*.shared.cs</Link>
 		</Compile>
 	</ItemGroup>
 

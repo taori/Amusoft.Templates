@@ -1,41 +1,40 @@
 using System.Reflection;
 using NLog;
 
-namespace MyLibrary.Tests.Shared
+namespace MyLibrary.Tests.Shared.Toolkit;
+
+public class EmbeddedResourceReader
 {
-	public class EmbeddedResourceReader
+	private static readonly Logger Log = LogManager.GetLogger(nameof(EmbeddedResourceReader));
+
+	private readonly Assembly _assembly;
+
+	public EmbeddedResourceReader(Assembly assembly)
 	{
-		private static readonly Logger Log = LogManager.GetLogger(nameof(EmbeddedResourceReader));
+		_assembly = assembly;
+	}
 
-		private readonly Assembly _assembly;
-
-		public EmbeddedResourceReader(Assembly assembly)
+	public string GetContent(string accessPath)
+	{
+		try
 		{
-			_assembly = assembly;
+			using var reader = GetStream(accessPath);
+			if (reader is null)
+				throw new Exception($"{accessPath} not found");
+			
+			using var streamReader = new StreamReader(reader);
+			return streamReader.ReadToEnd();
 		}
-
-		public string GetContent(string accessPath)
+		catch (Exception e)
 		{
-			try
-			{
-				using var reader = GetStream(accessPath);
-				if (reader is null)
-					throw new Exception($"{accessPath} not found");
-				
-				using var streamReader = new StreamReader(reader);
-				return streamReader.ReadToEnd();
-			}
-			catch (Exception e)
-			{
-				Log.Debug("available names: {@Values}", _assembly.GetManifestResourceNames());
-				throw new Exception($"Failed to get content for accessPath {accessPath}", e);
-			}
+			Log.Error("available names: {@Values}", _assembly.GetManifestResourceNames());
+			throw new Exception($"Failed to get content for accessPath {accessPath}", e);
 		}
+	}
 
-		private Stream? GetStream(string accessPath)
-		{
-			var fullPath = _assembly.GetName().Name + "." + accessPath;
-			return _assembly.GetManifestResourceStream(fullPath);
-		}
+	private Stream? GetStream(string accessPath)
+	{
+		var fullPath = _assembly.GetName().Name + "." + accessPath;
+		return _assembly.GetManifestResourceStream(fullPath);
 	}
 }

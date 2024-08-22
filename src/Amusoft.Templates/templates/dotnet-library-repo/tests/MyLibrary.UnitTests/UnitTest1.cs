@@ -1,5 +1,5 @@
 using Amusoft.XUnit.NLog.Extensions;
-using MyLibrary.UnitTests.Toolkit;
+using MyLibrary.Tests.Shared.Toolkit;
 using Xunit;
 using Xunit.Abstractions;
 using MyLibrary.Tests.Shared;
@@ -13,7 +13,7 @@ namespace MyLibrary.UnitTests
         {
         }
 
-        public UnitTest1(ITestOutputHelper outputHelper, GlobalSetupFixture data) : base(outputHelper, data)
+        public UnitTest1(ITestOutputHelper outputHelper, AssemblyInitializer data) : base(outputHelper, data)
         {
         }
     }
