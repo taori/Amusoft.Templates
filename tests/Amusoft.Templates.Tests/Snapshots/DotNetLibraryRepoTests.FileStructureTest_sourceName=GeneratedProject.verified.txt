@@ -16,7 +16,7 @@
   tests/GeneratedProject.Tests.Shared/AssemblyDeclarations.cs,
   tests/GeneratedProject.Tests.Shared/GeneratedProject.Tests.Shared.csproj,
   tests/GeneratedProject.Tests.Shared/Initializers/VerifyInitializer.cs,
-  tests/GeneratedProject.Tests.Shared/SharedStartup.cs,
+  tests/GeneratedProject.Tests.Shared/SharedStartup.shared.cs,
   tests/GeneratedProject.Tests.Shared/Toolkit/EmbeddedResourceReader.cs,
   tests/GeneratedProject.UnitTests/GeneratedProject.UnitTests.csproj,
   tests/GeneratedProject.UnitTests/nlog.config,
