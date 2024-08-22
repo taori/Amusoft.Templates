@@ -78,7 +78,7 @@ jobs:
       - name: declare default values
         id: defaults
         shell: pwsh
-        run: |        
+        run: |
           $suffixMap = @{
               "push"="alpha.${{github.run_number}}"; 
               "pull_request"="beta.${{github.run_number}}"; 
@@ -115,6 +115,16 @@ jobs:
     needs: environment
 
     steps:
+      - name: Dump environment outputs
+        if: ${{ inputs.debugWorkflow }}
+        run: echo "${{ toJson( steps.environment.outputs) }}" > env_outputs.json
+        
+      - name: Display environment outputs
+        if: ${{ inputs.debugWorkflow }}
+        run: cat env_outputs.json
+      - name: stop
+        run: exit 1
+      
       - uses: actions/checkout@v4.1.7
       - name: Setup .NET
         uses: actions/setup-dotnet@v4.0.1
