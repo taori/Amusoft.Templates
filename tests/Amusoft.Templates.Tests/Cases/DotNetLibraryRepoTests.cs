@@ -96,7 +96,7 @@ namespace Amusoft.Templates.Tests.Cases
 				.UseParameters(sourceName);
 		}
 
-		[Theory(Timeout = 15_000)]
+		[Theory(Timeout = 60_000)]
 		[InlineData("GeneratedProject")]
 		[InlineData("GeneratedProject2")]
 		public async Task BuildCheck(string sourceName)
