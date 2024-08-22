@@ -23,7 +23,7 @@ namespace Amusoft.Templates.Tests.Cases
 		{
 		}
 
-		[Theory]
+		[Theory(Timeout = 15_000)]
 		[InlineData("GeneratedProject")]
 		[InlineData("GeneratedProject2")]
 		public async Task FileStructureTest(string sourceName)
@@ -44,7 +44,7 @@ namespace Amusoft.Templates.Tests.Cases
 				.UseParameters(sourceName);
 		}
 
-		[Theory]
+		[Theory(Timeout = 15_000)]
 		[InlineData(null, "main")]
 		[InlineData("master", "master")]
 		public async Task RewriteWorkflowCheck(string rootBranchName, string expectedFileBranch)
@@ -69,7 +69,7 @@ namespace Amusoft.Templates.Tests.Cases
 		}
 
 
-		[Theory]
+		[Theory(Timeout = 15_000)]
 		[InlineData("GeneratedProject", "Santa Clause", "SampleProject", "SamplePackageId", "SampleProductName", "santa")]
 		[InlineData("GeneratedProject2", "Santa Clause2", "SampleProject2", "SamplePackageId2", "SampleProductName2", "santa2")]
 		public async Task RewriteProjectFileCheck(string sourceName, string authorName, string projectName, string packageId, string productName, string gitUser)
@@ -96,7 +96,7 @@ namespace Amusoft.Templates.Tests.Cases
 				.UseParameters(sourceName);
 		}
 
-		[Theory]
+		[Theory(Timeout = 15_000)]
 		[InlineData("GeneratedProject")]
 		[InlineData("GeneratedProject2")]
 		public async Task BuildCheck(string sourceName)

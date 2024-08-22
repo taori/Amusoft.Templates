@@ -15,11 +15,11 @@ success: restore "{Scaffold}/src/GeneratedProject2.sln" -v m --ignore-failed-sou
 {
   "Command": "build {Scaffold}/src/GeneratedProject2.sln --no-restore -v m",
   "Files": [
-    "{Scaffold}\src\GeneratedProject2\bin\Debug\net6.0\GeneratedProject2.dll",
-    "{Scaffold}\src\GeneratedProject2\bin\Debug\netstandard2.0\GeneratedProject2.dll",
-    "{Scaffold}\tests\GeneratedProject2.IntegrationTests\bin\Debug\net6.0\GeneratedProject2.IntegrationTests.dll",
-    "{Scaffold}\tests\GeneratedProject2.Tests.Shared\bin\Debug\net6.0\GeneratedProject2.Tests.Shared.dll",
-    "{Scaffold}\tests\GeneratedProject2.UnitTests\bin\Debug\net6.0\GeneratedProject2.UnitTests.dll"
+    "{Scaffold}/src/GeneratedProject2/bin/Debug/net6.0/GeneratedProject2.dll",
+    "{Scaffold}/src/GeneratedProject2/bin/Debug/netstandard2.0/GeneratedProject2.dll",
+    "{Scaffold}/tests/GeneratedProject2.IntegrationTests/bin/Debug/net6.0/GeneratedProject2.IntegrationTests.dll",
+    "{Scaffold}/tests/GeneratedProject2.Tests.Shared/bin/Debug/net6.0/GeneratedProject2.Tests.Shared.dll",
+    "{Scaffold}/tests/GeneratedProject2.UnitTests/bin/Debug/net6.0/GeneratedProject2.UnitTests.dll"
   ]
 }
 

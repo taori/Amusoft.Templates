@@ -19,7 +19,7 @@ namespace Amusoft.Templates.Tests.Cases
 		{
 		}
 
-		[Fact]
+		[Fact(Timeout = 15_000)]
 		public async Task FileStructureTest()
 		{
 			using var loggingScope = new LoggingScope();
@@ -32,7 +32,7 @@ namespace Amusoft.Templates.Tests.Cases
 			});
 		}
 
-		[Fact]
+		[Fact(Timeout = 15_000)]
 		public async Task CheckAuthorIsRequired()
 		{
 			using var loggingScope = new LoggingScope();
