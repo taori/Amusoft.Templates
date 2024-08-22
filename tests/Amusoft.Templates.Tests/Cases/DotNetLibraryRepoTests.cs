@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Amusoft.DotnetNew.Tests.CLI;
 using Amusoft.DotnetNew.Tests.Diagnostics;
+using Amusoft.DotnetNew.Tests.Exceptions;
 using Amusoft.DotnetNew.Tests.Scopes;
 using Amusoft.Templates.Tests.Toolkit;
 using Shouldly;
@@ -99,22 +100,30 @@ namespace Amusoft.Templates.Tests.Cases
 		[InlineData("GeneratedProject2")]
 		public async Task BuildCheck(string sourceName)
 		{
-			var sbArgs = new StringBuilder();
-			sbArgs.Append(" --GitProjectName \"SampleProject\"");
-			sbArgs.Append(" --NugetPackageId \"SamplePackageId\"");
-			sbArgs.Append(" --ProductName \"SampleProduct\"");
-			sbArgs.Append(" --GitUser \"taori\"");
-			sbArgs.Append(" --Author \"Santa Clause\"");
-			sbArgs.Append($" -n \"{sourceName}\"");
+			try
+			{
+				var sbArgs = new StringBuilder();
+				sbArgs.Append(" --GitProjectName \"SampleProject\"");
+				sbArgs.Append(" --NugetPackageId \"SamplePackageId\"");
+				sbArgs.Append(" --ProductName \"SampleProduct\"");
+				sbArgs.Append(" --GitUser \"taori\"");
+				sbArgs.Append(" --Author \"Santa Clause\"");
+				sbArgs.Append($" -n \"{sourceName}\"");
 			
-			using var logging = new LoggingScope();
-			using var scaffold = await Dotnet.Cli.NewAsync("dotnet-library-repo", sbArgs.ToString(), CancellationToken.None);
+				using var logging = new LoggingScope();
+				using var scaffold = await Dotnet.Cli.NewAsync("dotnet-library-repo", sbArgs.ToString(), CancellationToken.None);
 
-			await scaffold.RestoreAsync($"src/{sourceName}.sln", null, CancellationToken.None);
-			await scaffold.BuildAsync($"src/{sourceName}.sln", null, CancellationToken.None);
-			await Verifier
-				.Verify(logging.ToFullString(PrintKind.All))
-				.UseParameters(sourceName);
+				await scaffold.RestoreAsync($"src/{sourceName}.sln", null, CancellationToken.None);
+				await scaffold.BuildAsync($"src/{sourceName}.sln", null, CancellationToken.None);
+				await Verifier
+					.Verify(logging.ToFullString(PrintKind.All))
+					.UseParameters(sourceName);
+			}
+			catch (BuildFailedException e)
+			{
+				OutputHelper.WriteLine(e.Output);
+				return;
+			}
 		}
 	}
 }

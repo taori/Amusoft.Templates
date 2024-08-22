@@ -13,11 +13,12 @@
   tests/GeneratedProject2.IntegrationTests/GeneratedProject2.IntegrationTests.csproj,
   tests/GeneratedProject2.IntegrationTests/UnitTest1.cs,
   tests/GeneratedProject2.IntegrationTests/Usings.cs,
-  tests/GeneratedProject2.UnitTests/Configuration/ProjectSetup.cs,
+  tests/GeneratedProject2.Tests.Shared/AssemblyDeclarations.cs,
+  tests/GeneratedProject2.Tests.Shared/GeneratedProject2.Tests.Shared.csproj,
+  tests/GeneratedProject2.Tests.Shared/Initializers/VerifyInitializer.cs,
+  tests/GeneratedProject2.Tests.Shared/SharedStartup.cs,
+  tests/GeneratedProject2.Tests.Shared/Toolkit/EmbeddedResourceReader.cs,
   tests/GeneratedProject2.UnitTests/GeneratedProject2.UnitTests.csproj,
   tests/GeneratedProject2.UnitTests/nlog.config,
-  tests/GeneratedProject2.UnitTests/Toolkit/EmbeddedResourceReader.cs,
-  tests/GeneratedProject2.UnitTests/Toolkit/GlobalSetupFixture.cs,
-  tests/GeneratedProject2.UnitTests/Toolkit/TestBase.cs,
   tests/GeneratedProject2.UnitTests/UnitTest1.cs
 ]

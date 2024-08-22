@@ -10,6 +10,9 @@ namespace Amusoft.Templates.Tests.Toolkit
 	{
 		public TemplateTests(ITestOutputHelper outputHelper, GlobalSetupFixture data) : base(outputHelper)
 		{
+			OutputHelper = outputHelper;
 		}
+
+		public ITestOutputHelper OutputHelper { get; }
 	}
 }

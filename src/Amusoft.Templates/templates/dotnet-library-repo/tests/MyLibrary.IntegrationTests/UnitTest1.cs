@@ -1,3 +1,5 @@
+using MyLibrary.Tests.Shared;
+
 namespace MyLibrary.IntegrationTests;
 
 public class UnitTest1

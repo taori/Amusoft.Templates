@@ -1,9 +1,7 @@
-using System;
-using System.IO;
 using System.Reflection;
 using NLog;
 
-namespace MyLibrary.UnitTests.Toolkit
+namespace MyLibrary.Tests.Shared
 {
 	public class EmbeddedResourceReader
 	{
@@ -21,6 +19,9 @@ namespace MyLibrary.UnitTests.Toolkit
 			try
 			{
 				using var reader = GetStream(accessPath);
+				if (reader is null)
+					throw new Exception($"{accessPath} not found");
+				
 				using var streamReader = new StreamReader(reader);
 				return streamReader.ReadToEnd();
 			}
@@ -31,7 +32,7 @@ namespace MyLibrary.UnitTests.Toolkit
 			}
 		}
 
-		private Stream GetStream(string accessPath)
+		private Stream? GetStream(string accessPath)
 		{
 			var fullPath = _assembly.GetName().Name + "." + accessPath;
 			return _assembly.GetManifestResourceStream(fullPath);

@@ -2,6 +2,7 @@ using Amusoft.XUnit.NLog.Extensions;
 using MyLibrary.UnitTests.Toolkit;
 using Xunit;
 using Xunit.Abstractions;
+using MyLibrary.Tests.Shared;
 
 namespace MyLibrary.UnitTests
 {
