@@ -116,11 +116,11 @@ jobs:
 
     steps:
       - name: Dump environment outputs
-        if: ${{ inputs.debugWorkflow }}
+        shell: bash
         run: echo "${{ toJson( steps.environment.outputs) }}" > env_outputs.json
         
       - name: Display environment outputs
-        if: ${{ inputs.debugWorkflow }}
+        shell: bash
         run: cat env_outputs.json
       - name: stop
         run: exit 1
