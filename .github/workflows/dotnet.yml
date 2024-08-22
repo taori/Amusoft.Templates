@@ -117,7 +117,9 @@ jobs:
     steps:
       - name: Dump environment outputs
         shell: bash
-        run: echo "${{ toJson( steps.environment.outputs) }}" > env_outputs.json
+        run: |
+          echo "${{ toJson( needs.environment.outputs) }}" > env_outputs.json
+          echo "${{ toJson( github) }}" > env_outputs.json
         
       - name: Display environment outputs
         shell: bash
