@@ -1,0 +1,35 @@
+﻿---Result---
+
+Created temp directory at {Scaffold}
+
+---Result---
+
+success: new dotnet-library-repo -o "{Scaffold}"  --GitProjectName "SampleProject" --NugetPackageId "SamplePackageId" --ProductName "SampleProduct" --GitUser "taori" --Author "Santa Clause" -n "GeneratedProject"
+
+---Result---
+
+success: restore "{Scaffold}/src/GeneratedProject.sln" -v m --ignore-failed-sources
+
+---BuildResult---
+
+{
+  "Command": "build {Scaffold}/src/GeneratedProject.sln --no-restore -v m",
+  "Files": [
+    "{Scaffold}/src/GeneratedProject/bin/Debug/net6.0/GeneratedProject.dll",
+    "{Scaffold}/src/GeneratedProject/bin/Debug/netstandard2.0/GeneratedProject.dll",
+    "{Scaffold}/tests/GeneratedProject.IntegrationTests/bin/Debug/net6.0/GeneratedProject.IntegrationTests.dll",
+    "{Scaffold}/tests/GeneratedProject.Tests.Shared/bin/Debug/net6.0/GeneratedProject.Tests.Shared.dll",
+    "{Scaffold}/tests/GeneratedProject.UnitTests/bin/Debug/net6.0/GeneratedProject.UnitTests.dll"
+  ]
+}
+
+---TestResult---
+
+{
+  "Command": "test {Scaffold}/src/GeneratedProject.sln -v m --no-restore",
+  "Lines": [
+    "Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: < SCRUBBED - GeneratedProject.IntegrationTests.dll (net6.0)",
+    "Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: < SCRUBBED - GeneratedProject.UnitTests.dll (net6.0)"
+  ]
+}
+

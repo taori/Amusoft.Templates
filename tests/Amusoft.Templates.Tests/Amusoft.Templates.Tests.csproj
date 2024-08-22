@@ -19,11 +19,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Amusoft.DotnetNew.Tests" Version="0.2.0-alpha.95" />
 		<PackageReference Include="Amusoft.XUnit.NLog.Extensions" Version="2.4.0"/>
-		<PackageReference Include="CliWrap" Version="3.5.0"/>
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4"/>
 		<PackageReference Include="NLog" Version="4.7.11"/>
 		<PackageReference Include="Shouldly" Version="3.0.2"/>
+		<PackageReference Include="System.Linq.Async" Version="6.0.1" />
 		<PackageReference Include="Verify.Xunit" Version="26.1.6" />
 		<PackageReference Include="xunit" Version="2.9.0" />
 		<PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">

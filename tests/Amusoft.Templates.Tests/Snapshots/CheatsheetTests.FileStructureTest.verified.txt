@@ -1,7 +1,20 @@
-﻿[  
-File actions would have been taken:
-  Create: cheatsheet.txt
+﻿{
+  Log:
+---Result---
+
+Created temp directory at {Scaffold}
+
+---Result---
+
+success: new amusoft-cheatsheet -o "{Scaffold}" --Author testUser --ProjectId TestId
 
 ,
-  
-]
+  Files: [
+    {
+      RelativePath: cheatsheet.txt,
+      Content:
+dotnet new dotnet-template -au "testUser"
+dotnet new dotnet-library-repo --RootBranchName main --Author "testUser" --GitUser taori -n "TestId" --GitProjectName "TestId" --NugetPackageId "TestId" --ProductName "TestId"
+    }
+  ]
+}

@@ -1,23 +1,25 @@
-﻿File actions would have been taken:
-  Create: .github\workflows\CI.yml
-  Create: .gitignore
-  Create: README.md
-  Create: build\Project.Common.props
-  Create: build\SourceLink.props
-  Create: scripts\build.ps1
-  Create: src\Directory.Build.props
-  Create: src\GeneratedProject2.sln
-  Create: src\GeneratedProject2\GeneratedProject2.csproj
-  Create: src\nuget.config
-  Create: src\packageIcon.png
-  Create: tests\GeneratedProject2.IntegrationTests\GeneratedProject2.IntegrationTests.csproj
-  Create: tests\GeneratedProject2.IntegrationTests\UnitTest1.cs
-  Create: tests\GeneratedProject2.IntegrationTests\Usings.cs
-  Create: tests\GeneratedProject2.UnitTests\Configuration\ProjectSetup.cs
-  Create: tests\GeneratedProject2.UnitTests\GeneratedProject2.UnitTests.csproj
-  Create: tests\GeneratedProject2.UnitTests\Toolkit\EmbeddedResourceReader.cs
-  Create: tests\GeneratedProject2.UnitTests\Toolkit\GlobalSetupFixture.cs
-  Create: tests\GeneratedProject2.UnitTests\Toolkit\TestBase.cs
-  Create: tests\GeneratedProject2.UnitTests\UnitTest1.cs
-  Create: tests\GeneratedProject2.UnitTests\nlog.config
-
+﻿[
+  .github/workflows/CI.yml,
+  .gitignore,
+  build/Project.Common.props,
+  build/SourceLink.props,
+  build/Tests.Common.props,
+  README.md,
+  scripts/build.ps1,
+  src/Directory.Build.props,
+  src/GeneratedProject2.sln,
+  src/GeneratedProject2/GeneratedProject2.csproj,
+  src/nuget.config,
+  src/packageIcon.png,
+  tests/GeneratedProject2.IntegrationTests/GeneratedProject2.IntegrationTests.csproj,
+  tests/GeneratedProject2.IntegrationTests/UnitTest1.cs,
+  tests/GeneratedProject2.IntegrationTests/Usings.cs,
+  tests/GeneratedProject2.Tests.Shared/AssemblyDeclarations.cs,
+  tests/GeneratedProject2.Tests.Shared/GeneratedProject2.Tests.Shared.csproj,
+  tests/GeneratedProject2.Tests.Shared/Initializers/VerifyInitializer.cs,
+  tests/GeneratedProject2.Tests.Shared/nlog.config,
+  tests/GeneratedProject2.Tests.Shared/SharedStartup.shared.cs,
+  tests/GeneratedProject2.Tests.Shared/Toolkit/EmbeddedResourceReader.cs,
+  tests/GeneratedProject2.UnitTests/GeneratedProject2.UnitTests.csproj,
+  tests/GeneratedProject2.UnitTests/UnitTest1.cs
+]

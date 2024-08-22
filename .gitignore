@@ -12,6 +12,7 @@ tmp/
 *.user
 *.userosscache
 *.sln.docstates
+.idea/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

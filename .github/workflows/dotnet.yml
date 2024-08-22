@@ -109,7 +109,7 @@ jobs:
   
   build:
     if: true
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     needs: environment
 
     steps:
@@ -124,7 +124,7 @@ jobs:
       - name: Build
         run: dotnet build src/All.sln --no-restore --verbosity ${{ needs.environment.outputs.verbosity }} -c ${{ needs.environment.outputs.configuration }}
       - name: Test
-        run: dotnet test src/All.sln --no-build --verbosity ${{ needs.environment.outputs.verbosity }} -c ${{ needs.environment.outputs.configuration }}
+        run: dotnet test src/All.sln --no-build --verbosity ${{ needs.environment.outputs.verbosity }} -c ${{ needs.environment.outputs.configuration }} --filter Category!=SkipInCI
       - name: Pack      
         run: dotnet pack src/Amusoft.Templates/Amusoft.Templates.csproj -o "artifacts\nupkg" --no-build --verbosity ${{ needs.environment.outputs.verbosity }} -c ${{ needs.environment.outputs.configuration }} /p:VersionSuffix=${{ needs.environment.outputs.versionSuffix}}
       - name: Inspect path

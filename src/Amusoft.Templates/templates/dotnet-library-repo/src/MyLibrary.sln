@@ -3,22 +3,27 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{00000000-0000-0000-0000-000000000000}") = "MyLibrary", "MyLibrary\MyLibrary.csproj", "{00000000-0000-0000-0000-000000000000}"
+Project("{guidPackage}") = "MyLibrary", "MyLibrary\MyLibrary.csproj", "{guidLibrary}"
 EndProject
-Project("{00000000-0000-0000-0000-000000000000}") = "MyLibrary.UnitTests", "..\tests\MyLibrary.UnitTests\MyLibrary.UnitTests.csproj", "{00000000-0000-0000-0000-000000000000}"
+Project("{guidPackage}") = "MyLibrary.UnitTests", "..\tests\MyLibrary.UnitTests\MyLibrary.UnitTests.csproj", "{guidTestLibrary}"
 EndProject
-Project("{00000000-0000-0000-0000-000000000000}") = "MyLibrary.IntegrationTests", "..\tests\MyLibrary.IntegrationTests\MyLibrary.IntegrationTests.csproj", "{00000000-0000-0000-0000-000000000000}"
+Project("{guidPackage}") = "MyLibrary.IntegrationTests", "..\tests\MyLibrary.IntegrationTests\MyLibrary.IntegrationTests.csproj", "{guidIntegrationTestLibrary}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "package", "package", "{00000000-0000-0000-0000-000000000000}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "package", "package", "{guidPackage}"
 	ProjectSection(SolutionItems) = preProject
 		..\README.md = ..\README.md
 		..\.github\workflows\CI.yml = ..\.github\workflows\CI.yml
 		nuget.config = nuget.config
 		Directory.Build.props = Directory.Build.props
 		..\build\Project.Common.props = ..\build\Project.Common.props
+		..\build\SourceLink.props = ..\build\SourceLink.props
 		..\scripts\build.ps1 = ..\scripts\build.ps1
 		..\.gitignore = ..\.gitignore
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{guidvFolderSrc}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{guidvFolderTests}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,5 +77,10 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8B59E246-DB1F-4A94-8661-5B6DDC1E564D}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{guidTestLibrary} = {guidvFolderTests}
+		{guidIntegrationTestLibrary} = {guidvFolderTests}
+		{guidLibrary} = {guidvFolderSrc}
 	EndGlobalSection
 EndGlobal
