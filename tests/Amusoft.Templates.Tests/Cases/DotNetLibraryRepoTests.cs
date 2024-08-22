@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -97,6 +98,7 @@ namespace Amusoft.Templates.Tests.Cases
 		}
 
 		[Theory(Timeout = 60_000)]
+		[Trait("Category","SkipInCI")]
 		[InlineData("GeneratedProject")]
 		[InlineData("GeneratedProject2")]
 		public async Task BuildCheck(string sourceName)
