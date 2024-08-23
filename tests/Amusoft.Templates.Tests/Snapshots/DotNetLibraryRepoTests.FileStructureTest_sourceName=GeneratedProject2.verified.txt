@@ -1,4 +1,5 @@
 ﻿[
+  .gitattributes,
   .github/workflows/CI.yml,
   .gitignore,
   build/Project.Common.props,
