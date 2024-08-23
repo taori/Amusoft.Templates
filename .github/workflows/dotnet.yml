@@ -114,16 +114,20 @@ jobs:
 
     steps:
       - name: Dump environment outputs
+        if: false
         shell: bash
         run: |
           echo "${{ toJson( needs.environment.outputs) }}" > env_outputs.json
           echo "${{ toJson( github) }}" > env_outputs.json
         
       - name: Display environment outputs
+        if: false
         shell: bash
         run: cat env_outputs.json
-      #- name: stop
-      #  run: exit 1
+        
+      - name: stop
+        if: false
+        run: exit 1
       
       - uses: actions/checkout@v4.1.7
       - name: Setup .NET
