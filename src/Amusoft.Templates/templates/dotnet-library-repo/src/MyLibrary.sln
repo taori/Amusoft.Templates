@@ -7,6 +7,8 @@ Project("{guidPackage}") = "MyLibrary", "MyLibrary\MyLibrary.csproj", "{guidLibr
 EndProject
 Project("{guidPackage}") = "MyLibrary.UnitTests", "..\tests\MyLibrary.UnitTests\MyLibrary.UnitTests.csproj", "{guidTestLibrary}"
 EndProject
+Project("{guidPackage}") = "MyLibrary.Tests.Shared", "..\tests\MyLibrary.Tests.Shared\MyLibrary.Tests.Shared.csproj", "{guidTestSharedLibrary}"
+EndProject
 Project("{guidPackage}") = "MyLibrary.IntegrationTests", "..\tests\MyLibrary.IntegrationTests\MyLibrary.IntegrationTests.csproj", "{guidIntegrationTestLibrary}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "package", "package", "{guidPackage}"
@@ -15,6 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "package", "package", "{guid
 		..\.github\workflows\CI.yml = ..\.github\workflows\CI.yml
 		nuget.config = nuget.config
 		Directory.Build.props = Directory.Build.props
+		..\build\Tests.Common.props = ..\build\Tests.Common.props
 		..\build\Project.Common.props = ..\build\Project.Common.props
 		..\build\SourceLink.props = ..\build\SourceLink.props
 		..\scripts\build.ps1 = ..\scripts\build.ps1
@@ -71,6 +74,18 @@ Global
 		{guidIntegrationTestLibrary}.Release|x64.Build.0 = Release|Any CPU
 		{guidIntegrationTestLibrary}.Release|x86.ActiveCfg = Release|Any CPU
 		{guidIntegrationTestLibrary}.Release|x86.Build.0 = Release|Any CPU
+		{guidTestSharedLibrary}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{guidTestSharedLibrary}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{guidTestSharedLibrary}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{guidTestSharedLibrary}.Debug|x64.Build.0 = Debug|Any CPU
+		{guidTestSharedLibrary}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{guidTestSharedLibrary}.Debug|x86.Build.0 = Debug|Any CPU
+		{guidTestSharedLibrary}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{guidTestSharedLibrary}.Release|Any CPU.Build.0 = Release|Any CPU
+		{guidTestSharedLibrary}.Release|x64.ActiveCfg = Release|Any CPU
+		{guidTestSharedLibrary}.Release|x64.Build.0 = Release|Any CPU
+		{guidTestSharedLibrary}.Release|x86.ActiveCfg = Release|Any CPU
+		{guidTestSharedLibrary}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,6 +96,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{guidTestLibrary} = {guidvFolderTests}
 		{guidIntegrationTestLibrary} = {guidvFolderTests}
+		{guidTestSharedLibrary} = {guidvFolderTests}
 		{guidLibrary} = {guidvFolderSrc}
 	EndGlobalSection
 EndGlobal
