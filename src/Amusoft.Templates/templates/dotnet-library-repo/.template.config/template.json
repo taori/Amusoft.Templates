@@ -81,6 +81,14 @@
         "format": "B"
       }
     },
+    "guidTestSharedLibrary": {
+      "type": "generated",
+      "generator": "guid",
+      "replaces": "guidTestSharedLibrary",
+      "parameters": {
+        "format": "B"
+      }
+    },
     "guidIntegrationTestLibrary": {
       "type": "generated",
       "generator": "guid",
