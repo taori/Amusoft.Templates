@@ -115,6 +115,8 @@ jobs:
               $commitMode = "pushMerge" }
           if($commitMode -eq "noop" -and "$branch|push" -eq "${{github.ref_name}}|${{github.event_name}}") {
               $commitMode = "push" }
+          if("${{github.event_name}}" -eq "workflow_dispatch" -and [string]::IsNullOrEmpty($suffix) -eq $false){
+              $suffix = "$($suffix.TrimEnd(".")).$bnr" }
           
           $data = @{          #prefix         #suffix         #configuration  #verbosity  #publish    #removeprerelease                       
               "dispatch" =    @("$prefix",    "$suffix",      "$conf",        "$verb",    "$publ",    "$removePrereleases")
