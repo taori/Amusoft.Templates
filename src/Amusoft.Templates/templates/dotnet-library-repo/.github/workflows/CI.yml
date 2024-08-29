@@ -99,42 +99,55 @@ jobs:
         run: |
           Write-Host "Setting up parameters"
           
-          $suffixMap = @{
-              "push"="alpha.${{github.run_number}}"; 
-              "pull_request"="beta.${{github.run_number}}"; 
-              "workflow_dispatch"="${{github.event.inputs.versionSuffix}}"
+          $branch = "BRANCHTRIGGER"
+          $conf = "${{github.event.inputs.configuration}}"
+          $verb = "${{github.event.inputs.verbosity}}"
+          $publ = "${{github.event.inputs.publish}}"
+          $removePrereleases = "${{github.event.inputs.removePrereleases}}"
+          $prefix = "${{github.event.inputs.versionPrefix}}"
+          $suffix = "${{github.event.inputs.versionSuffix}}"
+          $bnr = "${{github.run_number}}"
+                    
+          $commitMode = "noop"          
+          if($commitMode -eq "noop" -and "${{github.event_name}}" -eq "workflow_dispatch") {
+              $commitMode = "dispatch" }
+          if($commitMode -eq "noop" -and "$branch|pull_request|closed|true" -eq "${{github.ref_name}}|${{github.event_name}}|${{github.event.action}}|${{github.event.pull_request.merged}}") {
+              $commitMode = "pushMerge" }
+          if($commitMode -eq "noop" -and "$branch|push" -eq "${{github.ref_name}}|${{github.event_name}}") {
+              $commitMode = "push" }
+          
+          $data = @{          #prefix         #suffix         #configuration  #verbosity  #publish    #removeprerelease                       
+              "dispatch" =    @("$prefix",    "$suffix",      "$conf",        "$verb",    "$publ",    "$removePrereleases")
+              "push" =        @("",           "alpha.$bnr",   "Release",      "n",        "true",     "false")
+              "pushMerge" =   @("",           "beta.$bnr",    "Release",      "n",        "true",     "false")
+              "noop" =        @("",           "noop",         "Release",      "n",        "false",    "false")
           };
-          $suffix = $suffixMap['${{github.event_name}}']
-          if( $suffixMap['workflow_dispatch'] -ne '' -and '${{github.event_name}}' -eq 'workflow_dispatch'){
-              $suffix = $($suffix.TrimEnd('.') + ".")
-              $suffix = "$($suffix)${{github.run_number}}"
-          }  
+          $names = @("versionPrefix","versionSuffix","configuration","verbosity","publish","removePrereleases")
           
-          #   key name                workflow value                                  fallback value
-          $values = @(
-              @("versionSuffix",      "$suffix",                                      "$suffix"),
-              @("versionPrefix",      "${{github.event.inputs.versionPrefix}}",       ""),
-              @("configuration",      "${{github.event.inputs.configuration}}",       "Release"),
-              @("verbosity",          "${{github.event.inputs.verbosity}}",           "minimal"),
-              @("publish",            "${{github.event.inputs.publish}}",             "true"),
-              @("package",            "true",                                         "true"),
-              @("publishSymbols",     "true",                                         "true"),
-              @("removePrereleases",  "${{github.event.inputs.removePrereleases}}",   "false"),
-              @("skipTests",          "false",                                        "false"),
-              @("runCoverage",        "true",                                         "true")
-          )
+          if($data[$commitMode] -eq $null){
+              Write-Host "Unidentified commit mode $commitMode"
+              echo "Commit mode could not be identified." >> $env:GITHUB_STEP_SUMMARY
+              exit 1;
+          }
+
+          $names += "package";
+          $names += "publishSymbols";
+          $names += "runTests";
+          $names += "runCoverage";
+
+          $data[$commitMode] += $data[$commitMode][4]
+          $data[$commitMode] += $data[$commitMode][4]
+          $data[$commitMode] += $data[$commitMode][4]
+          $data[$commitMode] += $data[$commitMode][4]
           
-          $manual = $('${{github.event_name}}' -eq 'workflow_dispatch')
+          foreach($item in $names){
+              $index = $names.IndexOf($item)
+              Write-Host "$item=$($data[$commitMode][$index])"
+              echo "$item=$($data[$commitMode][$index])" >> $env:GITHUB_OUTPUT
+              echo "$item=$($data[$commitMode][$index])" >> $env:GITHUB_STEP_SUMMARY
+          }
           
-          foreach($pair in $values){
-              $value = $pair[2]
-              if($manual -eq $true){
-                  $value = $pair[1]
-              }
-          
-              Write-Host "Setting parameter $($pair[0]) => $value"
-              echo "$($pair[0])=$value" >> $env:GITHUB_OUTPUT
-          }     
+          echo "Identified commit mode $commitMode" >> $env:GITHUB_STEP_SUMMARY
 
   package:
     needs: parameters
