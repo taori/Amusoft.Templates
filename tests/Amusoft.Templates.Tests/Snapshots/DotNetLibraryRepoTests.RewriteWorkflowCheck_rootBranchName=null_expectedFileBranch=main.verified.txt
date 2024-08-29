@@ -79,7 +79,7 @@ jobs:
       package: ${{ steps.parameters.outputs.package }}
       publishSymbols: ${{ steps.parameters.outputs.publishSymbols }}
       removePrereleases: ${{ steps.parameters.outputs.removePrereleases }}
-      skipTests: ${{ steps.parameters.outputs.skipTests }}
+      runTests: ${{ steps.parameters.outputs.runTests }}
       runCoverage: ${{ steps.parameters.outputs.runCoverage }}
 
     steps:
@@ -161,7 +161,7 @@ jobs:
       publish: ${{ needs.parameters.outputs.publish == 'true' }}
       publishSymbols: ${{ needs.parameters.outputs.publishSymbols == 'true' }}
       removePrereleases: ${{ needs.parameters.outputs.removePrereleases == 'true' }}
-      skipTests: ${{ needs.parameters.outputs.skipTests == 'true' }}
+      skipTests: ${{ needs.parameters.outputs.runTests == 'false' }}
       configuration: ${{ needs.parameters.outputs.configuration }}
       verbosity: ${{ needs.parameters.outputs.verbosity }}
       runCoverage: ${{ needs.parameters.outputs.runCoverage == 'true' }}
