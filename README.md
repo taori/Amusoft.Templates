@@ -20,3 +20,9 @@ the effort that goes into setting up CI, tests and all the same things every tim
 | item    | template-cheatsheet | Creates a cheatsheet.txt to get sample calls for templates                  |
 | item    | dotnet-template     | Creates a .template.config to begin a new template at the current directory |
 | project | dotnet-library-repo | Creates a quickstart repo to build nuget packages for dotnet                |
+
+## Project state
+
+<!--CoverageStart-->
+Coverage state not available yet.
+<!--CoverageEnd-->
