@@ -138,7 +138,7 @@ jobs:
           $data[$commitMode] += $data[$commitMode][4]
           $data[$commitMode] += $data[$commitMode][4]
           $data[$commitMode] += $data[$commitMode][4]
-          $data[$commitMode] += $data[$commitMode][4]
+          $data[$commitMode] += "false"
           
           foreach($item in $names){
               $index = $names.IndexOf($item)
