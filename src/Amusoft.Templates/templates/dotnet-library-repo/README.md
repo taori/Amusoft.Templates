@@ -13,4 +13,4 @@ Coverage state not available yet.
 
 ## Description
 
-This template was generated using Amusoft.Templates
+This template was generated using [Amusoft.Templates](https://www.github.com/taori/Amusoft.Templates)
