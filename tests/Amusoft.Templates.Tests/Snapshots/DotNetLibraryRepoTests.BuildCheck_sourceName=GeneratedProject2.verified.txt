@@ -28,8 +28,8 @@ success: restore "{Scaffold}/src/GeneratedProject2.sln" -v m --ignore-failed-sou
 {
   "Command": "test {Scaffold}/src/GeneratedProject2.sln -v m --no-restore",
   "Lines": [
-    "Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: < SCRUBBED - GeneratedProject2.IntegrationTests.dll (net6.0)",
-    "Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: < SCRUBBED - GeneratedProject2.UnitTests.dll (net6.0)"
+    "Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: SCRUBBED - GeneratedProject2.IntegrationTests.dll (net6.0)",
+    "Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: SCRUBBED - GeneratedProject2.UnitTests.dll (net6.0)"
   ]
 }
 
