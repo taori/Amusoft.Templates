@@ -171,6 +171,7 @@ jobs:
       concurrencyAbortable: true
       coverageThreshold: '85 95'
       dotnetVersion: 6.0.x
+      agentEnv: ubuntu-22.04
     secrets:
       nuget: ${{ secrets.NUGET }}
       
