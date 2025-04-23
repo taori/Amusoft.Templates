@@ -3,7 +3,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFrameworks>net6.0;netstandard2.0</TargetFrameworks>
-		<LangVersion>10.0</LangVersion>
+		<LangVersion>latest</LangVersion>
 		<IsPackable>true</IsPackable>
 
 		<Title>SamplePackageId2</Title>
@@ -19,10 +19,7 @@
 	<ItemGroup>
 		<InternalsVisibleTo Include="GeneratedProject2.UnitTests"/>
 		<InternalsVisibleTo Include="GeneratedProject2.IntegrationTests"/>
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0" PrivateAssets="all"/>
+		<InternalsVisibleTo Include="GeneratedProject2.Tests.Shared"/>
 	</ItemGroup>
 </Project>
 ,
@@ -59,6 +56,17 @@
 	<ItemGroup Condition="'$(IsPackable)' == 'True'">
 		<None Include="..\..\README.md" Pack="True" PackagePath="\Resources"/>
 		<None Include="..\packageIcon.png" Pack="True" PackagePath="\Resources"/>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="9.0.0" PrivateAssets="all"/>
+	</ItemGroup>
+
+	<ItemGroup>
+		<InternalsVisibleTo Include="GeneratedProject2.UnitTests"/>
+		<InternalsVisibleTo Include="GeneratedProject2.IntegrationTests"/>
+		<InternalsVisibleTo Include="GeneratedProject2.Tests.Shared"/>
+		<InternalsVisibleTo Include="DynamicProxyGenAssembly2"/>
 	</ItemGroup>
 </Project>
 

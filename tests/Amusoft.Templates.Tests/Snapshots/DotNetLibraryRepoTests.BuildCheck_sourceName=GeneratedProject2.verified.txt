@@ -13,13 +13,13 @@ success: restore "{Scaffold}/src/GeneratedProject2.sln" -v m --ignore-failed-sou
 ---BuildResult---
 
 {
-  "Command": "build {Scaffold}/src/GeneratedProject2.sln --no-restore -v m",
+  "Command": "build {Scaffold}/src/GeneratedProject2.sln --no-restore -v m -property:SkipMicrosoftBuildTasksGit=true",
   "Files": [
     "{Scaffold}/src/GeneratedProject2/bin/Debug/net6.0/GeneratedProject2.dll",
     "{Scaffold}/src/GeneratedProject2/bin/Debug/netstandard2.0/GeneratedProject2.dll",
-    "{Scaffold}/tests/GeneratedProject2.IntegrationTests/bin/Debug/net6.0/GeneratedProject2.IntegrationTests.dll",
-    "{Scaffold}/tests/GeneratedProject2.Tests.Shared/bin/Debug/net6.0/GeneratedProject2.Tests.Shared.dll",
-    "{Scaffold}/tests/GeneratedProject2.UnitTests/bin/Debug/net6.0/GeneratedProject2.UnitTests.dll"
+    "{Scaffold}/tests/GeneratedProject2.IntegrationTests/bin/Debug/net8.0/GeneratedProject2.IntegrationTests.dll",
+    "{Scaffold}/tests/GeneratedProject2.Tests.Shared/bin/Debug/net8.0/GeneratedProject2.Tests.Shared.dll",
+    "{Scaffold}/tests/GeneratedProject2.UnitTests/bin/Debug/net8.0/GeneratedProject2.UnitTests.dll"
   ]
 }
 
@@ -28,8 +28,8 @@ success: restore "{Scaffold}/src/GeneratedProject2.sln" -v m --ignore-failed-sou
 {
   "Command": "test {Scaffold}/src/GeneratedProject2.sln -v m --no-restore",
   "Lines": [
-    "Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: SCRUBBED - GeneratedProject2.IntegrationTests.dll (net6.0)",
-    "Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: SCRUBBED - GeneratedProject2.UnitTests.dll (net6.0)"
+    "Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: SCRUBBED - GeneratedProject2.IntegrationTests.dll (net8.0)",
+    "Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: SCRUBBED - GeneratedProject2.UnitTests.dll (net8.0)"
   ]
 }
 

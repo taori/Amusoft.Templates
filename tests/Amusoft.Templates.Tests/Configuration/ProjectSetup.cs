@@ -2,6 +2,7 @@
 using System.IO;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using DiffEngine;
 using VerifyTests;
 using VerifyXunit;
 using Xunit;
@@ -15,6 +16,7 @@ namespace Amusoft.Templates.Tests.Configuration
 		[ModuleInitializer]
 		public static void Initialize()
 		{
+			DiffTools.UseOrder(DiffTool.TortoiseGitMerge, DiffTool.VisualStudioCode, DiffTool.WinMerge);
 			Verifier.DerivePathInfo(PathInfoConfiguration);
 		}
 

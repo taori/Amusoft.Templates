@@ -31,4 +31,15 @@
 		<None Include="..\..\README.md" Pack="True" PackagePath="\Resources"/>
 		<None Include="..\packageIcon.png" Pack="True" PackagePath="\Resources"/>
 	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="9.0.0" PrivateAssets="all"/>
+	</ItemGroup>
+
+	<ItemGroup>
+		<InternalsVisibleTo Include="MyLibrary.UnitTests"/>
+		<InternalsVisibleTo Include="MyLibrary.IntegrationTests"/>
+		<InternalsVisibleTo Include="MyLibrary.Tests.Shared"/>
+		<InternalsVisibleTo Include="DynamicProxyGenAssembly2"/>
+	</ItemGroup>
 </Project>

@@ -9,7 +9,7 @@
 		<DefaultItemExcludes>$(DefaultItemExcludes);*.received.*</DefaultItemExcludes>
 	</PropertyGroup>
 
-	<ItemGroup>
+	<ItemGroup Condition="'$(SkipMicrosoftBuildTasksGit)' != 'true'">
 		<SourceRoot Include="$(MSBuildThisFileDirectory)/"/>
 		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All"/>
 	</ItemGroup>

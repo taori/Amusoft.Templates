@@ -1,6 +1,7 @@
-﻿using System.Reflection;
+﻿using System.IO;
+using System.Reflection;
 
-namespace MyLibrary.Tests.Shared.Initializers;
+namespace MyLibrary.Tests.Shared;
 
 public class VerifyInitializer
 {

@@ -1,15 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
-		<ImplicitUsings>enable</ImplicitUsings>
+		<TargetFrameworks>$(TestProjectTargetFramework)</TargetFrameworks>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\MyLibrary\MyLibrary.csproj"/>
 		<ProjectReference Include="..\MyLibrary.Tests.Shared\MyLibrary.Tests.Shared.csproj"/>
 	</ItemGroup>
-
-	<Import Project="..\..\build\Tests.Common.props"/>
-
 </Project>
