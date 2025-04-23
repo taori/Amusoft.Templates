@@ -161,7 +161,7 @@ jobs:
     uses: taori/actions/.github/workflows/nupkg-publish.yml@v10
     if: ${{ needs.parameters.outputs.publish == 'true' }}
     with:
-      nupkgArtifactName: "${{ needs.build.outputs.artifact-name-nupkg }}-patched"
+      nupkgArtifactName: "${{ needs.build.outputs.artifact-name-nupkg }}"
       removePrereleases: ${{ needs.parameters.outputs.removePrereleases == 'true' }}
       publishSymbols: ${{ needs.parameters.outputs.publishSymbols == 'true' }}
       debugWorkflow: false
