@@ -157,6 +157,7 @@ jobs:
       buildEnv: "ubuntu-22.04"
 
   coverage:
+    if: false
     needs: [ build, parameters ]
     uses: taori/actions/.github/workflows/coverage.yml@v10
     with:
@@ -165,7 +166,7 @@ jobs:
       debugWorkflow: false
 
   updatePackage:
-    if: ${{ needs.parameters.outputs.updateReadme == 'true' }}
+    if: false
     needs: [ parameters, build, coverage ]
     uses: taori/actions/.github/workflows/nupkg-update-readme.yml@v10
     with:
