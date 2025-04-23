@@ -13,6 +13,8 @@
   src/Directory.Build.props,
   src/GeneratedProject.sln,
   src/GeneratedProject/GeneratedProject.csproj,
+  src/GeneratedProject/PublicAPI.Shipped.txt,
+  src/GeneratedProject/PublicAPI.Unshipped.txt,
   src/nuget.config,
   src/packageIcon.png,
   tests/Directory.Build.props,
