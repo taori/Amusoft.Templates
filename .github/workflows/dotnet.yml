@@ -69,19 +69,17 @@ jobs:
 
   parameters:
     runs-on: ubuntu-latest
-    
+
     outputs:
-      versionSuffix: ${{ steps.parameters.outputs.versionSuffix }}
-      versionPrefix: ${{ steps.parameters.outputs.versionPrefix }}
+      suffix: ${{ steps.parameters.outputs.suffix }}
+      prefix: ${{ steps.parameters.outputs.prefix }}
       configuration: ${{ steps.parameters.outputs.configuration }}
       verbosity: ${{ steps.parameters.outputs.verbosity }}
       publish: ${{ steps.parameters.outputs.publish }}
-      package: ${{ steps.parameters.outputs.package }}
       publishSymbols: ${{ steps.parameters.outputs.publishSymbols }}
       removePrereleases: ${{ steps.parameters.outputs.removePrereleases }}
-      runTests: ${{ steps.parameters.outputs.runTests }}
-      runCoverage: ${{ steps.parameters.outputs.runCoverage }}
-
+      updateReadme: ${{ steps.parameters.outputs.updateReadme }}
+    
     steps:
 
       - name: nuget secret verification
@@ -118,60 +116,73 @@ jobs:
           if("${{github.event_name}}" -eq "workflow_dispatch" -and [string]::IsNullOrEmpty($suffix) -eq $false){
               $suffix = "$($suffix.TrimEnd(".")).$bnr" }
           
-          $data = @{          #prefix         #suffix         #configuration  #verbosity  #publish    #removeprerelease                       
-              "dispatch" =    @("$prefix",    "$suffix",      "$conf",        "$verb",    "$publ",    "$removePrereleases")
-              "push" =        @("",           "alpha.$bnr",   "Release",      "n",        "true",     "false")
-              "pushMerge" =   @("",           "beta.$bnr",    "Release",      "n",        "true",     "false")
-              "noop" =        @("",           "noop",         "Release",      "n",        "false",    "false")
-          };
-          $names = @("versionPrefix","versionSuffix","configuration","verbosity","publish","removePrereleases")
-          
-          if($data[$commitMode] -eq $null){
-              Write-Host "Unidentified commit mode $commitMode"
-              echo "Commit mode could not be identified." >> $env:GITHUB_STEP_SUMMARY
-              exit 1;
+          $json = @"
+          {
+            "prefix" :              {"push" : "",           "pushMerge" : "",           "noop" : "",        "dispatch" : "$prefix"},
+            "suffix" :              {"push" : "alpha.$bnr", "pushMerge" : "beta.$bnr",  "noop" : "noop",    "dispatch" : "$suffix"},
+            "configuration" :       {"push" : "Release",    "pushMerge" : "Release",    "noop" : "Release", "dispatch" : "$conf"},
+            "verbosity" :           {"push" : "n",          "pushMerge" : "n",          "noop" : "n",       "dispatch" : "$verb"},
+            "publish" :             {"push" : "true",       "pushMerge" : "true",       "noop" : "false",   "dispatch" : "$publ"},
+            "removePrereleases" :   {"push" : "false",      "pushMerge" : "false",      "noop" : "false",   "dispatch" : "$removePrereleases"},
+            "publishSymbols" :      {"push" : "true",       "pushMerge" : "true",       "noop" : "noop",    "dispatch" : "true"},
+            "runCoverage" :         {"push" : "true",       "pushMerge" : "true",       "noop" : "noop",    "dispatch" : "true"},
+            "updateReadme" :        {"push" : "true",       "pushMerge" : "true",       "noop" : "false",   "dispatch" : "$publ"},
           }
-
-          $names += "package";
-          $names += "publishSymbols";
-          $names += "runTests";
-          $names += "runCoverage";
-
-          $data[$commitMode] += $data[$commitMode][4]
-          $data[$commitMode] += $data[$commitMode][4]
-          $data[$commitMode] += $data[$commitMode][4]
-          $data[$commitMode] += "false"
+          "@ | ConvertFrom-Json
           
-          foreach($item in $names){
-              $index = $names.IndexOf($item)
-              Write-Host "$item=$($data[$commitMode][$index])"
-              echo "$item=$($data[$commitMode][$index])" >> $env:GITHUB_OUTPUT
-              echo "$item=$($data[$commitMode][$index])" >> $env:GITHUB_STEP_SUMMARY
-          }
+          $props = $json.psobject.properties.name
           
+          Write-Host "Identified commit mode $commitMode"
           echo "Identified commit mode $commitMode" >> $env:GITHUB_STEP_SUMMARY
+          foreach($prop in $props){
+            Write-Host "$prop=$($json.$prop.$commitMode)"
+            echo "$prop=$($json.$prop.$commitMode)" >> $env:GITHUB_OUTPUT
+            echo "$prop=$($json.$prop.$commitMode)" >> $env:GITHUB_STEP_SUMMARY
+          }
 
-  package:
-    needs: parameters
-    uses: taori/actions/.github/workflows/nupkg.yml@v9
+  build:
+    needs: [ parameters ]
+    uses: taori/actions/.github/workflows/nupkg-build.yml@v10
     with:
       solutionPath: src/All.sln
       packProjects: src/Amusoft.Templates/Amusoft.Templates.csproj
-      versionSuffix: ${{ needs.parameters.outputs.versionSuffix }}
-      versionPrefix: ${{ needs.parameters.outputs.versionPrefix }}
-      package: ${{ needs.parameters.outputs.package == 'true' }}
-      publish: ${{ needs.parameters.outputs.publish == 'true' }}
-      publishSymbols: ${{ needs.parameters.outputs.publishSymbols == 'true' }}
-      removePrereleases: ${{ needs.parameters.outputs.removePrereleases == 'true' }}
-      skipTests: ${{ needs.parameters.outputs.runTests == 'false' }}
+      versionSuffix: ${{ needs.parameters.outputs.suffix }}
+      versionPrefix: ${{ needs.parameters.outputs.prefix }}
       configuration: ${{ needs.parameters.outputs.configuration }}
       verbosity: ${{ needs.parameters.outputs.verbosity }}
-      runCoverage: ${{ needs.parameters.outputs.runCoverage == 'true' }}
       testArguments: "--filter Category!=SkipInCI"
       concurrencyAbortable: true
-      coverageThreshold: '85 95'
-      dotnetVersion: 6.0.x
-      agentEnv: ubuntu-22.04
+      dotnetVersion: |
+        6.0.x
+      buildEnv: "ubuntu-latest"
+
+  coverage:
+    needs: [ build, parameters ]
+    uses: taori/actions/.github/workflows/coverage.yml@v10
+    with:
+      coberturaArtifactsName: ${{ needs.build.outputs.artifact-name-cobertura }}
+      threshold: '85 95'
+      debugWorkflow: false
+
+  updatePackage:
+    if: ${{ needs.parameters.outputs.updateReadme == 'true' }}
+    needs: [ parameters, build, coverage ]
+    uses: taori/actions/.github/workflows/nupkg-update-readme.yml@v10
+    with:
+      artifactName: ${{ needs.build.outputs.artifact-name-nupkg }}
+      newArtifactName: "${{ needs.build.outputs.artifact-name-nupkg }}-patched"
+      readmePath: "./README.md"
+      readmeFileName: "README.md"
+      debugWorkflow: false
+
+  deploy:
+    needs: [ parameters, build, updatePackage ]
+    uses: taori/actions/.github/workflows/nupkg-publish.yml@v10
+    if: ${{ needs.parameters.outputs.publish == 'true' }}
+    with:
+      nupkgArtifactName: "${{ needs.build.outputs.artifact-name-nupkg }}-patched"
+      removePrereleases: ${{ needs.parameters.outputs.removePrereleases == 'true' }}
+      publishSymbols: ${{ needs.parameters.outputs.publishSymbols == 'true' }}
+      debugWorkflow: false
     secrets:
       nuget: ${{ secrets.NUGET }}
-      
