@@ -117,7 +117,7 @@ namespace Amusoft.Templates.Tests.Cases
 				using var scaffold = await Dotnet.Cli.NewAsync("dotnet-library-repo", sbArgs.ToString(), CancellationToken.None);
 
 				await scaffold.RestoreAsync($"src/{sourceName}.sln", null, CancellationToken.None);
-				await scaffold.BuildAsync($"src/{sourceName}.sln", null, CancellationToken.None);
+				await scaffold.BuildAsync($"src/{sourceName}.sln", "-property:SkipMicrosoftBuildTasksGit=true", CancellationToken.None);
 				await scaffold.TestAsync($"src/{sourceName}.sln", null, CancellationToken.None);
 				await Verifier
 					.Verify(logging.ToFullString(PrintKind.All))

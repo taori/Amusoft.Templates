@@ -1,34 +1,58 @@
 ﻿<Project>
 	<PropertyGroup>
+		<TestProjectTargetFramework>net8.0</TestProjectTargetFramework>
+	</PropertyGroup>
+	<!-- TestProject PropertyGroup-->
+	<PropertyGroup Condition="'$(MSBuildProjectName)' != 'MyLibrary.Tests.Shared'">
+		<XunitRunnerConfigPath>$(SolutionDir)..\tests\MyLibrary.Tests.Shared\xunit.runner.json</XunitRunnerConfigPath>
 		<Nullable>enable</Nullable>
 		<IsPackable>false</IsPackable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<OutputType>Exe</OutputType>
+		<IsTestProject>true</IsTestProject>
+		<NoWarn>CS8887</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Remove="..\MyLibrary.Tests.Shared\nlog.config"/>
+		<Using Include="Xunit" />
+		<Using Include="System.IO" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Content Include="..\MyLibrary.Tests.Shared\nlog.config">
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
+		<PackageReference Include="xunit.v3" Version="2.0.1" />
+		<PackageReference Include="xunit.runner.visualstudio" Version="3.0.2" >
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+
+		<PackageReference Include="coverlet.collector" Version="6.0.4">
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+
+		<PackageReference Include="Moq" Version="4.20.72" />
+		<PackageReference Include="Shouldly" Version="4.3.0" />
+		<PackageReference Include="Verify.XunitV3" Version="29.2.0" />
+		<PackageReference Include="xunit.v3.extensibility.core" Version="2.0.1" />
+	</ItemGroup>
+
+	<!-- TestProject ItemGroup-->
+	<ItemGroup Condition="'$(MSBuildProjectName)' != 'MyLibrary.Tests.Shared'">
+		<Compile Include="..\MyLibrary.Tests.Shared\**\*.shared.cs">
+			<Link>Shared\%(Compile.Filename).cs</Link>
+		</Compile>
+
+		<!-- Copy xunit.runner.json to output directories for all test projects -->
+		<Content Update="$(XunitRunnerConfigPath)">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.3" />
-		<PackageReference Include="xunit.runner.visualstudio" Version="2.8.2">
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-			<PrivateAssets>all</PrivateAssets>
-		</PackageReference>
-		<PackageReference Include="coverlet.collector" Version="6.0.2">
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-			<PrivateAssets>all</PrivateAssets>
-		</PackageReference>
-	</ItemGroup>
-
-	<ItemGroup>
-		<Compile Include="..\MyLibrary.Tests.Shared\**\*.shared.cs">
-			<Link>Shared\**\*.shared.cs</Link>
-		</Compile>
+		<InternalsVisibleTo Include="MyLibrary.UnitTests"/>
+		<InternalsVisibleTo Include="MyLibrary.IntegrationTests"/>
+		<InternalsVisibleTo Include="MyLibrary.Tests.Shared"/>
+		<InternalsVisibleTo Include="DynamicProxyGenAssembly2"/>
 	</ItemGroup>
 </Project>

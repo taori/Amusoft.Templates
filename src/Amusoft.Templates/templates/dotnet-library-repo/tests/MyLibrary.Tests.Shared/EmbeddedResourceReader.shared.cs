@@ -1,12 +1,10 @@
+using System.IO;
 using System.Reflection;
-using NLog;
 
-namespace MyLibrary.Tests.Shared.Toolkit;
+namespace MyLibrary.Tests.Shared;
 
 public class EmbeddedResourceReader
 {
-	private static readonly Logger Log = LogManager.GetLogger(nameof(EmbeddedResourceReader));
-
 	private readonly Assembly _assembly;
 
 	public EmbeddedResourceReader(Assembly assembly)
@@ -27,7 +25,7 @@ public class EmbeddedResourceReader
 		}
 		catch (Exception e)
 		{
-			Log.Error("available names: {@Values}", _assembly.GetManifestResourceNames());
+			TestContext.Current.SendDiagnosticMessage("Available resource names: {0}", string.Join(",", _assembly.GetManifestResourceNames()));
 			throw new Exception($"Failed to get content for accessPath {accessPath}", e);
 		}
 	}

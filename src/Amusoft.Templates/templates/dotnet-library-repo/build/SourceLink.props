@@ -1,5 +1,5 @@
 ﻿<Project>
-	<PropertyGroup>
+	<PropertyGroup Condition="'$(SkipMicrosoftBuildTasksGit)' != 'true'">
 		<!-- https://devblogs.microsoft.com/dotnet/producing-packages-with-source-link/ -->
 
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
