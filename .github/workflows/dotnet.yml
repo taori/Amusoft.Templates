@@ -156,28 +156,8 @@ jobs:
         6.0.x
       buildEnv: "ubuntu-22.04"
 
-  coverage:
-    if: false
-    needs: [ build, parameters ]
-    uses: taori/actions/.github/workflows/coverage.yml@v10
-    with:
-      coberturaArtifactsName: ${{ needs.build.outputs.artifact-name-cobertura }}
-      threshold: '85 95'
-      debugWorkflow: false
-
-  updatePackage:
-    if: false
-    needs: [ parameters, build, coverage ]
-    uses: taori/actions/.github/workflows/nupkg-update-readme.yml@v10
-    with:
-      artifactName: ${{ needs.build.outputs.artifact-name-nupkg }}
-      newArtifactName: "${{ needs.build.outputs.artifact-name-nupkg }}-patched"
-      readmePath: "./README.md"
-      readmeFileName: "README.md"
-      debugWorkflow: false
-
   deploy:
-    needs: [ parameters, build, updatePackage ]
+    needs: [ parameters, build ]
     uses: taori/actions/.github/workflows/nupkg-publish.yml@v10
     if: ${{ needs.parameters.outputs.publish == 'true' }}
     with:
