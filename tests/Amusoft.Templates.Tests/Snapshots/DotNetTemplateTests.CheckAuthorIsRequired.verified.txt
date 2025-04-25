@@ -1,6 +1,10 @@
-﻿---Command---
+﻿---Result---
 
-dotnet new dotnet-template -o "{Scaffold}"
+Using working directory: {Scaffold}
+
+---Command---
+
+dotnet new dotnet-template
 
 ---Result---
 

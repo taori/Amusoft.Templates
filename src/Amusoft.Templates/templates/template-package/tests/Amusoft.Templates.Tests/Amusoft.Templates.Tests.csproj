@@ -19,7 +19,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Amusoft.DotnetNew.Tests" Version="0.3.0-alpha.123" />
+		<PackageReference Include="Amusoft.DotnetNew.Tests" Version="0.3.0-alpha.122" />
 		<PackageReference Include="Amusoft.XUnit.NLog.Extensions" Version="2.4.0"/>
 		<PackageReference Include="NLog" Version="4.7.11"/>
 		<PackageReference Include="Shouldly" Version="3.0.2"/>
@@ -51,11 +51,14 @@
 	<PropertyGroup>
 		<TemplateRootPath>$(SolutionDir)Amusoft.Templates\templates</TemplateRootPath>
 		<TemplatePathResource>$(ProjectDir)Resources\Embedded\templatesRoot.txt</TemplatePathResource>
+		<SolutionPathResource>$(ProjectDir)Resources\Embedded\solutionFile.txt</SolutionPathResource>
 	</PropertyGroup>
 
 	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
 		<Message Importance="High" Text="Writing $(TemplateRootPath) to $(TemplatePathResource)"></Message>
 		<Exec Command="echo $(TemplateRootPath) &gt; &quot;$(TemplatePathResource)&quot;"/>
+		<Message Importance="High" Text="Writing $(SolutionPath) to $(SolutionPathResource)"></Message>
+		<Exec Command="echo $(SolutionPath) &gt; &quot;$(SolutionPathResource)&quot;"/>
 	</Target>
 
 </Project>

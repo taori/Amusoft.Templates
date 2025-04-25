@@ -1,0 +1,38 @@
+﻿{
+  Log:
+---Result---
+
+Created temp directory at {Scaffold}
+
+---Result---
+
+success: new template-package  -n "Some2" --GitProjectName TheNewProject --NugetPackageId TheNugetPackageId --ProductName TheProductName --GitUser TheUser --Author TheAuthor
+
+,
+  Files: [
+    Some2/.github/workflows/dotnet.yml,
+    Some2/.gitignore,
+    Some2/LICENSE,
+    Some2/README.md,
+    Some2/REFERENCES.md,
+    Some2/scripts/buildpackage.ps1,
+    Some2/scripts/packinstall.ps1,
+    Some2/scripts/packreinstall.ps1,
+    Some2/scripts/packremove.ps1,
+    Some2/src/Some2.slnx,
+    Some2/src/Some2/packageIcon.png,
+    Some2/src/Some2/Some2.csproj,
+    Some2/src/Some2/templates/Readme.MD,
+    Some2/src/TemplateProjects.slnx,
+    Some2/tests/Some2.Tests/Cases/CheatsheetTests.cs,
+    Some2/tests/Some2.Tests/Configuration/ProjectSetup.cs,
+    Some2/tests/Some2.Tests/nlog.config,
+    Some2/tests/Some2.Tests/Resources/Embedded/solutionFile.txt,
+    Some2/tests/Some2.Tests/Resources/Embedded/templatesRoot.txt,
+    Some2/tests/Some2.Tests/Snapshots/CheatsheetTests.FileStructureTest.verified.txt,
+    Some2/tests/Some2.Tests/Some2.Tests.csproj,
+    Some2/tests/Some2.Tests/Toolkit/EmbeddedResourceReader.cs,
+    Some2/tests/Some2.Tests/Toolkit/GlobalSetupFixture.cs,
+    Some2/tests/Some2.Tests/Toolkit/TemplateTests.cs
+  ]
+}

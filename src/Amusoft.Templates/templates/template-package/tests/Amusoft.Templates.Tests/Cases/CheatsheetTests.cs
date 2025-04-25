@@ -16,7 +16,11 @@ namespace Amusoft.Templates.Tests.Cases
 {
 	public class CheatsheetTests : TemplateTests
 	{
-		[Fact]
+		public CheatsheetTests(ITestOutputHelper outputHelper, GlobalSetupFixture data) : base(outputHelper, data)
+		{
+		}
+
+		[Fact(Timeout = 15_000)]
 		public async Task FileStructureTest()
 		{
 			using var loggingScope = new LoggingScope();
@@ -27,10 +31,6 @@ namespace Amusoft.Templates.Tests.Cases
 				Log = loggingScope.ToFullString(PrintKind.All),
 				Files = await scaffold.GetAllFileContentsAsync().ToListAsync()
 			});
-		}
-
-		public CheatsheetTests(ITestOutputHelper outputHelper, GlobalSetupFixture data) : base(outputHelper, data)
-		{
 		}
 	}
 }
