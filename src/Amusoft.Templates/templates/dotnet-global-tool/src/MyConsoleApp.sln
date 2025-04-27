@@ -1,0 +1,102 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{guidPackage}") = "MyConsoleApp", "MyConsoleApp\MyConsoleApp.csproj", "{guidLibrary}"
+EndProject
+Project("{guidPackage}") = "MyConsoleApp.UnitTests", "..\tests\MyConsoleApp.UnitTests\MyConsoleApp.UnitTests.csproj", "{guidTestLibrary}"
+EndProject
+Project("{guidPackage}") = "MyConsoleApp.Tests.Shared", "..\tests\MyConsoleApp.Tests.Shared\MyConsoleApp.Tests.Shared.csproj", "{guidTestSharedLibrary}"
+EndProject
+Project("{guidPackage}") = "MyConsoleApp.IntegrationTests", "..\tests\MyConsoleApp.IntegrationTests\MyConsoleApp.IntegrationTests.csproj", "{guidIntegrationTestLibrary}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "package", "package", "{guidPackage}"
+	ProjectSection(SolutionItems) = preProject
+		..\README.md = ..\README.md
+		..\.github\workflows\CI.yml = ..\.github\workflows\CI.yml
+		nuget.config = nuget.config
+		Directory.Build.props = Directory.Build.props
+		..\build\Tests.Common.props = ..\build\Tests.Common.props
+		..\build\Project.Common.props = ..\build\Project.Common.props
+		..\build\SourceLink.props = ..\build\SourceLink.props
+		..\scripts\build.ps1 = ..\scripts\build.ps1
+		..\.gitignore = ..\.gitignore
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{guidvFolderSrc}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{guidvFolderTests}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{guidLibrary}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{guidLibrary}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{guidLibrary}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{guidLibrary}.Debug|x64.Build.0 = Debug|Any CPU
+		{guidLibrary}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{guidLibrary}.Debug|x86.Build.0 = Debug|Any CPU
+		{guidLibrary}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{guidLibrary}.Release|Any CPU.Build.0 = Release|Any CPU
+		{guidLibrary}.Release|x64.ActiveCfg = Release|Any CPU
+		{guidLibrary}.Release|x64.Build.0 = Release|Any CPU
+		{guidLibrary}.Release|x86.ActiveCfg = Release|Any CPU
+		{guidLibrary}.Release|x86.Build.0 = Release|Any CPU
+		{guidTestLibrary}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{guidTestLibrary}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{guidTestLibrary}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{guidTestLibrary}.Debug|x64.Build.0 = Debug|Any CPU
+		{guidTestLibrary}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{guidTestLibrary}.Debug|x86.Build.0 = Debug|Any CPU
+		{guidTestLibrary}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{guidTestLibrary}.Release|Any CPU.Build.0 = Release|Any CPU
+		{guidTestLibrary}.Release|x64.ActiveCfg = Release|Any CPU
+		{guidTestLibrary}.Release|x64.Build.0 = Release|Any CPU
+		{guidTestLibrary}.Release|x86.ActiveCfg = Release|Any CPU
+		{guidTestLibrary}.Release|x86.Build.0 = Release|Any CPU
+		{guidIntegrationTestLibrary}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{guidIntegrationTestLibrary}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{guidIntegrationTestLibrary}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{guidIntegrationTestLibrary}.Debug|x64.Build.0 = Debug|Any CPU
+		{guidIntegrationTestLibrary}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{guidIntegrationTestLibrary}.Debug|x86.Build.0 = Debug|Any CPU
+		{guidIntegrationTestLibrary}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{guidIntegrationTestLibrary}.Release|Any CPU.Build.0 = Release|Any CPU
+		{guidIntegrationTestLibrary}.Release|x64.ActiveCfg = Release|Any CPU
+		{guidIntegrationTestLibrary}.Release|x64.Build.0 = Release|Any CPU
+		{guidIntegrationTestLibrary}.Release|x86.ActiveCfg = Release|Any CPU
+		{guidIntegrationTestLibrary}.Release|x86.Build.0 = Release|Any CPU
+		{guidTestSharedLibrary}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{guidTestSharedLibrary}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{guidTestSharedLibrary}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{guidTestSharedLibrary}.Debug|x64.Build.0 = Debug|Any CPU
+		{guidTestSharedLibrary}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{guidTestSharedLibrary}.Debug|x86.Build.0 = Debug|Any CPU
+		{guidTestSharedLibrary}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{guidTestSharedLibrary}.Release|Any CPU.Build.0 = Release|Any CPU
+		{guidTestSharedLibrary}.Release|x64.ActiveCfg = Release|Any CPU
+		{guidTestSharedLibrary}.Release|x64.Build.0 = Release|Any CPU
+		{guidTestSharedLibrary}.Release|x86.ActiveCfg = Release|Any CPU
+		{guidTestSharedLibrary}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8B59E246-DB1F-4A94-8661-5B6DDC1E564D}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{guidTestLibrary} = {guidvFolderTests}
+		{guidIntegrationTestLibrary} = {guidvFolderTests}
+		{guidTestSharedLibrary} = {guidvFolderTests}
+		{guidLibrary} = {guidvFolderSrc}
+	EndGlobalSection
+EndGlobal
