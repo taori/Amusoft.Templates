@@ -1,0 +1,191 @@
+name: CI
+
+permissions:
+  pages:
+    write
+  contents: 
+    write
+  pull-requests: 
+    write
+  id-token:
+    write
+    
+on:
+  push:
+    branches: [ BRANCHTRIGGER ]
+    paths:
+      - .github/workflows/*
+      - src/**/*
+      - tests/**/*
+  
+  pull_request:
+    branches: [ BRANCHTRIGGER ]
+    types:
+      - opened
+      - synchronize
+  
+  workflow_dispatch:
+    inputs:
+      versionPrefix:
+        type: string
+        description: Prefix (e.g 1.1.1)
+        default: ""
+
+      versionSuffix:
+        type: string
+        description: Suffix (e.g alpha.1)
+        default: ""
+
+      publish:
+        type: boolean
+        description: run dotnet publish?
+        default: true
+
+      removePrereleases:
+        type: boolean
+        description: nuget unlist preleases?
+        default: false
+
+      configuration:
+        description: build configuration
+        default: Release
+        type: choice
+        options:
+          - Debug
+          - Release
+
+      verbosity:
+        description: build log verbosity
+        default: minimal
+        type: choice
+        options:
+          - quiet
+          - minimal
+          - normal
+          - detailed
+          - diagnostic
+    
+jobs:
+
+  parameters:
+    runs-on: ubuntu-latest
+    
+    outputs:
+      suffix: ${{ steps.parameters.outputs.suffix }}
+      prefix: ${{ steps.parameters.outputs.prefix }}
+      configuration: ${{ steps.parameters.outputs.configuration }}
+      verbosity: ${{ steps.parameters.outputs.verbosity }}
+      publish: ${{ steps.parameters.outputs.publish }}
+      publishSymbols: ${{ steps.parameters.outputs.publishSymbols }}
+      removePrereleases: ${{ steps.parameters.outputs.removePrereleases }}
+      updateReadme: ${{ steps.parameters.outputs.updateReadme }}
+    
+    steps:
+
+      - name: nuget secret verification
+        env:
+          NUGET: ${{ secrets.NUGET }}
+        if: "${{ env.NUGET == '' }}"
+        uses: actions/github-script@v3
+        with:
+          script: |
+            core.setFailed('"nuget" secret is missing')
+
+      - name: Setting up parameters
+        id: parameters
+        shell: pwsh
+        run: |
+          Write-Host "Setting up parameters"
+          
+          $branch = "BRANCHTRIGGER"
+          $conf = "${{github.event.inputs.configuration}}"
+          $verb = "${{github.event.inputs.verbosity}}"
+          $publ = "${{github.event.inputs.publish}}"
+          $removePrereleases = "${{github.event.inputs.removePrereleases}}"
+          $prefix = "${{github.event.inputs.versionPrefix}}"
+          $suffix = "${{github.event.inputs.versionSuffix}}"
+          $bnr = "${{github.run_number}}"
+          
+          $commitMode = "noop"          
+          if($commitMode -eq "noop" -and "${{github.event_name}}" -eq "workflow_dispatch") {
+              $commitMode = "dispatch" }
+          if($commitMode -eq "noop" -and "$branch|pull_request|closed|true" -eq "${{github.ref_name}}|${{github.event_name}}|${{github.event.action}}|${{github.event.pull_request.merged}}") {
+              $commitMode = "pushMerge" }
+          if($commitMode -eq "noop" -and "$branch|push" -eq "${{github.ref_name}}|${{github.event_name}}") {
+              $commitMode = "push" }
+          if("${{github.event_name}}" -eq "workflow_dispatch" -and [string]::IsNullOrEmpty($suffix) -eq $false){
+              $suffix = "$($suffix.TrimEnd(".")).$bnr" }
+          
+          $json = @"
+          {
+            "prefix" :              {"push" : "",           "pushMerge" : "",           "noop" : "",        "dispatch" : "$prefix"},
+            "suffix" :              {"push" : "alpha.$bnr", "pushMerge" : "beta.$bnr",  "noop" : "noop",    "dispatch" : "$suffix"},
+            "configuration" :       {"push" : "Release",    "pushMerge" : "Release",    "noop" : "Release", "dispatch" : "$conf"},
+            "verbosity" :           {"push" : "n",          "pushMerge" : "n",          "noop" : "n",       "dispatch" : "$verb"},
+            "publish" :             {"push" : "true",       "pushMerge" : "true",       "noop" : "false",   "dispatch" : "$publ"},
+            "removePrereleases" :   {"push" : "false",      "pushMerge" : "false",      "noop" : "false",   "dispatch" : "$removePrereleases"},
+            "publishSymbols" :      {"push" : "true",       "pushMerge" : "true",       "noop" : "noop",    "dispatch" : "true"},
+            "runCoverage" :         {"push" : "true",       "pushMerge" : "true",       "noop" : "noop",    "dispatch" : "true"},
+            "updateReadme" :        {"push" : "true",       "pushMerge" : "true",       "noop" : "false",   "dispatch" : "$publ"},
+          }
+          "@ | ConvertFrom-Json
+          
+          $props = $json.psobject.properties.name
+          
+          Write-Host "Identified commit mode $commitMode"
+          echo "Identified commit mode $commitMode" >> $env:GITHUB_STEP_SUMMARY
+          foreach($prop in $props){
+            Write-Host "$prop=$($json.$prop.$commitMode)"
+            echo "$prop=$($json.$prop.$commitMode)" >> $env:GITHUB_OUTPUT
+            echo "$prop=$($json.$prop.$commitMode)" >> $env:GITHUB_STEP_SUMMARY
+          }
+
+  build:
+    needs: [ parameters ]
+    uses: taori/actions/.github/workflows/nupkg-build.yml@v10
+    with:
+      solutionPath: src/MyConsoleApp.sln
+      packProjects: src/MyConsoleApp/MyConsoleApp.csproj
+      versionSuffix: ${{ needs.parameters.outputs.suffix }}
+      versionPrefix: ${{ needs.parameters.outputs.prefix }}
+      configuration: ${{ needs.parameters.outputs.configuration }}
+      verbosity: ${{ needs.parameters.outputs.verbosity }}
+      testArguments: "--filter Category!=SkipInCI"
+      concurrencyAbortable: true
+      dotnetVersion: |
+        5.0.x
+        6.0.x
+        8.0.x
+      buildEnv: "ubuntu-latest"
+
+  coverage:
+    needs: [ build, parameters ]
+    uses: taori/actions/.github/workflows/coverage.yml@v10
+    with:
+      coberturaArtifactsName: ${{ needs.build.outputs.artifact-name-cobertura }}
+      githubPagesUrl: "https://GITOWNER.github.io/GITPROJECT"
+      threshold: '85 95'
+      debugWorkflow: false
+
+  updatePackage:
+    if: ${{ needs.parameters.outputs.updateReadme == 'true' }}
+    needs: [ parameters, build, coverage ]
+    uses: taori/actions/.github/workflows/nupkg-update-readme.yml@v10
+    with:
+      artifactName: ${{ needs.build.outputs.artifact-name-nupkg }}
+      newArtifactName: "${{ needs.build.outputs.artifact-name-nupkg }}-patched"
+      readmePath: "./README.md"
+      readmeFileName: "README.md"
+      debugWorkflow: false
+
+  deploy:
+    needs: [ parameters, build, updatePackage ]
+    uses: taori/actions/.github/workflows/nupkg-publish.yml@v10
+    if: ${{ needs.parameters.outputs.publish == 'true' }}
+    with:
+      nupkgArtifactName: "${{ needs.build.outputs.artifact-name-nupkg }}-patched"
+      removePrereleases: ${{ needs.parameters.outputs.removePrereleases == 'true' }}
+      publishSymbols: ${{ needs.parameters.outputs.publishSymbols == 'true' }}
+      debugWorkflow: false
+    secrets:
+      nuget: ${{ secrets.NUGET }}
