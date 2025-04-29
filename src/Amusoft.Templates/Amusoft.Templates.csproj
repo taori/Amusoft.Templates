@@ -39,6 +39,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Compile Include="templates\dotnet-github-action\src\MyConsoleApp\ActionInputs.cs" />
 		<Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**;templates\**\.vs\**"/>
 		<Compile Remove="**\*"/>
 	</ItemGroup>
