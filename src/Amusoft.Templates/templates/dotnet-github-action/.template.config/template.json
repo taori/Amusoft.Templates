@@ -15,6 +15,12 @@
 		"type": "project"
 	},
 	"symbols": {
+		"MaintainerEmail": {
+			"type": "parameter",
+			"description": "Mainer email address e.g. 'DisplayName <mail@domain.com>'",
+			"replaces": "MAINTAINEREMAIL",
+			"isRequired": true
+		},
 		"GitProjectName": {
 			"type": "parameter",
 			"description": "name of repository project",

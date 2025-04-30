@@ -1,0 +1,18 @@
+name: 'TODO actionname'
+author: 'MAINTAINEREMAIL'
+description: 'TODO Description'
+branding:
+  icon: book-open
+  color: purple
+inputs:
+  filename:
+    description: 'A comma separated list of code coverage files to analyse. Also supports using glob patterns to match multiple files.'
+    required: true
+runs:
+  using: 'docker'
+  # https://learn.microsoft.com/en-us/dotnet/devops/create-dotnet-github-action#performance-improvements
+  image: 'Dockerfile'
+  #image: 'docker://ghcr.io/GITOWNER/GITPROJECT:v1.0.0'
+  args:
+    - '--files'
+    - ${{ inputs.filename }}
