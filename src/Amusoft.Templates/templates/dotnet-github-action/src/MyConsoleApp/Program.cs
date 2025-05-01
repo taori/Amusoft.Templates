@@ -13,14 +13,16 @@ class Program
 			tokenSource.Cancel();
 		};
 		
-		await CoreProcedure.ExecuteAsync(host, inputs, tokenSource.Token);
+		await CoreProcedure.ExecuteAsync(host.GetService<ILogger<CoreProcedure>>(), inputs, tokenSource.Token);
 	}
 
 
-	static async Task Main(string[] args)
+	internal static async Task Main(string[] args)
 	{
 		using var host = Host.CreateDefaultBuilder(args)
-			.ConfigureServices((_, services) => { })
+			.ConfigureServices((_, services) =>
+			{
+			})
 			.Build();
 
 		var parser = Default
@@ -39,6 +41,6 @@ class Program
 				string.Join(Environment.NewLine, errors.Select(error => error.ToString()))
 			);
 
-		Environment.Exit(2);
+		ExitEnvironment.WithCode(2);
 	}
 }

@@ -20,6 +20,7 @@
 		<PackageReleaseNotes>
 			updates dotnet-library-repo
 		</PackageReleaseNotes>
+		<LangVersion>latest</LangVersion>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 
@@ -40,6 +41,7 @@
 
 	<ItemGroup>
 		<Compile Include="templates\dotnet-github-action\src\MyConsoleApp\ActionInputs.cs" />
+		<Compile Include="templates\dotnet-github-action\src\MyConsoleApp\ExitEnvironment.cs" />
 		<Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**;templates\**\.vs\**"/>
 		<Compile Remove="**\*"/>
 	</ItemGroup>

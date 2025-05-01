@@ -7,7 +7,7 @@
 	],
 	"identity": "Amusoft.Templates.GithubAction.Dotnet",
 	"name": "github action",
-	"shortName": "github-action",
+	"shortName": "github-action-dotnet",
 	"sourceName": "MyConsoleApp",
 	"preferNameDirectory": false,
 	"tags": {
@@ -15,6 +15,12 @@
 		"type": "project"
 	},
 	"symbols": {
+		"ActionName": {
+			"type": "parameter",
+			"description": "Name of the action",
+			"replaces": "ACTIONNAME",
+			"isRequired": true
+		},
 		"MaintainerEmail": {
 			"type": "parameter",
 			"description": "Mainer email address e.g. 'DisplayName <mail@domain.com>'",
@@ -27,29 +33,10 @@
 			"replaces": "GITPROJECT",
 			"isRequired": true
 		},
-		"NugetPackageId": {
-			"type": "parameter",
-			"description": "ID of nuget package",
-			"replaces": "MyPackageId",
-			"isRequired": true
-		},
-		"ProductName": {
-			"type": "parameter",
-			"description": "Name of product",
-			"replaces": "MyProductName",
-			"isRequired": true
-		},
 		"GitUser": {
 			"type": "parameter",
 			"description": "name of repository user",
 			"replaces": "GITOWNER",
-			"isRequired": true
-		},
-		"Author": {
-			"type": "parameter",
-			"description": "Name of project author",
-			"defaultValue": "John Doe",
-			"replaces": "AUTHOR",
 			"isRequired": true
 		},
 		"RootBranchName": {

@@ -9,12 +9,14 @@ permissions:
     write
   id-token:
     write
+  packages: 
+    write
     
 on:
   push:
     branches: [ BRANCHTRIGGER ]
     paths:
-      - .github/workflows/*
+      - .github/workflows/CI.yml
       - src/**/*
       - tests/**/*
   
@@ -26,33 +28,10 @@ on:
   
   workflow_dispatch:
     inputs:
-      versionPrefix:
-        type: string
-        description: Prefix (e.g 1.1.1)
-        default: ""
-
-      versionSuffix:
-        type: string
-        description: Suffix (e.g alpha.1)
-        default: ""
-
       publish:
         type: boolean
-        description: run dotnet publish?
+        description: run publish?
         default: true
-
-      removePrereleases:
-        type: boolean
-        description: nuget unlist preleases?
-        default: false
-
-      configuration:
-        description: build configuration
-        default: Release
-        type: choice
-        options:
-          - Debug
-          - Release
 
       verbosity:
         description: build log verbosity
@@ -71,25 +50,11 @@ jobs:
     runs-on: ubuntu-latest
     
     outputs:
-      suffix: ${{ steps.parameters.outputs.suffix }}
-      prefix: ${{ steps.parameters.outputs.prefix }}
-      configuration: ${{ steps.parameters.outputs.configuration }}
       verbosity: ${{ steps.parameters.outputs.verbosity }}
       publish: ${{ steps.parameters.outputs.publish }}
-      publishSymbols: ${{ steps.parameters.outputs.publishSymbols }}
-      removePrereleases: ${{ steps.parameters.outputs.removePrereleases }}
       updateReadme: ${{ steps.parameters.outputs.updateReadme }}
     
     steps:
-
-      - name: nuget secret verification
-        env:
-          NUGET: ${{ secrets.NUGET }}
-        if: "${{ env.NUGET == '' }}"
-        uses: actions/github-script@v3
-        with:
-          script: |
-            core.setFailed('"nuget" secret is missing')
 
       - name: Setting up parameters
         id: parameters
@@ -98,12 +63,8 @@ jobs:
           Write-Host "Setting up parameters"
           
           $branch = "BRANCHTRIGGER"
-          $conf = "${{github.event.inputs.configuration}}"
           $verb = "${{github.event.inputs.verbosity}}"
           $publ = "${{github.event.inputs.publish}}"
-          $removePrereleases = "${{github.event.inputs.removePrereleases}}"
-          $prefix = "${{github.event.inputs.versionPrefix}}"
-          $suffix = "${{github.event.inputs.versionSuffix}}"
           $bnr = "${{github.run_number}}"
           
           $commitMode = "noop"          
@@ -118,13 +79,8 @@ jobs:
           
           $json = @"
           {
-            "prefix" :              {"push" : "",           "pushMerge" : "",           "noop" : "",        "dispatch" : "$prefix"},
-            "suffix" :              {"push" : "alpha.$bnr", "pushMerge" : "beta.$bnr",  "noop" : "noop",    "dispatch" : "$suffix"},
-            "configuration" :       {"push" : "Release",    "pushMerge" : "Release",    "noop" : "Release", "dispatch" : "$conf"},
             "verbosity" :           {"push" : "n",          "pushMerge" : "n",          "noop" : "n",       "dispatch" : "$verb"},
-            "publish" :             {"push" : "true",       "pushMerge" : "true",       "noop" : "false",   "dispatch" : "$publ"},
-            "removePrereleases" :   {"push" : "false",      "pushMerge" : "false",      "noop" : "false",   "dispatch" : "$removePrereleases"},
-            "publishSymbols" :      {"push" : "true",       "pushMerge" : "true",       "noop" : "noop",    "dispatch" : "true"},
+            "publish" :             {"push" : "false",      "pushMerge" : "false",      "noop" : "false",   "dispatch" : "$publ"},
             "runCoverage" :         {"push" : "true",       "pushMerge" : "true",       "noop" : "noop",    "dispatch" : "true"},
             "updateReadme" :        {"push" : "true",       "pushMerge" : "true",       "noop" : "false",   "dispatch" : "$publ"},
           }
@@ -142,52 +98,33 @@ jobs:
 
   build:
     needs: [ parameters ]
-    uses: taori/actions/.github/workflows/nupkg-build.yml@v10
+    uses: taori/actions/.github/workflows/github-dotnet-action-build.yml@v11
     with:
       solutionPath: src/MyConsoleApp.sln
-      packProjects: src/MyConsoleApp/MyConsoleApp.csproj
-      versionSuffix: ${{ needs.parameters.outputs.suffix }}
-      versionPrefix: ${{ needs.parameters.outputs.prefix }}
-      configuration: ${{ needs.parameters.outputs.configuration }}
-      verbosity: ${{ needs.parameters.outputs.verbosity }}
+      verbosity: ${{ needs.parameters.outputs.verbosity }}      
       testArguments: "--filter Category!=SkipInCI"
       concurrencyAbortable: true
       dotnetVersion: |
         5.0.x
         6.0.x
         8.0.x
-      buildEnv: "ubuntu-latest"
 
   coverage:
     needs: [ build, parameters ]
-    uses: taori/actions/.github/workflows/coverage.yml@v10
+    uses: taori/actions/.github/workflows/coverage.yml@v11
     with:
       coberturaArtifactsName: ${{ needs.build.outputs.artifact-name-cobertura }}
       githubPagesUrl: "https://GITOWNER.github.io/GITPROJECT"
       threshold: '85 95'
       debugWorkflow: false
 
-  updatePackage:
-    if: ${{ needs.parameters.outputs.updateReadme == 'true' }}
-    needs: [ parameters, build, coverage ]
-    uses: taori/actions/.github/workflows/nupkg-update-readme.yml@v10
-    with:
-      artifactName: ${{ needs.build.outputs.artifact-name-nupkg }}
-      newArtifactName: "${{ needs.build.outputs.artifact-name-nupkg }}-patched"
-      readmePath: "./README.md"
-      readmeFileName: "README.md"
-      debugWorkflow: false
-
   deploy:
-    needs: [ parameters, build, updatePackage ]
-    uses: taori/actions/.github/workflows/nupkg-publish.yml@v10
-    if: ${{ needs.parameters.outputs.publish == 'true' }}
+    needs: [ parameters, coverage ]
+    uses: taori/actions/.github/workflows/github-dotnet-action-deploy.yml@v11
     with:
-      nupkgArtifactName: "${{ needs.build.outputs.artifact-name-nupkg }}-patched"
-      removePrereleases: ${{ needs.parameters.outputs.removePrereleases == 'true' }}
-      publishSymbols: ${{ needs.parameters.outputs.publishSymbols == 'true' }}
-      debugWorkflow: false
-    secrets:
-      nuget: ${{ secrets.NUGET }}
+      imageTags: |
+        ghcr.io/GITOWNER/ACTIONNAME:latest
+      push: ${{ needs.parameters.outputs.publish == 'true' }}
+      
       
 #https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry

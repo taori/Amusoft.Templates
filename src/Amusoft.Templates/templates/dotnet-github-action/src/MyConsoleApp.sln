@@ -16,12 +16,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "package", "package", "{A21A
 		..\.gitignore = ..\.gitignore
 		..\scripts\build.ps1 = ..\scripts\build.ps1
 		..\.github\workflows\CI.yml = ..\.github\workflows\CI.yml
+		..\.github\workflows\docker-release = ..\.github\workflows\docker-release.yml
 		Directory.Build.props = Directory.Build.props
 		nuget.config = nuget.config
 		..\build\Project.Common.props = ..\build\Project.Common.props
 		..\README.md = ..\README.md
 		..\build\SourceLink.props = ..\build\SourceLink.props
 		..\build\Tests.Common.props = ..\build\Tests.Common.props
+		..\Dockerfile = ..\Dockerfile
+		..\action.yml = ..\action.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{382A3607-386C-4D09-95A1-CD295EC6DA29}"

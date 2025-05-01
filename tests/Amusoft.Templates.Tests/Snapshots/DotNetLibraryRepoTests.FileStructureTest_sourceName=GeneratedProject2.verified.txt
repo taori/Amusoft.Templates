@@ -1,6 +1,7 @@
 ﻿[
   .editorconfig,
   .gitattributes,
+  .github/release.yml,
   .github/workflows/CI.yml,
   .gitignore,
   build/Project.Common.props,

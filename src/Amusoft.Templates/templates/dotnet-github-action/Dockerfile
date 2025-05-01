@@ -11,7 +11,7 @@ LABEL repository="https://github.com/GITOWNER/GITPROJECT"
 LABEL homepage="https://github.com/GITOWNER/GITPROJECT"
 
 # Label as GitHub Action
-LABEL com.github.actions.name="TODO name"
+LABEL com.github.actions.name="ACTIONNAME"
 LABEL com.github.actions.description="TODO description"
 LABEL com.github.actions.icon="book-open"
 LABEL com.github.actions.color="purple"

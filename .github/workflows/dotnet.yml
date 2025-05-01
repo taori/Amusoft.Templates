@@ -142,7 +142,7 @@ jobs:
 
   build:
     needs: [ parameters ]
-    uses: taori/actions/.github/workflows/nupkg-build.yml@v10
+    uses: taori/actions/.github/workflows/nupkg-build.yml@v11
     with:
       solutionPath: src/All.sln
       packProjects: src/Amusoft.Templates/Amusoft.Templates.csproj
@@ -158,7 +158,7 @@ jobs:
 
   deploy:
     needs: [ parameters, build ]
-    uses: taori/actions/.github/workflows/nupkg-publish.yml@v10
+    uses: taori/actions/.github/workflows/nupkg-publish.yml@v11
     if: ${{ needs.parameters.outputs.publish == 'true' }}
     with:
       nupkgArtifactName: "${{ needs.build.outputs.artifact-name-nupkg }}"
