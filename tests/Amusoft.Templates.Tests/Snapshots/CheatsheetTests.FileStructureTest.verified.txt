@@ -6,7 +6,7 @@ Created temp directory at {Scaffold}
 
 ---Result---
 
-success: new amusoft-cheatsheet -o "{Scaffold}" --Author testUser --ProjectId TestId
+success: new amusoft-cheatsheet --Author testUser --ProjectId TestId
 
 ,
   Files: [

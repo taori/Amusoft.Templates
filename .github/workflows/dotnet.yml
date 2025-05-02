@@ -14,7 +14,7 @@ on:
   push:
     branches: [ master ]
     paths:
-      - .github/workflows/*
+      - .github/workflows/dotnet.yml
       - src/**/*
       - tests/**/*
   
@@ -142,7 +142,7 @@ jobs:
 
   build:
     needs: [ parameters ]
-    uses: taori/actions/.github/workflows/nupkg-build.yml@v10
+    uses: taori/actions/.github/workflows/nupkg-build.yml@v11
     with:
       solutionPath: src/All.sln
       packProjects: src/Amusoft.Templates/Amusoft.Templates.csproj
@@ -154,11 +154,12 @@ jobs:
       concurrencyAbortable: true
       dotnetVersion: |
         6.0.x
+        9.0.x
       buildEnv: "ubuntu-22.04"
 
   deploy:
     needs: [ parameters, build ]
-    uses: taori/actions/.github/workflows/nupkg-publish.yml@v10
+    uses: taori/actions/.github/workflows/nupkg-publish.yml@v11
     if: ${{ needs.parameters.outputs.publish == 'true' }}
     with:
       nupkgArtifactName: "${{ needs.build.outputs.artifact-name-nupkg }}"

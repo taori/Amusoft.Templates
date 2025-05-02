@@ -1,0 +1,14 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/package/">
+    <File Path="../.github/workflows/dotnet.yml" />
+    <File Path="../.gitignore" />
+    <File Path="../README.md" />
+  </Folder>
+  <Project Path="../tests/Amusoft.Templates.Tests/Amusoft.Templates.Tests.csproj" />
+  <Project Path="Amusoft.Templates/Amusoft.Templates.csproj" />
+</Solution>

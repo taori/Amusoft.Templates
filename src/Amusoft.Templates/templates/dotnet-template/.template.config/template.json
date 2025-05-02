@@ -7,6 +7,8 @@
   "identity": "Amusoft.Templates.TemplateFile.Json",
   "name": ".template.config structure",
   "shortName": "dotnet-template",
+  "sourceName": "MyTemplate",
+  "preferNameDirectory": false,
   "tags": {
     "type": "item"
   },
@@ -27,5 +29,17 @@
       "fileRename": "MyTemplate.json",
       "defaultValue": "template.json"
     }
-  }
+  },
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "exclude": [
+            ".vs/**",
+            "test-template.ps1"
+          ]
+        }
+      ]
+    }
+  ]
 }

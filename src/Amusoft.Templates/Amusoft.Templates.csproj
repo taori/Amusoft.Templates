@@ -1,24 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<PackageType>Template</PackageType>
 		<PackageId>Amusoft.Templates</PackageId>
 		<Title>Amusoft.Templates</Title>
 		<Authors>Andreas Müller</Authors>
 		<Description>Amusoft templates for multiple purposes</Description>
 		<PackageTags>dotnet-new;templates;Amusoft</PackageTags>
 		<TargetFramework>netstandard2.0</TargetFramework>
-		<AssemblyVersion>1.0.0.0</AssemblyVersion>
-		<FileVersion>1.0.0</FileVersion>
 		<VersionPrefix>1.4.0</VersionPrefix>
 		<VersionSuffix>beta</VersionSuffix>
 		<IsPackable>true</IsPackable>
 		<PackageIcon>packageIcon.png</PackageIcon>
-		<NoDefaultExcludes>true</NoDefaultExcludes>
-
-		<IncludeContentInPack>true</IncludeContentInPack>
-		<IncludeBuildOutput>false</IncludeBuildOutput>
-		<ContentTargetFolders>content</ContentTargetFolders>
 		<RepositoryUrl>https://github.com/taori/Amusoft.Templates.git</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/taori/Amusoft.Templates</PackageProjectUrl>
 		<RepositoryType>git</RepositoryType>
@@ -28,11 +20,18 @@
 		<PackageReleaseNotes>
 			updates dotnet-library-repo
 		</PackageReleaseNotes>
+		<LangVersion>latest</LangVersion>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<NoWarn>1701;1702;NU5128</NoWarn>
+	<PropertyGroup>
+		<LocalizeTemplates>false</LocalizeTemplates>
+		<NoDefaultExcludes>true</NoDefaultExcludes>
+		<IncludeContentInPack>true</IncludeContentInPack>
+		<IncludeBuildOutput>false</IncludeBuildOutput>
+		<ContentTargetFolders>content</ContentTargetFolders>
+		<PackageType>Template</PackageType>
+		<NoWarn>$(NoWarn);NU5128</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -41,12 +40,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Compile Include="templates\dotnet-github-action\src\MyConsoleApp\ActionInputs.cs" />
+		<Compile Include="templates\dotnet-github-action\src\MyConsoleApp\ExitEnvironment.cs" />
+		<Compile Include="templates\dotnet-global-tool\src\MyConsoleApp\Integration\DependencyInjection.cs" />
 		<Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**;templates\**\.vs\**"/>
 		<Compile Remove="**\*"/>
-	</ItemGroup>
-
-	<ItemGroup>
-		<None Remove="templates\dotnet-library-repo\build\Project.Common.props"/>
 	</ItemGroup>
 
 </Project>

@@ -1,0 +1,165 @@
+﻿{
+	"$schema": "http://json.schemastore.org/template",
+	"author": "Andreas Müller",
+	"classifications": [
+		"C#",
+		"Repository"
+	],
+	"identity": "Amusoft.Templates.Tool.Global",
+	"name": "global dotnet tool",
+	"shortName": "global-tool",
+	"sourceName": "MyConsoleApp",
+	"preferNameDirectory": false,
+	"tags": {
+		"language": "C#",
+		"type": "project"
+	},
+	"symbols": {
+		"ToolName": {
+			"type": "parameter",
+			"description": "The name of the tool for the CLI",
+			"replaces": "TOOLNAME",
+			"isRequired": true
+		},
+		"GitProjectName": {
+			"type": "parameter",
+			"description": "name of repository project",
+			"replaces": "GITPROJECT",
+			"isRequired": true
+		},
+		"NugetPackageId": {
+			"type": "parameter",
+			"description": "ID of nuget package",
+			"replaces": "MyPackageId",
+			"isRequired": true
+		},
+		"ProductName": {
+			"type": "parameter",
+			"description": "Name of product",
+			"replaces": "MyProductName",
+			"isRequired": true
+		},
+		"GitUser": {
+			"type": "parameter",
+			"description": "name of repository user",
+			"replaces": "GITOWNER",
+			"isRequired": true
+		},
+		"Author": {
+			"type": "parameter",
+			"description": "Name of project author",
+			"defaultValue": "John Doe",
+			"replaces": "AUTHOR",
+			"isRequired": true
+		},
+		"RootBranchName": {
+			"type": "parameter",
+			"description": "Name of root branch to listen for changes",
+			"defaultValue": "main",
+			"replaces": "BRANCHTRIGGER"
+		},
+		"IncludeTests": {
+			"type": "parameter",
+			"datatype": "bool",
+			"defaultValue": "true"
+		},
+		"currentYearGenerated": {
+			"type": "generated",
+			"generator": "now",
+			"parameters": {
+				"format": "yyyy"
+			},
+			"replaces": "CURRENTYEAR"
+		},
+		"guidLibrary": {
+			"type": "generated",
+			"generator": "guid",
+			"replaces": "guidLibrary",
+			"parameters": {
+				"format": "B"
+			}
+		},
+		"guidTestLibrary": {
+			"type": "generated",
+			"generator": "guid",
+			"replaces": "guidTestLibrary",
+			"parameters": {
+				"format": "B"
+			}
+		},
+		"guidTestSharedLibrary": {
+			"type": "generated",
+			"generator": "guid",
+			"replaces": "guidTestSharedLibrary",
+			"parameters": {
+				"format": "B"
+			}
+		},
+		"guidIntegrationTestLibrary": {
+			"type": "generated",
+			"generator": "guid",
+			"replaces": "guidIntegrationTestLibrary",
+			"parameters": {
+				"format": "B"
+			}
+		},
+		"guidSolution": {
+			"type": "generated",
+			"generator": "guid",
+			"replaces": "guidSolution",
+			"parameters": {
+				"format": "B"
+			}
+		},
+		"guidSolutionFolder": {
+			"type": "generated",
+			"generator": "guid",
+			"replaces": "SOLUTIONFOLDERID",
+			"parameters": {
+				"format": "B"
+			}
+		},
+		"guidPackage": {
+			"type": "generated",
+			"generator": "guid",
+			"replaces": "guidPackage",
+			"parameters": {
+				"format": "B"
+			}
+		},
+		"guidvFolderSrc": {
+			"type": "generated",
+			"generator": "guid",
+			"replaces": "guidvFolderSrc",
+			"parameters": {
+				"format": "B"
+			}
+		},
+		"guidvFolderTests": {
+			"type": "generated",
+			"generator": "guid",
+			"replaces": "guidvFolderTests",
+			"parameters": {
+				"format": "B"
+			}
+		}
+	},
+	"sources": [
+		{
+			"modifiers": [
+				{
+					"condition": "(!IncludeTests)",
+					"exclude": [
+						"MyConsoleApp.UnitTests/**/*",
+						"MyConsoleApp.IntegrationTests/**/*"
+					]
+				},
+				{
+					"exclude": [
+						"src/.idea/**/*"
+					]
+				}
+			]
+		}
+	]
+}

@@ -6,7 +6,7 @@ Created temp directory at {Scaffold}
 
 ---Result---
 
-success: new dotnet-template -o "{Scaffold}" -au testauthor
+success: new dotnet-template -au testauthor
 
 ,
   Files: [

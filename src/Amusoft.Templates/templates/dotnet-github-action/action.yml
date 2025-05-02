@@ -1,0 +1,20 @@
+name: 'ACTIONNAME'
+author: 'MAINTAINEREMAIL'
+description: 'TODO Description'
+branding:
+  icon: book-open
+  color: purple
+inputs:
+  workspace:
+    description: 'path of workspace'
+    required: true
+outputs:
+  message:
+    description: "message from the runner"
+runs:
+  using: 'docker'
+  # https://learn.microsoft.com/en-us/dotnet/devops/create-dotnet-github-action#performance-improvements
+  image: 'Dockerfile'
+  args:
+    - '-w'
+    - ${{ inputs.workspace }}

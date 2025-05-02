@@ -11,7 +11,7 @@ $projects = @(
     "$PSScriptRoot/../src/MyLibrary/MyLibrary.csproj"
 )
 
-$sln = "$PSScriptRoot/../src/All.sln"
+$sln = "$PSScriptRoot/../src/MyLibrary.slnx"
 
 dotnet restore "$sln" --verbosity $verbosity
 Write-Host "Restore complete" -ForegroundColor Green

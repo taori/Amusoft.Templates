@@ -1,0 +1,16 @@
+﻿{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Andreas Müller",
+  "classifications": [
+    "Templating"
+  ],
+  "identity": "Amusoft.Templates.Testing.TemplateTestScript",
+  "name": ".template.config test script",
+  "shortName": "template-test-script",
+  "sourceName": "MyTemplate",
+  "tags": {
+    "type": "item"
+  },
+  "symbols": {
+  }
+}

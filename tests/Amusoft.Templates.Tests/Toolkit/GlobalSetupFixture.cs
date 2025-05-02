@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
+using Amusoft.DotnetNew.Tests.Diagnostics;
+using Amusoft.DotnetNew.Tests.Scopes;
 using Amusoft.DotnetNew.Tests.Templating;
 using Xunit;
 
@@ -14,8 +17,12 @@ namespace Amusoft.Templates.Tests.Toolkit
 
 		public GlobalSetupFixture()
 		{
-			_solutionFile = new TemplateSolution(typeof(GlobalSetupFixture).Assembly.Location, 6, "All.sln");
-			_installation = _solutionFile.InstallTemplatesFromDirectoryAsync("Amusoft.Templates/templates", CancellationToken.None).GetAwaiter().GetResult();
+			using (var scope = new LoggingScope())
+			{
+				_solutionFile = new TemplateSolution(typeof(GlobalSetupFixture).Assembly.Location, 6, "All.sln");
+				_installation = _solutionFile.InstallTemplatesFromDirectoryAsync("Amusoft.Templates/templates", CancellationToken.None).GetAwaiter().GetResult();
+				Debug.WriteLine(scope.ToFullString(PrintKind.All));
+			}
 		}
 
 		public void Dispose()

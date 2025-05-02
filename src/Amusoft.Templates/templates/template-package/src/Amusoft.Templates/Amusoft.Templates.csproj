@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<PackageId>MyPackageId</PackageId>
+		<Title>GITPROJECT</Title>
+		<Authors>AUTHOR</Authors>
+		<Description>TODO</Description>
+		<PackageTags>dotnet-new;templates;MyPackageId</PackageTags>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<VersionPrefix>0.1.0</VersionPrefix>
+		<VersionSuffix>beta</VersionSuffix>
+		<IsPackable>true</IsPackable>
+		<PackageIcon>packageIcon.png</PackageIcon>
+		<RepositoryUrl>https://github.com/GITOWNER/GITPROJECT.git</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/GITOWNER/GITPROJECT</PackageProjectUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<Copyright>Copyright © AUTHOR CURRENTYEAR</Copyright>
+		<PackageReleaseNotes>
+			TODO
+		</PackageReleaseNotes>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<LocalizeTemplates>false</LocalizeTemplates>
+		<NoDefaultExcludes>true</NoDefaultExcludes>
+		<IncludeContentInPack>true</IncludeContentInPack>
+		<IncludeBuildOutput>false</IncludeBuildOutput>
+		<ContentTargetFolders>templates</ContentTargetFolders>
+		<PackageType>Template</PackageType>
+		<NoWarn>$(NoWarn);NU5128</NoWarn>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="packageIcon.png" Pack="true" PackagePath="\"/>
+		<None Include="..\..\README.md" Pack="True" PackagePath="\"/>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**;templates\**\.vs\**"/>
+		<Compile Remove="**\*"/>
+	</ItemGroup>
+
+</Project>

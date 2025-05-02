@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFrameworks>$(TestProjectTargetFramework)</TargetFrameworks>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\src\MyConsoleApp\MyConsoleApp.csproj"/>
+		<ProjectReference Include="..\MyConsoleApp.Tests.Shared\MyConsoleApp.Tests.Shared.csproj"/>
+	</ItemGroup>
+</Project>

@@ -1,6 +1,7 @@
 ﻿[
   .editorconfig,
   .gitattributes,
+  .github/release.yml,
   .github/workflows/CI.yml,
   .gitignore,
   build/Project.Common.props,
@@ -11,7 +12,7 @@
   scripts/build.ps1,
   scripts/coverage.ps1,
   src/Directory.Build.props,
-  src/GeneratedProject.sln,
+  src/GeneratedProject.slnx,
   src/GeneratedProject/GeneratedProject.csproj,
   src/GeneratedProject/PublicAPI.Shipped.txt,
   src/GeneratedProject/PublicAPI.Unshipped.txt,

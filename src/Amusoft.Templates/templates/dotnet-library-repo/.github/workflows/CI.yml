@@ -14,7 +14,7 @@ on:
   push:
     branches: [ BRANCHTRIGGER ]
     paths:
-      - .github/workflows/*
+      - .github/workflows/CI.yml
       - src/**/*
       - tests/**/*
   
@@ -142,9 +142,9 @@ jobs:
 
   build:
     needs: [ parameters ]
-    uses: taori/actions/.github/workflows/nupkg-build.yml@v10
+    uses: taori/actions/.github/workflows/nupkg-build.yml@v11
     with:
-      solutionPath: src/MyLibrary.sln
+      solutionPath: src/MyLibrary.slnx
       packProjects: src/MyLibrary/MyLibrary.csproj
       versionSuffix: ${{ needs.parameters.outputs.suffix }}
       versionPrefix: ${{ needs.parameters.outputs.prefix }}
@@ -156,11 +156,12 @@ jobs:
         5.0.x
         6.0.x
         8.0.x
+        9.0.x
       buildEnv: "ubuntu-latest"
 
   coverage:
     needs: [ build, parameters ]
-    uses: taori/actions/.github/workflows/coverage.yml@v10
+    uses: taori/actions/.github/workflows/coverage.yml@v11
     with:
       coberturaArtifactsName: ${{ needs.build.outputs.artifact-name-cobertura }}
       githubPagesUrl: "https://GITOWNER.github.io/GITPROJECT"
@@ -170,7 +171,7 @@ jobs:
   updatePackage:
     if: ${{ needs.parameters.outputs.updateReadme == 'true' }}
     needs: [ parameters, build, coverage ]
-    uses: taori/actions/.github/workflows/nupkg-update-readme.yml@v10
+    uses: taori/actions/.github/workflows/nupkg-update-readme.yml@v11
     with:
       artifactName: ${{ needs.build.outputs.artifact-name-nupkg }}
       newArtifactName: "${{ needs.build.outputs.artifact-name-nupkg }}-patched"
@@ -180,7 +181,7 @@ jobs:
 
   deploy:
     needs: [ parameters, build, updatePackage ]
-    uses: taori/actions/.github/workflows/nupkg-publish.yml@v10
+    uses: taori/actions/.github/workflows/nupkg-publish.yml@v11
     if: ${{ needs.parameters.outputs.publish == 'true' }}
     with:
       nupkgArtifactName: "${{ needs.build.outputs.artifact-name-nupkg }}-patched"

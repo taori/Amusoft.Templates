@@ -1,0 +1,1 @@
+﻿add your template folders here

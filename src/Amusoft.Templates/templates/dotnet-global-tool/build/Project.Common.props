@@ -1,0 +1,46 @@
+﻿<Project>
+	<PropertyGroup>
+		<VersionPrefix>0.1.0</VersionPrefix>
+		<VersionSuffix>alpha</VersionSuffix>
+		<Copyright>Copyright © AUTHOR CURRENTYEAR</Copyright>
+		<Authors>https://github.com/GITOWNER/GITPROJECT/graphs/contributors</Authors>
+	</PropertyGroup>
+	
+	<PropertyGroup>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<Nullable>Enable</Nullable>
+		<IsTestProject>false</IsTestProject>		
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/GITOWNER/GITPROJECT.git</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/GITOWNER/GITPROJECT</PackageProjectUrl>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<NoWarn>MSB3243;NU1801</NoWarn>
+		<WarningsAsErrors>CS1591</WarningsAsErrors>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<PackageIcon>Resources\packageIcon.png</PackageIcon>
+		<PackageReadmeFile>Resources\README.md</PackageReadmeFile>
+		<LangVersion>latest</LangVersion>
+	</PropertyGroup>
+
+	<ItemGroup Condition="'$(IsPackable)' == 'True'">
+		<None Include="..\..\README.md" Pack="True" PackagePath="\Resources"/>
+		<None Include="..\packageIcon.png" Pack="True" PackagePath="\Resources"/>
+	</ItemGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="9.0.0" PrivateAssets="all"/>
+	</ItemGroup>
+
+	<ItemGroup>
+		<InternalsVisibleTo Include="MyConsoleApp.UnitTests"/>
+		<InternalsVisibleTo Include="MyConsoleApp.IntegrationTests"/>
+		<InternalsVisibleTo Include="MyConsoleApp.Tests.Shared"/>
+		<InternalsVisibleTo Include="DynamicProxyGenAssembly2"/>
+	</ItemGroup>
+</Project>
