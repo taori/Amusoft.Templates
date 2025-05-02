@@ -144,7 +144,7 @@ jobs:
     needs: [ parameters ]
     uses: taori/actions/.github/workflows/nupkg-build.yml@v11
     with:
-      solutionPath: src/All.slnx
+      solutionPath: src/All.sln
       packProjects: src/Amusoft.Templates/Amusoft.Templates.csproj
       versionSuffix: ${{ needs.parameters.outputs.suffix }}
       versionPrefix: ${{ needs.parameters.outputs.prefix }}
