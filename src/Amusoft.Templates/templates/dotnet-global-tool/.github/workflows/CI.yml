@@ -14,7 +14,7 @@ on:
   push:
     branches: [ BRANCHTRIGGER ]
     paths:
-      - .github/workflows/*
+      - .github/workflows/CI.yml
       - src/**/*
       - tests/**/*
   

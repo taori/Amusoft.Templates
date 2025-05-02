@@ -14,7 +14,7 @@ on:
   push:
     branches: [ BRANCHTRIGGER ]
     paths:
-      - .github/workflows/*
+      - .github/workflows/dotnet.yml
       - src/**/*
       - tests/**/*
   

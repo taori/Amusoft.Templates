@@ -15,6 +15,12 @@
 		"type": "project"
 	},
 	"symbols": {
+		"ToolName": {
+			"type": "parameter",
+			"description": "The name of the tool for the CLI",
+			"replaces": "TOOLNAME",
+			"isRequired": true
+		},
 		"GitProjectName": {
 			"type": "parameter",
 			"description": "name of repository project",
