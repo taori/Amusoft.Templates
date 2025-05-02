@@ -100,7 +100,7 @@ jobs:
     needs: [ parameters ]
     uses: taori/actions/.github/workflows/github-dotnet-action-build.yml@v11
     with:
-      solutionPath: src/MyConsoleApp.sln
+      solutionPath: src/MyConsoleApp.slnx
       verbosity: ${{ needs.parameters.outputs.verbosity }}      
       testArguments: "--filter Category!=SkipInCI"
       concurrencyAbortable: true
@@ -108,6 +108,7 @@ jobs:
         5.0.x
         6.0.x
         8.0.x
+        9.0.x
 
   coverage:
     needs: [ build, parameters ]

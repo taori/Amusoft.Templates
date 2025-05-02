@@ -8,12 +8,12 @@ success: new dotnet-library-repo  --GitProjectName "SampleProject" --NugetPackag
 
 ---Result---
 
-success: restore "{Scaffold}/src/GeneratedProject.sln" -v m --ignore-failed-sources
+success: restore "{Scaffold}/src/GeneratedProject.slnx" -v m --ignore-failed-sources
 
 ---BuildResult---
 
 {
-  "Command": "build {Scaffold}/src/GeneratedProject.sln --no-restore -v m -property:SkipMicrosoftBuildTasksGit=true",
+  "Command": "build {Scaffold}/src/GeneratedProject.slnx --no-restore -v m -property:SkipMicrosoftBuildTasksGit=true",
   "Files": [
     "{Scaffold}/src/GeneratedProject/bin/Debug/net6.0/GeneratedProject.dll",
     "{Scaffold}/src/GeneratedProject/bin/Debug/netstandard2.0/GeneratedProject.dll",
@@ -26,7 +26,7 @@ success: restore "{Scaffold}/src/GeneratedProject.sln" -v m --ignore-failed-sour
 ---TestResult---
 
 {
-  "Command": "test {Scaffold}/src/GeneratedProject.sln -v m --no-restore",
+  "Command": "test {Scaffold}/src/GeneratedProject.slnx -v m --no-restore",
   "Lines": [
     "Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: SCRUBBED - GeneratedProject.IntegrationTests.dll (net8.0)",
     "Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: SCRUBBED - GeneratedProject.UnitTests.dll (net8.0)"

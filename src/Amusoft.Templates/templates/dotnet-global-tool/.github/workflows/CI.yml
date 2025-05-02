@@ -144,7 +144,7 @@ jobs:
     needs: [ parameters ]
     uses: taori/actions/.github/workflows/nupkg-build.yml@v11
     with:
-      solutionPath: src/MyConsoleApp.sln
+      solutionPath: src/MyConsoleApp.slnx
       packProjects: src/MyConsoleApp/MyConsoleApp.csproj
       versionSuffix: ${{ needs.parameters.outputs.suffix }}
       versionPrefix: ${{ needs.parameters.outputs.prefix }}
@@ -156,6 +156,7 @@ jobs:
         5.0.x
         6.0.x
         8.0.x
+        9.0.x
       buildEnv: "ubuntu-latest"
 
   coverage:

@@ -1,4 +1,4 @@
-dotnet build ..\src\Amusoft.Templates.sln -v q
+dotnet build ..\src\Amusoft.Templates.slnx -v q
 
 Write-Host "Removing artifacts folder ..."
 Remove-Item -Recurse -Force -Path ..\artifacts -ErrorAction SilentlyContinue

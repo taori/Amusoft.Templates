@@ -1,6 +1,6 @@
 $wd = "$($PSScriptRoot)\..\src\"
 $cache = "$($PSScriptRoot)\..\tmp"
-$sln = Get-ChildItem $wd -File -Filter "*.sln" | Select-Object -First 1 -ExpandProperty FullName
+$sln = Get-ChildItem $wd -File -Filter "*.slnx" | Select-Object -First 1 -ExpandProperty FullName
 
 Write-Host "Working with solution: $sln"
 

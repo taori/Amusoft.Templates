@@ -144,7 +144,7 @@ jobs:
     needs: [ parameters ]
     uses: taori/actions/.github/workflows/nupkg-build.yml@v11
     with:
-      solutionPath: src/All.sln
+      solutionPath: src/All.slnx
       packProjects: src/Amusoft.Templates/Amusoft.Templates.csproj
       versionSuffix: ${{ needs.parameters.outputs.suffix }}
       versionPrefix: ${{ needs.parameters.outputs.prefix }}
@@ -154,6 +154,7 @@ jobs:
       concurrencyAbortable: true
       dotnetVersion: |
         6.0.x
+        9.0.x
       buildEnv: "ubuntu-22.04"
 
   deploy:

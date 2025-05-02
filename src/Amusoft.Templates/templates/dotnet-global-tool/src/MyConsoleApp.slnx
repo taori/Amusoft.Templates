@@ -1,0 +1,33 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/package/">
+    <File Path="../.gitignore" />
+    <File Path="../README.md" />
+  </Folder>
+  <Folder Name="/package/build/">
+    <File Path="..\build\SourceLink.props" />
+    <File Path="..\build\Tests.Common.props" />
+    <File Path="..\build\Project.Common.props" />
+    <File Path="nuget.config" />
+  </Folder>
+  <Folder Name="/package/github/">
+    <File Path="..\.github\workflows\CI.yml" />
+  </Folder>
+  <Folder Name="/package/scripts/">
+    <File Path="..\scripts\build.ps1" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="MyConsoleApp/MyConsoleApp.csproj" Type="969f8cfa-ce30-4b5a-9bd2-bb04a18f3448" />
+    <File Path="Directory.Build.props" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="../tests/MyConsoleApp.IntegrationTests/MyConsoleApp.IntegrationTests.csproj" Type="969f8cfa-ce30-4b5a-9bd2-bb04a18f3448" />
+    <Project Path="../tests/MyConsoleApp.Tests.Shared/MyConsoleApp.Tests.Shared.csproj" Type="969f8cfa-ce30-4b5a-9bd2-bb04a18f3448" />
+    <Project Path="../tests/MyConsoleApp.UnitTests/MyConsoleApp.UnitTests.csproj" Type="969f8cfa-ce30-4b5a-9bd2-bb04a18f3448" />
+    <File Path="..\tests\Directory.Build.props" />
+  </Folder>
+</Solution>

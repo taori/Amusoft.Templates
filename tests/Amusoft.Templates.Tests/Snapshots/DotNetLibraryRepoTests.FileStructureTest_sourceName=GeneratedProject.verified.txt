@@ -12,7 +12,7 @@
   scripts/build.ps1,
   scripts/coverage.ps1,
   src/Directory.Build.props,
-  src/GeneratedProject.sln,
+  src/GeneratedProject.slnx,
   src/GeneratedProject/GeneratedProject.csproj,
   src/GeneratedProject/PublicAPI.Shipped.txt,
   src/GeneratedProject/PublicAPI.Unshipped.txt,

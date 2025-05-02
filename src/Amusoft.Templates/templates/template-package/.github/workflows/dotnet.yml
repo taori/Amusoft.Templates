@@ -153,6 +153,7 @@ jobs:
       concurrencyAbortable: true
       dotnetVersion: |
         6.0.x
+        9.0.x
       buildEnv: "ubuntu-22.04"
 
   deploy:

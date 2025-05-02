@@ -1,4 +1,9 @@
+using Microsoft.Extensions.Logging.Testing;
+
 using MyConsoleApp.Tests.Shared;
+
+using Shouldly;
+
 using Xunit;
 
 namespace MyConsoleApp.IntegrationTests;
