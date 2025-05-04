@@ -1,0 +1,32 @@
+name: CI - PACKAGENAME - Build
+on:
+  push:
+    branches: [ BRANCHTRIGGER ]
+    paths:
+      - .github/workflows/CI-PACKAGENAME-Build.yml
+      - analyzers/PACKAGENAME/**/*
+  
+  pull_request:
+    branches: [ BRANCHTRIGGER ]
+    types:
+      - opened
+      - synchronize
+  
+  workflow_dispatch: 
+    
+jobs:
+  vsix:
+    uses: ./.github/workflows/build-vsix.yml
+    with:
+      csprojPath: analyzers/PACKAGENAME/PACKAGENAME.Vsix/PACKAGENAME.Vsix.csproj
+      packageSolutionPath: analyzers/PACKAGENAME/PACKAGENAME.slnx
+      vsixManifestPath: analyzers/PACKAGENAME/PACKAGENAME.Vsix/source.extension.vsixmanifest
+      artifactName: "PACKAGENAME.vsix"
+      dotnetVersion: "9.0.x"
+  nupkg:
+    uses: ./.github/workflows/build-nupkg.yml
+    with:
+      csprojPath: analyzers/PACKAGENAME/PACKAGENAME.Package/PACKAGENAME.Package.csproj
+      packageSolutionPath: analyzers/PACKAGENAME/PACKAGENAME.slnx
+      artifactName: "PACKAGENAME.nupkg"
+      dotnetVersion: "9.0.x"

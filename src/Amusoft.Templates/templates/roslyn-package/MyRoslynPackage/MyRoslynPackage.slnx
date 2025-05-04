@@ -1,0 +1,35 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/deployments/">
+    <Project Path="MyRoslynPackage.Package/MyRoslynPackage.Package.csproj" />
+    <Project Path="MyRoslynPackage.Vsix/MyRoslynPackage.Vsix.csproj" />
+    <File Path="vs-publish.json" />
+  </Folder>
+  <Folder Name="/scripts/">
+    <File Path="scripts\build-nupkg.ps1" />
+    <File Path="scripts\build-vsix.ps1" />
+    <File Path="scripts\verify.ps1" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="MyRoslynPackage.Analyzers\MyRoslynPackage.Analyzers.csproj" Type="Classic C#">
+      <Configuration Solution="Debug|x64" Project="Debug|Any CPU" />
+      <Configuration Solution="Debug|x86" Project="Debug|Any CPU" />
+      <Configuration Solution="Release|x64" Project="Release|Any CPU" />
+      <Configuration Solution="Release|x86" Project="Release|Any CPU" />
+    </Project>
+    <Project Path="MyRoslynPackage.Codefixes\MyRoslynPackage.Codefixes.csproj" Type="Classic C#">
+      <Configuration Solution="Debug|x64" Project="Debug|Any CPU" />
+      <Configuration Solution="Debug|x86" Project="Debug|Any CPU" />
+      <Configuration Solution="Release|x64" Project="Release|Any CPU" />
+      <Configuration Solution="Release|x86" Project="Release|Any CPU" />
+    </Project>
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="MyRoslynPackage.Sample/MyRoslynPackage.Sample.csproj" />
+    <Project Path="MyRoslynPackage.Test/MyRoslynPackage.Test.csproj" />
+  </Folder>
+</Solution>

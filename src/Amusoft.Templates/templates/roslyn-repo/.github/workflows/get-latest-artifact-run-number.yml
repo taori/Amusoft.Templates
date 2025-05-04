@@ -1,0 +1,75 @@
+﻿name: "get latest artifact run number"
+on:
+  workflow_call:
+    inputs:
+      
+      artifactName:
+        type: string
+        description: Name of the artifact
+        required: true
+        
+      gitOwner:
+        type: string
+        description: Name of the git owner
+        default: ${{ github.repository_owner }}
+        required: false
+      
+      gitProject:
+        type: string
+        description: Name of the project
+        default: ${{ github.event.repository.name }}
+        required: false
+      
+      branchName:
+        type: string
+        description: Name of the branch to check for. Empty to disable branch filtering
+        default: ''
+        required: false
+      
+      gitServerUrl:
+        type: string
+        description: API url for git server
+        default: "api.github.com"
+        required: false
+        
+    outputs:
+      runId: 
+        value: ${{ jobs.execute.outputs.runId }}
+        description: Run number associated with the artifact
+
+jobs:
+  execute:
+    outputs: 
+      runId: ${{ steps.exec.outputs.result }}
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: exec
+        shell: pwsh
+        id: exec
+        run: |  
+          $repoUrl = "https://${{ inputs.gitServerUrl }}/repos/${{ inputs.gitOwner }}/${{ inputs.gitProject }}/actions/artifacts"
+          $c = (Invoke-WebRequest $repoUrl).Content
+          $artifactsJson = $c | ConvertFrom-Json
+          
+          $branchName = "${{ inputs.branchName }}"
+          $artifactName = "${{ inputs.artifactName }}"
+          
+          $matches = @()
+          
+          foreach ($artifact in $artifactsJson.artifacts) {
+            if ($artifact.name -ne $artifactName) { continue }
+            if ($artifact.workflow_run.head_branch -ne $branchName -and $branchName -ne '') { continue }
+          
+            $matches += $artifact
+          }
+          
+          if ($matches.Count -eq 0) {
+            Write-Host "No matching artifact found."
+            exit 1
+          }
+          
+          $latest = $matches | Sort-Object -Property created_at -Descending | Select-Object -First 1
+          
+          echo "result=$($latest.workflow_run.id)" >> $env:GITHUB_OUTPUT

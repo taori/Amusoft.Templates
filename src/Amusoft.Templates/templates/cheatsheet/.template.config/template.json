@@ -2,10 +2,11 @@
   "$schema": "http://json.schemastore.org/template",
   "author": "Andreas Müller",
   "classifications": [
-    "Templating"
+    "Templating",
+    "Amusoft"
   ],
   "identity": "Amusoft.Templates.Cheatsheet",
-  "name": "A cheatshee for Amusoft.Templates to copypaste commands",
+  "name": "A cheatsheet for Amusoft.Templates to copypaste commands",
   "shortName": "amusoft-cheatsheet",
   "tags": {
     "type": "item"

@@ -14,6 +14,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "package", "package", "{53F6
 		..\.gitignore = ..\.gitignore
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{C5D52DD7-2F0F-44A2-ADE6-4EF57538D05B}"
+	ProjectSection(SolutionItems) = preProject
+		..\scripts\buildpackage.ps1 = ..\scripts\buildpackage.ps1
+		..\scripts\local.ps1 = ..\scripts\local.ps1
+		..\scripts\packinstall.ps1 = ..\scripts\packinstall.ps1
+		..\scripts\packreinstall.ps1 = ..\scripts\packreinstall.ps1
+		..\scripts\packremove.ps1 = ..\scripts\packremove.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F8558DF4-61C5-43F5-ABD3-B8716CB4D53B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{214C449E-0985-4D6E-B2A5-6829AB22A988}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,5 +67,9 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6E56E71A-CB1D-49DB-8361-ACE89AE3709D}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3EBAB693-B422-4AFB-8BA5-54DC491912B4} = {214C449E-0985-4D6E-B2A5-6829AB22A988}
+		{6EE782EB-3F6D-4008-B8F3-B7885206AA29} = {F8558DF4-61C5-43F5-ABD3-B8716CB4D53B}
 	EndGlobalSection
 EndGlobal

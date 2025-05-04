@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net9.0</TargetFramework>
 		<IsPackable>false</IsPackable>
 	</PropertyGroup>
 
@@ -19,7 +19,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Amusoft.DotnetNew.Tests" Version="0.3.0-alpha.123" />
+		<PackageReference Include="Amusoft.DotnetNew.Tests" Version="0.3.0-alpha.127" />
 		<PackageReference Include="Amusoft.XUnit.NLog.Extensions" Version="2.4.0"/>
 		<PackageReference Include="NLog" Version="4.7.11"/>
 		<PackageReference Include="Shouldly" Version="3.0.2"/>

@@ -3,13 +3,14 @@
   "author": "Andreas Müller",
   "classifications": [
     "C#",
-    "Repository"
+    "Repository",
+    "Amusoft"
   ],
   "identity": "Amusoft.Templates.Template.Package",
   "name": "template package",
   "shortName": "template-package",
   "sourceName": "Amusoft.Templates",
-  "preferNameDirectory": true,
+  "preferNameDirectory": false,
   "tags": {
     "language": "C#",
     "type": "project"

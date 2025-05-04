@@ -1,0 +1,13 @@
+﻿[
+  .github/release.yml,
+  .github/workflows/build-nupkg.yml,
+  .github/workflows/build-vsix.yml,
+  .github/workflows/get-latest-artifact-run-number.yml,
+  .github/workflows/get-manual-version.yml,
+  .github/workflows/publish-github.yml,
+  .github/workflows/publish-nupkg.yml,
+  .github/workflows/publish-vsix.yml,
+  analyzers/README.MD,
+  scripts/override-nupkg-version.ps1,
+  scripts/override-vsix-version.ps1
+]

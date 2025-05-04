@@ -3,10 +3,11 @@
 	"author": "Andreas Müller",
 	"classifications": [
 		"C#",
-		"Repository"
+		"Repository",
+		"Amusoft"
 	],
 	"identity": "Amusoft.Templates.GithubAction.Dotnet",
-	"name": "github action",
+	"name": "GitHub action using C#",
 	"shortName": "github-action-dotnet",
 	"sourceName": "MyConsoleApp",
 	"preferNameDirectory": false,
@@ -57,78 +58,6 @@
 				"format": "yyyy"
 			},
 			"replaces": "CURRENTYEAR"
-		},
-		"guidLibrary": {
-			"type": "generated",
-			"generator": "guid",
-			"replaces": "guidLibrary",
-			"parameters": {
-				"format": "B"
-			}
-		},
-		"guidTestLibrary": {
-			"type": "generated",
-			"generator": "guid",
-			"replaces": "guidTestLibrary",
-			"parameters": {
-				"format": "B"
-			}
-		},
-		"guidTestSharedLibrary": {
-			"type": "generated",
-			"generator": "guid",
-			"replaces": "guidTestSharedLibrary",
-			"parameters": {
-				"format": "B"
-			}
-		},
-		"guidIntegrationTestLibrary": {
-			"type": "generated",
-			"generator": "guid",
-			"replaces": "guidIntegrationTestLibrary",
-			"parameters": {
-				"format": "B"
-			}
-		},
-		"guidSolution": {
-			"type": "generated",
-			"generator": "guid",
-			"replaces": "guidSolution",
-			"parameters": {
-				"format": "B"
-			}
-		},
-		"guidSolutionFolder": {
-			"type": "generated",
-			"generator": "guid",
-			"replaces": "SOLUTIONFOLDERID",
-			"parameters": {
-				"format": "B"
-			}
-		},
-		"guidPackage": {
-			"type": "generated",
-			"generator": "guid",
-			"replaces": "guidPackage",
-			"parameters": {
-				"format": "B"
-			}
-		},
-		"guidvFolderSrc": {
-			"type": "generated",
-			"generator": "guid",
-			"replaces": "guidvFolderSrc",
-			"parameters": {
-				"format": "B"
-			}
-		},
-		"guidvFolderTests": {
-			"type": "generated",
-			"generator": "guid",
-			"replaces": "guidvFolderTests",
-			"parameters": {
-				"format": "B"
-			}
 		}
 	},
 	"sources": [
@@ -143,7 +72,8 @@
 				},
 				{
 					"exclude": [
-						"src/.idea/**/*"
+						"**/.idea/**/*",
+						"**/.vs/**/*"
 					]
 				}
 			]
