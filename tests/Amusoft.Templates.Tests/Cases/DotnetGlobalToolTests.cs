@@ -95,6 +95,7 @@ namespace Amusoft.Templates.Tests.Cases
 		}
 
 		[Fact(Timeout = 60_000)]
+		[Trait("Category","SkipInCI")]
 		public async Task VerifyCoverageScript()
 		{
 			try
