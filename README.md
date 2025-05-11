@@ -15,11 +15,18 @@ the effort that goes into setting up CI, tests and all the same things every tim
 
 ## Templates
 
-| kind    | command             | function                                                                    |
-|---------|:--------------------|:----------------------------------------------------------------------------|
-| item    | template-cheatsheet | Creates a cheatsheet.txt to get sample calls for templates                  |
-| item    | dotnet-template     | Creates a .template.config to begin a new template at the current directory |
-| project | dotnet-library-repo | Creates a quickstart repo to build nuget packages for dotnet                |
+| kind    | command                    | function                                                                                                               |
+|---------|:---------------------------|:-----------------------------------------------------------------------------------------------------------------------|
+| item    | template-cheatsheet        | Creates a cheatsheet.txt to get sample calls for templates                                                             |
+| project | global-tool                | Repository to generate a CLI application that can be published as dotnet global tool                                   |
+| project | dotnet-library-repo        | Repository template to provide nuget packages                                                                          |
+| item    | dotnet-template            | Creates a .template.config to begin a new template at the current directory                                            |
+| project | github-action-dotnet       | Repository template to create a github action that uses c#                                                             |
+| project | roslyn-package             | Multi project template for a roslyn package, which includes a debugging sample, vsix, nupkg, analyzer, codefix + tests |
+| project | roslyn-repository          | Repository template that serves as host project for "roslyn-package" scaffolds                                         |
+| project | roslyn-repository-workflow | Generates workflow files that are meant to be used with roslyn package and provide the CI basics                       |
+| project | template-package           | Repository template to generate a nuget package that contains multiple templates                                       |
+| item    | template-test-script       | Item Template that generates a powershell testscript for a template                                                    |
 
 ## Coverage
 
