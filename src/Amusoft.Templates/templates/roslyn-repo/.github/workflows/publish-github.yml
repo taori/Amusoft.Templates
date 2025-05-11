@@ -1,0 +1,28 @@
+﻿name: "GitHub Release"
+permissions:
+  actions: write
+  contents: write
+
+on:
+  workflow_call:
+    inputs:
+      
+      versionNumber:
+        type: string
+        description: Version for the vsix package
+        default: ''
+        required: true
+jobs:
+  release:
+    name: release
+    runs-on: ubuntu-latest
+
+    steps:
+      
+    - name: Tag and release
+      id: tag_release
+      uses: softprops/action-gh-release@da05d552573ad5aba039eaac05058a918a7bf631
+      with:
+        body: release ${{ inputs.versionNumber }}
+        generate_release_notes: true
+        tag_name: v${{ inputs.versionNumber }}

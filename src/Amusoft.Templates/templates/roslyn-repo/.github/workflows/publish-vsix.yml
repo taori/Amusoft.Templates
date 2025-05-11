@@ -1,0 +1,86 @@
+name: "VSIX Release"
+on:
+  workflow_call:
+    inputs:
+        
+      artifactName:
+        type: string
+        description: Path to the .slnx
+        required: true
+      
+      runNumber:
+        type: string
+        description: Run number of artifact
+        required: true
+        
+      vsMarketManifestPath:
+        type: string
+        description: Path to the vs-publish.json
+        required: true
+        
+      versionNumber:
+        type: string
+        description: Version for the vsix package
+        default: ''
+        required: false
+        
+    secrets:      
+      vsMarketAccessToken:
+        description: VS Market secret
+        required: true
+        
+jobs:
+
+  publish:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4.1.7
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Download Package artifact
+        uses: actions/download-artifact@v4
+        with:
+          run-id: ${{ inputs.runNumber }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          name: ${{ inputs.artifactName }}
+          path: ${{github.workspace}}/artifacts
+
+      - name: Update version manually
+        if: ${{ inputs.versionNumber != '' }}
+        shell: pwsh
+        run: |
+          Get-ChildItem -Path "${{ github.workspace }}/artifacts" -Filter "*.vsix" |
+            %{
+              & '${{ github.workspace }}/scripts/override-vsix-version.ps1' `
+                -InputFile "$($_.FullName)" `
+                -Version "${{ inputs.versionNumber }}" `
+                -DestinationFolder "${{ github.workspace }}/artifacts-patched" 
+            }
+          
+          Remove-Item "${{ github.workspace }}/artifacts" -Recurse -Force
+          Move-Item -Path "${{ github.workspace }}/artifacts-patched" -Destination "${{ github.workspace }}/artifacts"
+          
+      - name: get artifacts vsix path
+        id: vsixPath
+        shell: pwsh
+        run: |
+          $path = Get-ChildItem -Path "${{github.workspace}}/artifacts" -Filter "*.vsix" | Select-Object -ExpandProperty FullName -First 1
+          echo "result=$path" >> $env:GITHUB_OUTPUT
+
+      - name: Upload to Open VSIX
+        uses: timheuer/openvsixpublish@04b38d641d8b7475ab6ddece48e42525d58b0875
+        with:
+          vsix-file: '${{ steps.vsixPath.outputs.result }}'
+
+      - name: Publish extension to Marketplace
+        if: ${{ env.ACCESSTOKEN != '' }}
+        uses: cezarypiatek/VsixPublisherAction@d28bc8109d6eaa67fa28e611d5b4557e90683bdd
+        with:
+          extension-file: '${{ steps.vsixPath.outputs.result }}'
+          publish-manifest-file: ${{ inputs.vsMarketManifestPath }}
+          personal-access-code: ${{ secrets.vsMarketAccessToken }}
+        env: 
+          ACCESSTOKEN: ${{ secrets.vsMarketAccessToken }}

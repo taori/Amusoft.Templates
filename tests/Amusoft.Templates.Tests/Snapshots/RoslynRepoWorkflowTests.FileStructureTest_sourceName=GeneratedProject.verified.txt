@@ -1,0 +1,4 @@
+﻿[
+  CI-GeneratedProject-Build.yml,
+  CI-GeneratedProject-Publish.yml
+]

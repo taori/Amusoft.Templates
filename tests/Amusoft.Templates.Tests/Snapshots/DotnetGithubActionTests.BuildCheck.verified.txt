@@ -1,0 +1,34 @@
+﻿---Result---
+
+Created temp directory at {Scaffold}
+
+---Result---
+
+success: new github-action-dotnet -n GeneratedProject --ActionName TheActionName --MaintainerEmail TheMainerMail --GitProjectName TheGitProjectName --GitUser TheGitUser
+
+---Result---
+
+success: restore "{Scaffold}/src/GeneratedProject.slnx" -v m --ignore-failed-sources
+
+---BuildResult---
+
+{
+  "Command": "build {Scaffold}/src/GeneratedProject.slnx --no-restore -v m -property:SkipMicrosoftBuildTasksGit=true",
+  "Files": [
+    "{Scaffold}/src/GeneratedProject/bin/Debug/net6.0/GeneratedProject.dll",
+    "{Scaffold}/tests/GeneratedProject.IntegrationTests/bin/Debug/net8.0/GeneratedProject.IntegrationTests.dll",
+    "{Scaffold}/tests/GeneratedProject.Tests.Shared/bin/Debug/net8.0/GeneratedProject.Tests.Shared.dll",
+    "{Scaffold}/tests/GeneratedProject.UnitTests/bin/Debug/net8.0/GeneratedProject.UnitTests.dll"
+  ]
+}
+
+---TestResult---
+
+{
+  "Command": "test {Scaffold}/src/GeneratedProject.slnx -v m --no-restore",
+  "Lines": [
+    "Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: SCRUBBED - GeneratedProject.IntegrationTests.dll (net8.0)",
+    "Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: SCRUBBED - GeneratedProject.UnitTests.dll (net8.0)"
+  ]
+}
+

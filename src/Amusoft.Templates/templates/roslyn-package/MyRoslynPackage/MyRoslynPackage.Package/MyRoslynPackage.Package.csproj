@@ -1,0 +1,56 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <VersionPrefix>0.1.0</VersionPrefix>
+    <VersionSuffix>alpha</VersionSuffix>
+    <PackageId>MyRoslynPackage</PackageId>
+    <Authors>A</Authors>
+    <PackageProjectUrl>https://www.github.com/GITOWNER/GITPROJECT</PackageProjectUrl>
+    <RepositoryUrl>https://www.github.com/GITOWNER/GITPROJECT.git</RepositoryUrl>
+    <Description>MyRoslynPackage</Description>
+    <PackageReleaseNotes>Summary of changes made in this release of the package.</PackageReleaseNotes>
+    <Copyright>Copyright</Copyright>
+    <PackageTags>MyRoslynPackage, analyzers</PackageTags>
+    <DevelopmentDependency>true</DevelopmentDependency>
+    <NoPackageAnalysis>true</NoPackageAnalysis>
+
+    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);_AddAnalyzersToOutput</TargetsForTfmSpecificContentInPackage>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageIcon>Resources\icon.png</PackageIcon>
+    <PackageReadmeFile>Resources\analyzer.md</PackageReadmeFile>
+    <PackageLicenseFile>Resources\LICENSE</PackageLicenseFile>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(IsPackable)' == 'True'">
+    <None Include="$(ProjectDir)\..\analyzer.md" Pack="True" PackagePath="\Resources" />
+    <None Include="$(ProjectDir)\..\resources\LICENSE" Pack="True" PackagePath="\Resources" />
+    <None Include="$(ProjectDir)\..\resources\icon.png" Pack="True" PackagePath="\Resources" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="tools\*.ps1" CopyToOutputDirectory="PreserveNewest" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MyRoslynPackage.Analyzers\MyRoslynPackage.Analyzers.csproj" />
+    <ProjectReference Include="..\MyRoslynPackage.Codefixes\MyRoslynPackage.Codefixes.csproj" />
+  </ItemGroup>
+
+  <Target Name="_AddAnalyzersToOutput">
+    <ItemGroup>
+      <TfmSpecificPackageFile Include="$(OutputPath)\MyRoslynPackage.Analyzers.dll" PackagePath="analyzers/dotnet/cs" />
+      <TfmSpecificPackageFile Include="$(OutputPath)\MyRoslynPackage.Codefixes.dll" PackagePath="analyzers/dotnet/cs" />
+    </ItemGroup>
+  </Target>
+
+</Project>

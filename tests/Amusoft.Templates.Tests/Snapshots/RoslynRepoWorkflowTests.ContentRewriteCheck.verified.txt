@@ -1,0 +1,155 @@
+﻿{
+  CI-GeneratedProject-Build.yml:
+name: CI - GeneratedProject - Build
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - .github/workflows/CI-GeneratedProject-Build.yml
+      - analyzers/GeneratedProject/**/*
+  
+  pull_request:
+    branches: [ main ]
+    types:
+      - opened
+      - synchronize
+  
+  workflow_dispatch: 
+    
+jobs:
+  vsix:
+    uses: ./.github/workflows/build-vsix.yml
+    with:
+      csprojPath: analyzers/GeneratedProject/GeneratedProject.Vsix/GeneratedProject.Vsix.csproj
+      packageSolutionPath: analyzers/GeneratedProject/GeneratedProject.slnx
+      vsixManifestPath: analyzers/GeneratedProject/GeneratedProject.Vsix/source.extension.vsixmanifest
+      artifactName: "GeneratedProject.vsix"
+      dotnetVersion: "9.0.x"
+  nupkg:
+    uses: ./.github/workflows/build-nupkg.yml
+    with:
+      csprojPath: analyzers/GeneratedProject/GeneratedProject.Package/GeneratedProject.Package.csproj
+      packageSolutionPath: analyzers/GeneratedProject/GeneratedProject.slnx
+      artifactName: "GeneratedProject.nupkg"
+      dotnetVersion: "9.0.x",
+  CI-GeneratedProject-Publish.yml:
+name: CI - GeneratedProject - Publish
+permissions:
+  actions: write 
+  contents: write
+on:  
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: name of branch artifact to publish
+        default: main
+        required: true
+        type: string
+        
+      publishVsix:
+        description: Publish Vsix?
+        default: true
+        required: true
+        type: boolean
+        
+      publishNupkg:
+        description: Publish Nupkg?
+        default: true
+        required: true
+        type: boolean
+        
+      useManualVersioning:
+        description: Use manual versioning?
+        default: false
+        required: true
+        type: boolean
+        
+      gitRelease:
+        description: Create GitHub release?
+        default: false
+        required: true
+        type: boolean
+        
+      removePreRelease:
+        description: Remove pre releases?
+        default: false
+        required: true
+        type: boolean
+        
+      manualVsixVersion:
+        description: Manual version for vsix file - {bnr} is replaced by the current run number
+        required: false
+        type: string
+        default: '0.1.0.{bnr}'
+        
+      manualNupkgVersion:
+        description: Manual version for nupkg file - {bnr} is replaced by the current run number
+        required: false
+        type: string
+        default: '0.1.0-alpha{bnr}'
+
+jobs:
+  
+  nupkgRunNumber:
+    if: ${{ inputs.publishNupkg }}
+    uses: ./.github/workflows/get-latest-artifact-run-number.yml
+    with:
+      artifactName: "GeneratedProject.nupkg"
+      branchName: ${{ inputs.branch }}
+      
+  getNupkgVersion:
+    if: ${{ inputs.publishNupkg }}
+    uses: ./.github/workflows/get-manual-version.yml
+    needs: [nupkgRunNumber]
+    with:
+      modify: ${{ inputs.useManualVersioning }}
+      inputVersion: ${{ inputs.manualNupkgVersion }}
+      runNumber: ${{ needs.nupkgRunNumber.outputs.runId }}
+  
+  nupkg:
+    if: ${{ inputs.publishNupkg }}
+    uses: ./.github/workflows/publish-nupkg.yml
+    needs: [nupkgRunNumber, getNupkgVersion]
+    with:
+      removePrereleases: ${{ inputs.removePreRelease }}
+      artifactName: "GeneratedProject.nupkg"
+      runNumber: ${{ needs.nupkgRunNumber.outputs.runId }}
+      versionNumber: ${{ needs.getNupkgVersion.outputs.version }}
+    secrets:
+      nupkgPublishToken: ${{ secrets.NUGET }}
+  
+  vsixRunNumber:
+    if: ${{ inputs.publishVsix }}
+    uses: ./.github/workflows/get-latest-artifact-run-number.yml
+    with:
+      artifactName: "GeneratedProject.vsix"
+      branchName: ${{ inputs.branch }}
+  
+  getVsixVersion:
+    if: ${{ inputs.publishVsix }}
+    uses: ./.github/workflows/get-manual-version.yml
+    needs: [vsixRunNumber]
+    with:
+      modify: ${{ inputs.useManualVersioning }}
+      inputVersion: ${{ inputs.manualVsixVersion }}
+      runNumber: ${{ needs.vsixRunNumber.outputs.runId }}
+  
+  vsix:
+    if: ${{ inputs.publishVsix }}
+    uses: ./.github/workflows/publish-vsix.yml
+    needs: [vsixRunNumber, getVsixVersion]
+    with:
+      artifactName: "GeneratedProject.vsix"
+      runNumber: ${{ needs.vsixRunNumber.outputs.runId }}
+      vsMarketManifestPath: 'analyzers/GeneratedProject/vs-publish.json'
+      versionNumber: ${{ needs.getVsixVersion.outputs.version }}
+    secrets:
+      vsMarketAccessToken: ${{ secrets.VSMARKETACCESSTOKEN }}
+
+  gitHubRelease:
+    if: ${{ inputs.publishNupkg && needs.getNupkgVersion.outputs.version != '' }}
+    uses: ./.github/workflows/publish-github.yml
+    needs: [ nupkgRunNumber, getNupkgVersion, nupkg, vsix ]
+    with:
+      versionNumber: ${{ needs.getNupkgVersion.outputs.version }}
+}

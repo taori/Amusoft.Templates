@@ -1,0 +1,46 @@
+﻿{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Andreas Müller",
+  "classifications": [
+    "C#",
+    "Roslyn",
+    "Amusoft"
+  ],
+  "identity": "Amusoft.Templates.Roslyn.AnalyzerRepositoryWorkflow",
+  "name": "Workflow for roslyn repository",
+  "shortName": "roslyn-repository-workflow",
+  "sourceName": "PACKAGENAME",
+  "preferNameDirectory": false,
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "symbols": {
+    "RootBranchName": {
+      "type": "parameter",
+      "description": "Name of root branch to listen for changes",
+      "defaultValue": "main",
+      "replaces": "BRANCHTRIGGER"
+    },
+    "currentYearGenerated": {
+      "type": "generated",
+      "generator": "now",
+      "parameters": {
+        "format": "yyyy"
+      },
+      "replaces": "CURRENTYEAR"
+    }
+  },
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "exclude": [
+            "**/.idea/**/*",
+            "**/.vs/**/*"
+          ]
+        }
+      ]
+    }
+  ]
+}

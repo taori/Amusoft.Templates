@@ -1,0 +1,78 @@
+name: "NUPKG Release"
+on:
+  workflow_call:
+    inputs:
+      
+      removePrereleases:
+        type: boolean
+        description: remove prereleases?
+        required: true
+      
+      artifactName:
+        type: string
+        description: Artifact name
+        required: true
+        
+      runNumber:
+        type: string
+        description: Run number of artifact
+        required: true
+      
+      versionNumber:
+        type: string
+        description: Version for the vsix package
+        default: ''
+        required: true
+    
+    secrets:
+      nupkgPublishToken:
+        description: nupkg access token
+        required: true
+
+jobs:
+        
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4.1.7
+        
+      - name: Download Package artifact
+        uses: actions/download-artifact@v4
+        if: ${{ env.TOKEN != '' }}
+        env:
+          TOKEN: ${{ secrets.nupkgPublishToken }}
+        with:
+          run-id: ${{ inputs.runNumber }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          name: ${{ inputs.artifactName }}
+          path: ${{ github.workspace }}/artifacts
+          
+      - name: Update version manually
+        if: ${{ inputs.versionNumber != '' }}
+        shell: pwsh
+        run: |
+          Get-ChildItem -Path "${{ github.workspace }}/artifacts" -Filter "*.nupkg" |
+            %{
+              & '${{ github.workspace }}/scripts/override-nupkg-version.ps1' `
+                -InputFile "$($_.FullName)" `
+                -Version "${{ inputs.versionNumber }}" `
+                -DestinationFolder "${{ github.workspace }}/artifacts-patched" 
+            }
+          Remove-Item "${{ github.workspace }}/artifacts" -Recurse -Force
+          Move-Item -Path "${{ github.workspace }}/artifacts-patched" -Destination "${{ github.workspace }}/artifacts"          
+
+      - name: Release
+        run: dotnet nuget push "${{ github.workspace }}/artifacts/*.nupkg" -k ${{ secrets.nupkgPublishToken }} -s https://api.nuget.org/v3/index.json
+
+      - name: Remove old prereleases
+        if: ${{ inputs.removePrereleases }}
+        shell: pwsh
+        run: |
+          & dotnet tool install --global NugetUnlister
+           Get-ChildItem "${{ github.workspace }}/artifacts" -Filter "*.nupkg" | `
+           %{ $_.Name } | `
+           Select-String -Pattern "(?<packageId>.+)\.(?<version>\d{1,2}\.\d{1,2}\.\d{1,2}(?:[-\w\d.]+)?)(?=.nupkg)" | `
+           %{ , @( $_.Matches[0].Groups["packageId"].Value, $_.Matches[0].Groups["version"].Value ) } | `
+           % { Write-Output "nuget-unlist drop prereleasebefore $($_[0]) $($_[1]) ${{ secrets.nupkgPublishToken }}" `
+             & nuget-unlist drop prereleasebefore $_[0] $_[1] ${{ secrets.nupkgPublishToken }} }

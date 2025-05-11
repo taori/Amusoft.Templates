@@ -17,7 +17,8 @@ success: new dotnet-template -au testauthor
   "$schema": "http://json.schemastore.org/template",
   "author": "testauthor",
   "classifications": [
-    "C#"
+    "C#",
+    "Amusoft"
   ],
   "identity": "Some.Unique.Id",
   "name": "Display name for dotnet new",

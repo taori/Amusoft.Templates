@@ -1,0 +1,119 @@
+name: CI - PACKAGENAME - Publish
+permissions:
+  actions: write 
+  contents: write
+on:  
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: name of branch artifact to publish
+        default: BRANCHTRIGGER
+        required: true
+        type: string
+        
+      publishVsix:
+        description: Publish Vsix?
+        default: true
+        required: true
+        type: boolean
+        
+      publishNupkg:
+        description: Publish Nupkg?
+        default: true
+        required: true
+        type: boolean
+        
+      useManualVersioning:
+        description: Use manual versioning?
+        default: false
+        required: true
+        type: boolean
+        
+      gitRelease:
+        description: Create GitHub release?
+        default: false
+        required: true
+        type: boolean
+        
+      removePreRelease:
+        description: Remove pre releases?
+        default: false
+        required: true
+        type: boolean
+        
+      manualVsixVersion:
+        description: Manual version for vsix file - {bnr} is replaced by the current run number
+        required: false
+        type: string
+        default: '0.1.0.{bnr}'
+        
+      manualNupkgVersion:
+        description: Manual version for nupkg file - {bnr} is replaced by the current run number
+        required: false
+        type: string
+        default: '0.1.0-alpha{bnr}'
+
+jobs:
+  
+  nupkgRunNumber:
+    if: ${{ inputs.publishNupkg }}
+    uses: ./.github/workflows/get-latest-artifact-run-number.yml
+    with:
+      artifactName: "PACKAGENAME.nupkg"
+      branchName: ${{ inputs.branch }}
+      
+  getNupkgVersion:
+    if: ${{ inputs.publishNupkg }}
+    uses: ./.github/workflows/get-manual-version.yml
+    needs: [nupkgRunNumber]
+    with:
+      modify: ${{ inputs.useManualVersioning }}
+      inputVersion: ${{ inputs.manualNupkgVersion }}
+      runNumber: ${{ needs.nupkgRunNumber.outputs.runId }}
+  
+  nupkg:
+    if: ${{ inputs.publishNupkg }}
+    uses: ./.github/workflows/publish-nupkg.yml
+    needs: [nupkgRunNumber, getNupkgVersion]
+    with:
+      removePrereleases: ${{ inputs.removePreRelease }}
+      artifactName: "PACKAGENAME.nupkg"
+      runNumber: ${{ needs.nupkgRunNumber.outputs.runId }}
+      versionNumber: ${{ needs.getNupkgVersion.outputs.version }}
+    secrets:
+      nupkgPublishToken: ${{ secrets.NUGET }}
+  
+  vsixRunNumber:
+    if: ${{ inputs.publishVsix }}
+    uses: ./.github/workflows/get-latest-artifact-run-number.yml
+    with:
+      artifactName: "PACKAGENAME.vsix"
+      branchName: ${{ inputs.branch }}
+  
+  getVsixVersion:
+    if: ${{ inputs.publishVsix }}
+    uses: ./.github/workflows/get-manual-version.yml
+    needs: [vsixRunNumber]
+    with:
+      modify: ${{ inputs.useManualVersioning }}
+      inputVersion: ${{ inputs.manualVsixVersion }}
+      runNumber: ${{ needs.vsixRunNumber.outputs.runId }}
+  
+  vsix:
+    if: ${{ inputs.publishVsix }}
+    uses: ./.github/workflows/publish-vsix.yml
+    needs: [vsixRunNumber, getVsixVersion]
+    with:
+      artifactName: "PACKAGENAME.vsix"
+      runNumber: ${{ needs.vsixRunNumber.outputs.runId }}
+      vsMarketManifestPath: 'analyzers/PACKAGENAME/vs-publish.json'
+      versionNumber: ${{ needs.getVsixVersion.outputs.version }}
+    secrets:
+      vsMarketAccessToken: ${{ secrets.VSMARKETACCESSTOKEN }}
+
+  gitHubRelease:
+    if: ${{ inputs.publishNupkg && needs.getNupkgVersion.outputs.version != '' }}
+    uses: ./.github/workflows/publish-github.yml
+    needs: [ nupkgRunNumber, getNupkgVersion, nupkg, vsix ]
+    with:
+      versionNumber: ${{ needs.getNupkgVersion.outputs.version }}

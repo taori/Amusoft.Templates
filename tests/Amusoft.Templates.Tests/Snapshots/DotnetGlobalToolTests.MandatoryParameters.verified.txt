@@ -1,0 +1,28 @@
+﻿{
+  Output:
+---Result---
+
+Using working directory: {Scaffold}
+
+---Command---
+
+dotnet new global-tool
+
+---Result---
+
+{
+  "ExitCode": 102,
+  "Output": "
+
+",
+  "Errors": "Missing mandatory option(s) for the template 'global dotnet tool': '--ToolName', '--GitProjectName', '--NugetPackageId', '--ProductName', '--GitUser', '--Author'.
+
+For details on the exit code, refer to https://aka.ms/templating-exit-codes#102
+
+",
+  "Success": false,
+  "Runtime": "00:00:00"
+}
+
+
+}

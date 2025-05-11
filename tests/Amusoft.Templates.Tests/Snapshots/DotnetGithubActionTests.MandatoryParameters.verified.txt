@@ -1,0 +1,28 @@
+﻿{
+  Output:
+---Result---
+
+Using working directory: {Scaffold}
+
+---Command---
+
+dotnet new github-action-dotnet
+
+---Result---
+
+{
+  "ExitCode": 102,
+  "Output": "
+
+",
+  "Errors": "Missing mandatory option(s) for the template 'GitHub action using C#': '--ActionName', '--MaintainerEmail', '--GitProjectName', '--GitUser'.
+
+For details on the exit code, refer to https://aka.ms/templating-exit-codes#102
+
+",
+  "Success": false,
+  "Runtime": "00:00:00"
+}
+
+
+}
