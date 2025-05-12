@@ -22,7 +22,7 @@
 			"replaces": "TOOLNAME",
 			"isRequired": true
 		},
-		"GitProjectName": {
+		"GitRepository": {
 			"type": "parameter",
 			"description": "name of repository project",
 			"replaces": "GITPROJECT",
@@ -40,7 +40,7 @@
 			"replaces": "MyProductName",
 			"isRequired": true
 		},
-		"GitUser": {
+		"GitOwner": {
 			"type": "parameter",
 			"description": "name of repository user",
 			"replaces": "GITOWNER",

@@ -3,10 +3,11 @@
 	"author": "Andreas Müller",
 	"classifications": [
 		"C#",
+		"GitHub Action",
 		"Repository",
 		"Amusoft"
 	],
-	"identity": "Amusoft.Templates.GithubAction.Dotnet",
+	"identity": "Amusoft.Templates.GitHubAction.Dotnet",
 	"name": "GitHub action using C#",
 	"shortName": "github-action-dotnet",
 	"sourceName": "MyConsoleApp",
@@ -28,13 +29,13 @@
 			"replaces": "MAINTAINEREMAIL",
 			"isRequired": true
 		},
-		"GitProjectName": {
+		"GitRepository": {
 			"type": "parameter",
 			"description": "name of repository project",
 			"replaces": "GITPROJECT",
 			"isRequired": true
 		},
-		"GitUser": {
+		"GitOwner": {
 			"type": "parameter",
 			"description": "name of repository user",
 			"replaces": "GITOWNER",

@@ -16,7 +16,7 @@
     "type": "project"
   },
   "symbols": {
-    "GitUser": {
+    "GitOwner": {
       "type": "parameter",
       "description": "name of repository owner",
       "replaces": "GITOWNER",

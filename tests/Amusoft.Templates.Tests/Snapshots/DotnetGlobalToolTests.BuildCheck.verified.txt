@@ -4,7 +4,7 @@ Created temp directory at {Scaffold}
 
 ---Result---
 
-success: new global-tool -n GeneratedProject --ToolName TheToolName --GitProjectName TheGitProject --NugetPackageId ThePackageId --ProductName TheProductName --GitUser TheGitUser --Author TheAuthor
+success: new global-tool -n GeneratedProject --ToolName TheToolName --GitRepository TheGitProject --NugetPackageId ThePackageId --ProductName TheProductName --GitOwner TheGitOwner --Author TheAuthor
 
 ---Result---
 

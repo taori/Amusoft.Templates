@@ -1,4 +1,4 @@
-﻿: '--GitProjectName', '--NugetPackageId', '--ProductName', '--GitUser', '--Author'.
+﻿: '--GitRepository', '--NugetPackageId', '--ProductName', '--GitOwner', '--Author'.
 
 For details on the exit code, refer to https://aka.ms/templating-exit-codes#102
 

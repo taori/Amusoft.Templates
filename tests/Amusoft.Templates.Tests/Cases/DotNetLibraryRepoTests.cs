@@ -30,10 +30,10 @@ namespace Amusoft.Templates.Tests.Cases
 		public async Task FileStructureTest(string sourceName)
 		{
 			var sbArgs = new StringBuilder();
-			sbArgs.Append(" --GitProjectName \"SampleProject\"");
+			sbArgs.Append(" --GitRepository \"SampleProject\"");
 			sbArgs.Append(" --NugetPackageId \"SamplePackageId\"");
 			sbArgs.Append(" --ProductName \"SampleProduct\"");
-			sbArgs.Append(" --GitUser \"taori\"");
+			sbArgs.Append(" --GitOwner \"taori\"");
 			sbArgs.Append(" --Author \"Santa Clause\"");
 			sbArgs.Append($" -n \"{sourceName}\"");
 			
@@ -51,10 +51,10 @@ namespace Amusoft.Templates.Tests.Cases
 		public async Task RewriteWorkflowCheck(string rootBranchName, string expectedFileBranch)
 		{
 			var sbArgs = new StringBuilder();
-			sbArgs.Append(" --GitProjectName \"SampleProject\"");
+			sbArgs.Append(" --GitRepository \"SampleProject\"");
 			sbArgs.Append(" --NugetPackageId \"SamplePackageId\"");
 			sbArgs.Append(" --ProductName \"SampleProduct\"");
-			sbArgs.Append(" --GitUser \"taori\"");
+			sbArgs.Append(" --GitOwner \"taori\"");
 			sbArgs.Append(" --Author \"Santa Clause\"");
 			sbArgs.Append(" -n \"GeneratedProject\"");
 
@@ -76,10 +76,10 @@ namespace Amusoft.Templates.Tests.Cases
 		public async Task RewriteProjectFileCheck(string sourceName, string authorName, string projectName, string packageId, string productName, string gitUser)
 		{
 			var sbArgs = new StringBuilder();
-			sbArgs.Append($" --GitProjectName \"{projectName}\"");
+			sbArgs.Append($" --GitRepository \"{projectName}\"");
 			sbArgs.Append($" --NugetPackageId \"{packageId}\"");
 			sbArgs.Append($" --ProductName \"{productName}\"");
-			sbArgs.Append($" --GitUser \"{gitUser}\"");
+			sbArgs.Append($" --GitOwner \"{gitUser}\"");
 			sbArgs.Append($" --RootBranchName \"master\"");
 			sbArgs.Append($" --Author \"{authorName}\"");
 			sbArgs.Append($" -n \"{sourceName}\"");
@@ -106,10 +106,10 @@ namespace Amusoft.Templates.Tests.Cases
 			try
 			{
 				var sbArgs = new StringBuilder();
-				sbArgs.Append(" --GitProjectName \"SampleProject\"");
+				sbArgs.Append(" --GitRepository \"SampleProject\"");
 				sbArgs.Append(" --NugetPackageId \"SamplePackageId\"");
 				sbArgs.Append(" --ProductName \"SampleProduct\"");
-				sbArgs.Append(" --GitUser \"taori\"");
+				sbArgs.Append(" --GitOwner \"taori\"");
 				sbArgs.Append(" --Author \"Santa Clause\"");
 				sbArgs.Append($" -n \"{sourceName}\"");
 			

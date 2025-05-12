@@ -33,7 +33,7 @@ namespace Amusoft.Templates.Tests.Cases
 		{
 			var sbArgs = new StringBuilder();
 			sbArgs.Append($" -n \"{sourceName}\"");
-			sbArgs.Append($" --GitUser TheGitUser");
+			sbArgs.Append($" --GitOwner TheGitOwner");
 			sbArgs.Append($" --PackageName ThePackageName");
 			sbArgs.Append($" --GitRepository TheRepository");
 			sbArgs.Append($" --Author TheAuthor");
@@ -56,7 +56,7 @@ namespace Amusoft.Templates.Tests.Cases
 			{
 				var sbArgs = new StringBuilder();
 				sbArgs.Append($" -n \"{sourceName}\"");
-				sbArgs.Append($" --GitUser TheGitUser");
+				sbArgs.Append($" --GitOwner TheGitOwner");
 				sbArgs.Append($" --PackageName ThePackageName");
 				sbArgs.Append($" --GitRepository TheRepository");
 				sbArgs.Append($" --Author TheAuthor");
@@ -93,7 +93,7 @@ namespace Amusoft.Templates.Tests.Cases
 			{
 				var sbArgs = new StringBuilder();
 				sbArgs.Append($" -n \"{sourceName}\"");
-				sbArgs.Append($" --GitUser TheGitUser");
+				sbArgs.Append($" --GitOwner TheGitOwner");
 				sbArgs.Append($" --PackageName ThePackageName");
 				sbArgs.Append($" --GitRepository TheRepository");
 				sbArgs.Append($" --Author TheAuthor");

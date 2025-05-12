@@ -6,7 +6,7 @@ Created temp directory at {Scaffold}
 
 ---Result---
 
-success: new template-package  -n "Some1" --GitProjectName TheNewProject --NugetPackageId TheNugetPackageId --ProductName TheProductName --GitUser TheUser --Author TheAuthor
+success: new template-package  -n "Some1" --GitRepository TheNewProject --NugetPackageId TheNugetPackageId --ProductName TheProductName --GitOwner TheUser --Author TheAuthor
 
 ,
   Files: [

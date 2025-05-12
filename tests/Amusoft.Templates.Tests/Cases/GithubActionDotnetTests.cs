@@ -16,9 +16,9 @@ using Xunit.Abstractions;
 
 namespace Amusoft.Templates.Tests.Cases
 {
-	public class DotnetGithubActionTests : TemplateTests
+	public class GithubActionDotnetTests : TemplateTests
 	{
-		public DotnetGithubActionTests(ITestOutputHelper outputHelper, GlobalSetupFixture data) : base(outputHelper, data)
+		public GithubActionDotnetTests(ITestOutputHelper outputHelper, GlobalSetupFixture data) : base(outputHelper, data)
 		{
 		}
 
@@ -40,7 +40,7 @@ namespace Amusoft.Templates.Tests.Cases
 		public async Task FileStructureTest()
 		{
 			using var loggingScope = new LoggingScope();
-			var args = "-n GeneratedProject --ActionName TheActionName --MaintainerEmail TheMainerMail --GitProjectName TheGitProjectName --GitUser TheGitUser";
+			var args = "-n GeneratedProject --ActionName TheActionName --MaintainerEmail TheMainerMail --GitRepository TheGitRepository --GitOwner TheGitOwner";
 			using var scaffold = await Dotnet.Cli.NewAsync("github-action-dotnet", args, CancellationToken.None);
 
 			await Verifier.Verify(scaffold.GetRelativeDirectoryPaths().ToArray());
@@ -55,7 +55,7 @@ namespace Amusoft.Templates.Tests.Cases
 			try
 			{
 				using var logging = new LoggingScope();
-			var args = "-n GeneratedProject --ActionName TheActionName --MaintainerEmail TheMainerMail --GitProjectName TheGitProjectName --GitUser TheGitUser";
+			var args = "-n GeneratedProject --ActionName TheActionName --MaintainerEmail TheMainerMail --GitRepository TheGitRepository --GitOwner TheGitOwner";
 				using var scaffold = await Dotnet.Cli.NewAsync("github-action-dotnet", args, CancellationToken.None);
 
 				await scaffold.RestoreAsync($"src/GeneratedProject.slnx", null, CancellationToken.None);
@@ -76,7 +76,7 @@ namespace Amusoft.Templates.Tests.Cases
 			try
 			{
 				using var logging = new LoggingScope();
-			var args = "-n GeneratedProject --ActionName TheActionName --MaintainerEmail TheMainerMail --GitProjectName TheGitProjectName --GitUser TheGitUser";
+			var args = "-n GeneratedProject --ActionName TheActionName --MaintainerEmail TheMainerMail --GitRepository TheGitRepository --GitOwner TheGitOwner";
 				using var scaffold = await Dotnet.Cli.NewAsync("github-action-dotnet", args, CancellationToken.None);
 
 				var scriptPath = Path.Combine(scaffold.GetAbsoluteRootPath(), $"scripts/build.ps1");
@@ -100,7 +100,7 @@ namespace Amusoft.Templates.Tests.Cases
 			try
 			{
 				using var logging = new LoggingScope();
-			var args = "-n GeneratedProject --ActionName TheActionName --MaintainerEmail TheMainerMail --GitProjectName TheGitProjectName --GitUser TheGitUser";
+				var args = "-n GeneratedProject --ActionName TheActionName --MaintainerEmail TheMainerMail --GitRepository TheGitRepository --GitOwner TheGitOwner";
 				using var scaffold = await Dotnet.Cli.NewAsync("github-action-dotnet", args, CancellationToken.None);
 
 				var scriptPath = Path.Combine(scaffold.GetAbsoluteRootPath(), $"scripts/coverage.ps1");

@@ -6,7 +6,7 @@ Using working directory: {Scaffold}
 
 ---Command---
 
-dotnet new global-tool
+dotnet new github-action-composite
 
 ---Result---
 
@@ -15,7 +15,7 @@ dotnet new global-tool
   "Output": "
 
 ",
-  "Errors": "Missing mandatory option(s) for the template 'global dotnet tool': '--ToolName', '--GitRepository', '--NugetPackageId', '--ProductName', '--GitOwner', '--Author'.
+  "Errors": "Missing mandatory option(s) for the template 'GitHub action using Composite PowerShell': '--ActionName', '--GitRepository', '--GitOwner'.
 
 For details on the exit code, refer to https://aka.ms/templating-exit-codes#102
 
