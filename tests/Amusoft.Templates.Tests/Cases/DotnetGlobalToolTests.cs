@@ -41,7 +41,7 @@ namespace Amusoft.Templates.Tests.Cases
 		public async Task FileStructureTest()
 		{
 			using var loggingScope = new LoggingScope();
-			var args = "-n GeneratedProject --ToolName TheToolName --GitProjectName TheGitProject --NugetPackageId ThePackageId --ProductName TheProductName --GitUser TheGitUser --Author TheAuthor";
+			var args = "-n GeneratedProject --ToolName TheToolName --GitRepository TheGitProject --NugetPackageId ThePackageId --ProductName TheProductName --GitOwner TheGitOwner --Author TheAuthor";
 			using var scaffold = await Dotnet.Cli.NewAsync("global-tool", args, CancellationToken.None);
 
 			await Verifier.Verify(scaffold.GetRelativeDirectoryPaths().ToArray());
@@ -56,7 +56,7 @@ namespace Amusoft.Templates.Tests.Cases
 			try
 			{
 				using var logging = new LoggingScope();
-				var args = "-n GeneratedProject --ToolName TheToolName --GitProjectName TheGitProject --NugetPackageId ThePackageId --ProductName TheProductName --GitUser TheGitUser --Author TheAuthor";
+				var args = "-n GeneratedProject --ToolName TheToolName --GitRepository TheGitProject --NugetPackageId ThePackageId --ProductName TheProductName --GitOwner TheGitOwner --Author TheAuthor";
 				using var scaffold = await Dotnet.Cli.NewAsync("global-tool", args, CancellationToken.None);
 
 				await scaffold.RestoreAsync($"src/GeneratedProject.slnx", null, CancellationToken.None);
@@ -77,7 +77,7 @@ namespace Amusoft.Templates.Tests.Cases
 			try
 			{
 				using var logging = new LoggingScope();
-				var args = "-n GeneratedProject --ToolName TheToolName --GitProjectName TheGitProject --NugetPackageId ThePackageId --ProductName TheProductName --GitUser TheGitUser --Author TheAuthor";
+				var args = "-n GeneratedProject --ToolName TheToolName --GitRepository TheGitProject --NugetPackageId ThePackageId --ProductName TheProductName --GitOwner TheGitOwner --Author TheAuthor";
 				using var scaffold = await Dotnet.Cli.NewAsync("global-tool", args, CancellationToken.None);
 
 				var scriptPath = Path.Combine(scaffold.GetAbsoluteRootPath(), $"scripts/build.ps1");
@@ -101,7 +101,7 @@ namespace Amusoft.Templates.Tests.Cases
 			try
 			{
 				using var logging = new LoggingScope();
-				var args = "-n GeneratedProject --ToolName TheToolName --GitProjectName TheGitProject --NugetPackageId ThePackageId --ProductName TheProductName --GitUser TheGitUser --Author TheAuthor";
+				var args = "-n GeneratedProject --ToolName TheToolName --GitRepository TheGitProject --NugetPackageId ThePackageId --ProductName TheProductName --GitOwner TheGitOwner --Author TheAuthor";
 				using var scaffold = await Dotnet.Cli.NewAsync("global-tool", args, CancellationToken.None);
 
 				var scriptPath = Path.Combine(scaffold.GetAbsoluteRootPath(), $"scripts/coverage.ps1");

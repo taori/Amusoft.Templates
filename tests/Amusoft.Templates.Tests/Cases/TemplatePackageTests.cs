@@ -23,10 +23,10 @@ public class TemplatePackageTests : TemplateTests
 	{
 		var sbArgs = new StringBuilder();
 		sbArgs.Append($" -n \"{sourceName}\"");
-		sbArgs.Append($" --GitProjectName TheNewProject");
+		sbArgs.Append($" --GitRepository TheNewProject");
 		sbArgs.Append($" --NugetPackageId TheNugetPackageId");
 		sbArgs.Append($" --ProductName TheProductName");
-		sbArgs.Append($" --GitUser TheUser");
+		sbArgs.Append($" --GitOwner TheUser");
 		sbArgs.Append($" --Author TheAuthor");
 		
 		using var loggingScope = new LoggingScope();

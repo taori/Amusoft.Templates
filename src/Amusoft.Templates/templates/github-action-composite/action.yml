@@ -1,0 +1,24 @@
+name: 'ACTIONNAME'
+description: 'What is it doing'
+branding:
+  icon: upload-cloud
+  color: purple
+inputs:
+  input1:
+    description: Description input 1
+    required: true
+outputs:
+  output1:
+    description: Description output 1
+    value: ${{ steps.step1.outputs.output1 }}
+runs:
+  using: "composite"
+  steps:
+
+    - name: Sample step
+      id: step1
+      shell: pwsh
+      run: |        
+        $repoUrl = "$Env:GITHUB_SERVER_URL/$Env:GITHUB_REPOSITORY/"
+        echo "output1=${{ inputs.input1 }}" >> $GITHUB_OUTPUT
+        echo "value2=someValue" >> $env:GITHUB_STEP_SUMMARY

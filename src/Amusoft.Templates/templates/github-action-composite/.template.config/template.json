@@ -1,0 +1,49 @@
+﻿{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Andreas Müller",
+  "classifications": [
+    "Templating",
+    "GitHub Action",
+    "Amusoft"
+  ],
+  "identity": "Amusoft.Templates.GitHubAction.Composite",
+  "name": "GitHub action using Composite PowerShell",
+  "shortName": "github-action-composite",
+  "sourceName": "MyTemplate",
+  "preferNameDirectory": false,
+  "tags": {
+    "type": "project"
+  },
+  "symbols": {
+    "ActionName": {
+      "type": "parameter",
+      "description": "Name of the action",
+      "replaces": "ACTIONNAME",
+      "isRequired": true
+    },
+    "GitRepository": {
+      "type": "parameter",
+      "description": "name of repository project",
+      "replaces": "GITPROJECT",
+      "isRequired": true
+    },
+    "GitOwner": {
+      "type": "parameter",
+      "description": "name of repository user",
+      "replaces": "GITOWNER",
+      "isRequired": true
+    }
+  },
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "exclude": [
+            ".vs/**",
+            "test-template.ps1"
+          ]
+        }
+      ]
+    }
+  ]
+}
